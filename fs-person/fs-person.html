@@ -30,8 +30,9 @@ Example:
       }
       .fs-person-vitals,
       .fs-person-vitals__name-block {
-        width: 98%;
-        width: calc(100% - 1.143rem);
+        /*https://css-tricks.com/flexbox-truncated-text*/
+        min-width: 0;
+        width: 100%;
       }
       .fs-person-vitals__name {
         white-space: nowrap;
