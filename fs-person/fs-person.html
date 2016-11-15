@@ -19,6 +19,7 @@ Example:
       }
       :host {
         display: inline-block;
+        width: 100%;
       }
       :host([inline]) .fs-person-vitals {
         display: flex;
@@ -26,6 +27,11 @@ Example:
       }
       :host([inline]) .fs-person-vitals__name {
         margin-right: 15px;
+      }
+      .fs-person-vitals,
+      .fs-person-vitals__name-block {
+        width: 98%;
+        width: calc(100% - 1.143rem);
       }
       .fs-person-vitals__name {
         white-space: nowrap;
@@ -59,6 +65,12 @@ Example:
         display: flex;
         flex-direction: row;
         align-items: center;
+      }
+
+      .fs-person__container > .v-center,
+      .fs-person-vitals > .v-center {
+        overflow-x: hidden;
+        width: 100%;
       }
       :host([orientation='portrait']) .v-center {
         justify-content: center;
@@ -96,16 +108,13 @@ Example:
         width: 60%;
         height: 60%;
       }
-
       .fs-person-portrait__portrait-image {
         width: 100%;
         height: 100%;
       }
-
       a:visited {
         color: blue;
       }
-
       a {
         text-decoration: none;
       }
@@ -122,14 +131,14 @@ Example:
         <div class="fs-person-vitals">
           <div class='v-center'>
             <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, gender, orientation)]]'></fs-icon>
-            <span hidden="[[!destination]]">
+            <span class="fs-person-vitals__name-block" hidden="[[!destination]]">
               <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</a>
               <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
                 <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
                 <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
               </a>
             </span>
-            <span hidden="[[destination]]">
+            <span class="fs-person-vitals__name-block" hidden="[[destination]]">
               <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
                 <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
@@ -257,7 +266,7 @@ Example:
           reflectToAttribute: true
         },
 
-        /** 
+        /**
         * Optional navigation to take place by clicking on name
         * @type {String}
         */
