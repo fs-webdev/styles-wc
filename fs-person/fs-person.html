@@ -328,7 +328,7 @@ Example:
         return (pid && !hidePid);
       },
       _openPersonCard: function(e){
-        if (this.openPersonCard && document.querySelector("person-card") && !(e.metaKey || e.ctrlKey)) {
+        if (this.openPersonCard && document.querySelector("fs-person-card") && !(e.metaKey || e.ctrlKey)) {
           // Cancel out the link's href
           e.preventDefault();
           // Cancel the person card's default click event.
