@@ -108,9 +108,14 @@ Example:
         height: 12px;
       }
 
+      .fs-person__container {
+        color: #333331;
+      }
+      
       :host([orientation='portrait']) .fs-person__container {
         flex-direction: column;
       }
+
       .fs-person-gender__icon {
         margin-right: 8px;
       }
@@ -328,6 +333,7 @@ Example:
         return a && b;
       },
       _copyPid: function(e) {
+        e.preventDefault();
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
