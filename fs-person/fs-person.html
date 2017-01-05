@@ -147,32 +147,13 @@ Example:
         <div class="fs-person-vitals">
           <div class='v-center'>
             <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, gender, orientation)]]'></fs-icon>
-            <div hidden="[[!openPersonCard]]">
-              <span id="fsPersonName" class="fs-person-vitals__name-block">
-                <!-- This must use on-click instead of on-tap in order to capture cmd + click or ctrl + click events -->
-                <a href="[[destination]]" on-click="_openPersonCard" class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</a>
-                <a href="[[destination]]" on-click="_openPersonCard" class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </a>
-              </span>
-            </div>
-            <div hidden="[[openPersonCard]]">
-              <span class="fs-person-vitals__name-block" hidden="[[!destination]]">
-                <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</a>
-                <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </a>
-              </span>
-              <span class="fs-person-vitals__name-block" hidden="[[destination]]">
-                <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
-                <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </p>
-              </span>
-            </div>
+            <span class="fs-person-vitals__name-block">
+              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
+              <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
+                <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
+                <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
+              </p>
+            </span>
           </div>
           <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, gender, orientation)]]'>
             <span>[[lifespan]]</span>
@@ -297,24 +278,6 @@ Example:
         },
 
         /**
-        * Optional navigation to take place by clicking on name
-        * @type {String}
-        */
-        destination: {
-          type: String,
-          value: ''
-        },
-
-        /**
-         * Whether the person card should be opened
-         * @type {Boolean}
-         */
-        openPersonCard: {
-          type: Boolean,
-          value: false
-        },
-
-        /**
          * Whether the person id should be shown
          * @type {Boolean}
          */
@@ -333,17 +296,6 @@ Example:
       },
       _showPid: function(pid, hidePid) {
         return (pid && !hidePid);
-      },
-      _openPersonCard: function(e){
-        if (this.openPersonCard && document.querySelector("fs-person-card") && !(e.metaKey || e.ctrlKey)) {
-          // Cancel out the link's href
-          e.preventDefault();
-          // Cancel the person card's default click event.
-          e.stopPropagation();
-          // Open the person card
-          this.fire("openPersonCard", {"element": this.$.fsPersonName.querySelector(".fs-person-vitals__name"), "personId": this.pid});
-        }
-        return;
       },
       _portraitDefault: function(showPortrait, orientation) {
         if (orientation === 'portrait' && !showPortrait) {
