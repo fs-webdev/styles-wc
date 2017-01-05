@@ -19,7 +19,6 @@ Example:
       }
       :host {
         display: inline-block;
-        width: 100%;
       }
       :host([inline]) .fs-person-vitals {
         display: flex;
@@ -34,6 +33,11 @@ Example:
         min-width: 0;
         width: 100%;
       }
+
+      :host([orientation='portrait']) .fs-person-vitals {
+        text-align: center;
+      }
+
       .fs-person-vitals__name {
         white-space: nowrap;
         overflow: hidden;
@@ -56,6 +60,9 @@ Example:
         display: flex;
         -webkit-flex-wrap: nowrap;
         flex-wrap: nowrap;
+      }
+      :host([orientation='portrait']) .fs-person-details__container {
+        justify-content: center;
       }
       .fs-person-details__container.indented {
         margin-left:16px;
