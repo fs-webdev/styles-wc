@@ -8,7 +8,7 @@ Example:
 
     <fs-person full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person>
 
-@demo demo/index.html
+@demo fs-person/demo/index.html
 -->
 
 <dom-module id="fs-person">
@@ -19,7 +19,6 @@ Example:
       }
       :host {
         display: inline-block;
-        width: 100%;
       }
       :host([inline]) .fs-person-vitals {
         display: flex;
@@ -34,6 +33,11 @@ Example:
         min-width: 0;
         width: 100%;
       }
+
+      :host([orientation='portrait']) .fs-person-vitals {
+        text-align: center;
+      }
+
       .fs-person-vitals__name {
         white-space: nowrap;
         overflow: hidden;
@@ -56,6 +60,13 @@ Example:
         display: flex;
         -webkit-flex-wrap: nowrap;
         flex-wrap: nowrap;
+        white-space: nowrap;
+      }
+      .fs-person-details__pid {
+        cursor: pointer;
+      }
+      :host([orientation='portrait']) .fs-person-details__container {
+        justify-content: center;
       }
       .fs-person-details__container.indented {
         margin-left:16px;
@@ -77,11 +88,35 @@ Example:
         justify-content: center;
       }
       .fs-person__container {
+        position: relative;
+        z-index:0;
         @apply(--fs-person-container);
       }
+
+      /* This is a CSS hack to allow for easy copying of the PID */
+      #_pidInput {
+        opacity: 0;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        top:0;
+        left:0;
+        z-index: -1;
+      }
+
+      .copy-icon {
+        width: 15px;
+        height: 12px;
+      }
+
+      .fs-person__container {
+        color: #333331;
+      }
+      
       :host([orientation='portrait']) .fs-person__container {
         flex-direction: column;
       }
+
       .fs-person-gender__icon {
         margin-right: 8px;
       }
@@ -140,38 +175,30 @@ Example:
         <div class="fs-person-vitals">
           <div class='v-center'>
             <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, gender, orientation)]]'></fs-icon>
-            <div hidden="[[!openPersonCard]]">
-              <span id="fsPersonName" class="fs-person-vitals__name-block">
-                <!-- This must use on-click instead of on-tap in order to capture cmd + click or ctrl + click events -->
-                <a href="[[destination]]" on-click="_openPersonCard" class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</a>
-                <a href="[[destination]]" on-click="_openPersonCard" class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </a>
-              </span>
-            </div>
-            <div hidden="[[openPersonCard]]">
-              <span class="fs-person-vitals__name-block" hidden="[[!destination]]">
-                <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</a>
-                <a href="[[destination]]" class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </a>
-              </span>
-              <span class="fs-person-vitals__name-block" hidden="[[destination]]">
-                <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
-                <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
-                  <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
-                  <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
-                </p>
-              </span>
-            </div>
+            <span class="fs-person-vitals__name-block">
+              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
+              <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
+                <span>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
+                <span>[[_getLastName(firstName, lastName, nameSystem)]]</span>
+              </p>
+            </span>
           </div>
           <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, gender, orientation)]]'>
             <span>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
-              <span>[[pid]]</span>
+              <span class='fs-person-details__pid' on-tap='_copyPid'>
+                <svg class='copy-icon' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.2" baseProfile="tiny" id="Art" x="0" y="0" width="17" height="17" viewBox="0 0 17 17" xml:space="preserve">
+                  <path fill="#333331" d="M10.97 2c0.1 0.02 0.28 0.09 0.32 0.12l3.56 3.56C14.91 5.75 14.99 5.95 15 6v6H5V2H10.97M11 0H4C3.45 0 3 0.45 3 1v12c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1V6c0-0.55-0.32-1.32-0.71-1.71l-3.59-3.59C12.32 0.32 11.55 0 11 0L11 0z"/>
+                  <path fill="#333331" d="M16 5.5C16 5.78 15.55 6 15 6h-3c-0.55 0-1-0.45-1-1V2c0-0.55 0.23-1 0.5-1 0.28 0 0.82 0.32 1.21 0.71l2.59 2.59C15.68 4.68 16 5.23 16 5.5z"/>
+                  <path fill="#333331" d="M11 3L11 3c0-0.55-0.45-1-1-1l0 0h1V3z"/>
+                  <path fill="#333331" d="M15 7L15 7c0-0.55-0.45-1-1-1l0 0h1V7z"/>
+                  <path fill="#333331" d="M2 15V3H1C0.45 3 0 3.45 0 4v12c0 0.55 0.45 1 1 1h12c0.55 0 1-0.45 1-1v-1H2z"/>
+                  <rect fill="none" width="17" height="17"/>
+                </svg>
+                [[pid]]
+              </span>
+              <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
           </div>
         </div>
@@ -290,24 +317,6 @@ Example:
         },
 
         /**
-        * Optional navigation to take place by clicking on name
-        * @type {String}
-        */
-        destination: {
-          type: String,
-          value: ''
-        },
-
-        /**
-         * Whether the person card should be opened
-         * @type {Boolean}
-         */
-        openPersonCard: {
-          type: Boolean,
-          value: false
-        },
-
-        /**
          * Whether the person id should be shown
          * @type {Boolean}
          */
@@ -324,19 +333,14 @@ Example:
       _and: function(a, b) {
         return a && b;
       },
+      _copyPid: function(e) {
+        e.preventDefault();
+        this.$._pidInput.select();
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+      },
       _showPid: function(pid, hidePid) {
         return (pid && !hidePid);
-      },
-      _openPersonCard: function(e){
-        if (this.openPersonCard && document.querySelector("fs-person-card") && !(e.metaKey || e.ctrlKey)) {
-          // Cancel out the link's href
-          e.preventDefault();
-          // Cancel the person card's default click event.
-          e.stopPropagation();
-          // Open the person card
-          this.fire("openPersonCard", {"element": this.$.fsPersonName.querySelector(".fs-person-vitals__name"), "personId": this.pid});
-        }
-        return;
       },
       _portraitDefault: function(showPortrait, orientation) {
         if (orientation === 'portrait' && !showPortrait) {
