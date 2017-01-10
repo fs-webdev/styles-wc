@@ -328,6 +328,7 @@ Example:
       },
       _copyPid: function(e) {
         e.preventDefault();
+        // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
         this.$._pidInput.select();
         document.execCommand('copy');
