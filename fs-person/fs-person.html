@@ -328,6 +328,7 @@ Example:
       },
       _copyPid: function(e) {
         e.preventDefault();
+        e.stopImmediatePropagation();
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
