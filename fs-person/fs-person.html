@@ -165,7 +165,7 @@ Example:
     <div class='fs-person__container'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
-          <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" hidden='[[!portraitUrl]]'>
+          <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" hidden='[[!portraitUrl]]'>
           <fs-icon icon='gray-[[_getGender(gender)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
         </div>
       </div>
@@ -321,6 +321,10 @@ Example:
       observers: [
         '_portraitDefault(showPortrait, orientation)'
       ],
+
+      handlePortraitError: function(e) {
+        this.portraitUrl = false;
+      },
 
       _and: function(a, b) {
         return a && b;
