@@ -216,7 +216,7 @@ fs-person:not([inline]) {
         <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, showPortrait, gender, orientation)]]'></fs-icon>
         <div class="fs-person-vitals">
           <div class='v-center'>
-            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, gender, orientation)]]'></fs-icon>
+            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, hideGender, orientation)]]'></fs-icon>
             <span class="fs-person-vitals__name-block">
               <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
@@ -225,7 +225,7 @@ fs-person:not([inline]) {
               </p>
             </span>
           </div>
-          <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, gender, orientation)]]'>
+          <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, hideGender, orientation)]]'>
             <span>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
@@ -322,6 +322,12 @@ fs-person:not([inline]) {
           value: ''
         },
 
+        /** Whether this element is hiding the gender icon. */
+        hideGender: {
+          type: Boolean,
+          value: false
+        },
+
         /**
          * Orientation of the person renderer
          *
@@ -403,12 +409,14 @@ fs-person:not([inline]) {
         if (inline) return false;
         return gender && !showPortrait && !this._isPortrait(orientation);
       },
-      _showGenderDot: function(inline, showPortrait, gender, orientation) {
+      _showGenderDot: function(inline, showPortrait, hideGender, orientation) {
         if (inline) return true;
-        return gender && showPortrait && !this._isPortrait(orientation);
+        if (this._isPortrait(orientation)) return false;
+        if (!hideGender) return true;
+        return false;
       },
-      _getDetailsClass: function(inline, showPortrait, gender, orientation) {
-        return this._showGenderDot(inline,showPortrait,gender, orientation) ? 'indented' : '';
+      _getDetailsClass: function(inline, showPortrait, hideGender, orientation) {
+        return this._showGenderDot(inline,showPortrait, hideGender, orientation) ? 'indented' : '';
       },
       _getGender: function(gender) {
         if (gender === 'female') return gender;
@@ -438,11 +446,11 @@ fs-person:not([inline]) {
       _usingNameParts: function(first, last) {
         return first || last;
       },
-      _getFirstName: function(first, last, orientation) {
-        return orientation === 'sinotypic' ? last : first;
+      _getFirstName: function(first, last, nameSystem) {
+        return nameSystem === 'sinotypic' ? last : first;
       },
-      _getLastName: function(first, last, orientation) {
-        return orientation === 'sinotypic' ? first : last;
+      _getLastName: function(first, last, nameSystem) {
+        return nameSystem === 'sinotypic' ? first : last;
       }
     });
   </script>
