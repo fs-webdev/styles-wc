@@ -8,6 +8,40 @@ Example:
 
     <fs-person full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person>
 
+### Styling
+You can use the `--fs-person-name`, `--fs-person-portrait`, `--fs-person-portrait-icon`, `--fs-person-portrait-image` and `--fs-person-container` mixin to style `fs-person` underneath:
+```css
+fs-person {
+  --fs-person-name: {
+    font-size: 14px;
+  };
+}
+
+fs-person:not([inline]) {
+  --fs-person: {
+    width: 100%;
+  };
+  --fs-person-name: {
+    font-size: 20px;
+    font-family: museo, serif;
+  };
+  --fs-person-portrait: {
+    height: 40px;
+    width: 40px;
+  };
+  --fs-person-portrait-icon: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-portrait-image: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-container: {
+    padding: 5px;
+  };
+}
+```
 @demo fs-person/demo/index.html
 -->
 
@@ -141,13 +175,22 @@ Example:
       :host([orientation='portrait']) .fs-person-portrait__container {
         margin-right: 0;
       }
-      .fs-person-portrait__portrait-icon {
+      .fs-person-portrait__portrait-icon[icon='female'],
+      .fs-person-portrait__portrait-icon[icon='male'] {
+        width: 100%;
+        height: 100%;
+        @apply(--fs-person-portrait-icon);
+      }
+      .fs-person-portrait__portrait-icon[icon^='gray'],
+      .fs-person-portrait__portrait-icon[icon^='unknown'] {
         width: 60%;
         height: 60%;
+        @apply(--fs-person-portrait-icon);
       }
       .fs-person-portrait__portrait-image {
         width: 100%;
         height: 100%;
+        @apply(--fs-person-portrait-image);
       }
       a:visited {
         color: blue;
@@ -166,7 +209,7 @@ Example:
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
           <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" hidden='[[!portraitUrl]]'>
-          <fs-icon icon='gray-[[_getGender(gender)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
+          <fs-icon icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
         </div>
       </div>
       <div class='v-center'>
@@ -201,6 +244,17 @@ Example:
     Polymer({
       is: 'fs-person',
       properties: {
+        /**
+         * Whether or not to use a colored icon (instead of gray), used to compute the gender icon
+         *
+         * **Valid values are true or false**
+         * @type {Boolean}
+         */
+        coloredIcon: {
+          type: Boolean,
+          value: false
+        },
+
         /**
          * The full name of the person to be rendered (used only in landscape mode)
          * @type {String}
@@ -359,6 +413,24 @@ Example:
       _getGender: function(gender) {
         if (gender === 'female') return gender;
         return 'male';
+      },
+      _getGenderIcon: function(gender, coloredIcon) {
+        if(coloredIcon){
+          if(gender === 'female'){
+            return 'female';
+          }
+          if(gender === 'male'){
+            return 'male';
+          }
+        }
+        if(gender === 'female'){
+          return 'gray-female';
+        }
+        if(gender === 'male'){
+          return 'gray-male';
+        }
+
+        return 'unknown-portrait';
       },
       _isPortrait: function(orientation) {
         return orientation === 'portrait';
