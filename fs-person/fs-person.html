@@ -4,10 +4,46 @@
 <!--
 The styleguide person renderer
 
+TODO: Looks like we need unit tests for this!
+
 Example:
 
     <fs-person full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person>
 
+### Styling
+You can use the `--fs-person-name`, `--fs-person-portrait`, `--fs-person-portrait-icon`, `--fs-person-portrait-image` and `--fs-person-container` mixin to style `fs-person` underneath:
+```css
+fs-person {
+  --fs-person-name: {
+    font-size: 14px;
+  };
+}
+
+fs-person:not([inline]) {
+  --fs-person: {
+    width: 100%;
+  };
+  --fs-person-name: {
+    font-size: 20px;
+    font-family: museo, serif;
+  };
+  --fs-person-portrait: {
+    height: 40px;
+    width: 40px;
+  };
+  --fs-person-portrait-icon: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-portrait-image: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-container: {
+    padding: 5px;
+  };
+}
+```
 @demo fs-person/demo/index.html
 -->
 
@@ -141,13 +177,22 @@ Example:
       :host([orientation='portrait']) .fs-person-portrait__container {
         margin-right: 0;
       }
-      .fs-person-portrait__portrait-icon {
+      .fs-person-portrait__portrait-icon[icon='female'],
+      .fs-person-portrait__portrait-icon[icon='male'] {
+        width: 100%;
+        height: 100%;
+        @apply(--fs-person-portrait-icon);
+      }
+      .fs-person-portrait__portrait-icon[icon^='gray'],
+      .fs-person-portrait__portrait-icon[icon^='unknown'] {
         width: 60%;
         height: 60%;
+        @apply(--fs-person-portrait-icon);
       }
       .fs-person-portrait__portrait-image {
         width: 100%;
         height: 100%;
+        @apply(--fs-person-portrait-image);
       }
       a:visited {
         color: blue;
@@ -166,14 +211,14 @@ Example:
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
           <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" hidden='[[!portraitUrl]]'>
-          <fs-icon icon='gray-[[_getGender(gender)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
+          <fs-icon icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
         </div>
       </div>
       <div class='v-center'>
         <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, showPortrait, gender, orientation)]]'></fs-icon>
         <div class="fs-person-vitals">
           <div class='v-center'>
-            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, gender, orientation)]]'></fs-icon>
+            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, hideGender, orientation)]]'></fs-icon>
             <span class="fs-person-vitals__name-block">
               <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]'>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
@@ -182,7 +227,7 @@ Example:
               </p>
             </span>
           </div>
-          <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, gender, orientation)]]'>
+          <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, hideGender, orientation)]]'>
             <span>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
@@ -201,6 +246,17 @@ Example:
     Polymer({
       is: 'fs-person',
       properties: {
+        /**
+         * Whether or not to use a colored icon (instead of gray), used to compute the gender icon
+         *
+         * **Valid values are true or false**
+         * @type {Boolean}
+         */
+        coloredIcon: {
+          type: Boolean,
+          value: false
+        },
+
         /**
          * The full name of the person to be rendered (used only in landscape mode)
          * @type {String}
@@ -266,6 +322,12 @@ Example:
         gender: {
           type: String,
           value: ''
+        },
+
+        /** Whether this element is hiding the gender icon. */
+        hideGender: {
+          type: Boolean,
+          value: false
         },
 
         /**
@@ -349,16 +411,36 @@ Example:
         if (inline) return false;
         return gender && !showPortrait && !this._isPortrait(orientation);
       },
-      _showGenderDot: function(inline, showPortrait, gender, orientation) {
+      _showGenderDot: function(inline, showPortrait, hideGender, orientation) {
         if (inline) return true;
-        return gender && showPortrait && !this._isPortrait(orientation);
+        if (this._isPortrait(orientation)) return false;
+        if (!hideGender) return true;
+        return false;
       },
-      _getDetailsClass: function(inline, showPortrait, gender, orientation) {
-        return this._showGenderDot(inline,showPortrait,gender, orientation) ? 'indented' : '';
+      _getDetailsClass: function(inline, showPortrait, hideGender, orientation) {
+        return this._showGenderDot(inline,showPortrait, hideGender, orientation) ? 'indented' : '';
       },
       _getGender: function(gender) {
         if (gender === 'female') return gender;
         return 'male';
+      },
+      _getGenderIcon: function(gender, coloredIcon) {
+        if (coloredIcon) {
+          if (gender === 'female') {
+            return 'female';
+          }
+          if (gender === 'male') {
+            return 'male';
+          }
+        }
+        if (gender === 'female') {
+          return 'gray-female';
+        }
+        if (gender === 'male') {
+          return 'gray-male';
+        }
+
+        return 'unknown-portrait';
       },
       _isPortrait: function(orientation) {
         return orientation === 'portrait';
@@ -366,11 +448,11 @@ Example:
       _usingNameParts: function(first, last) {
         return first || last;
       },
-      _getFirstName: function(first, last, orientation) {
-        return orientation === 'sinotypic' ? last : first;
+      _getFirstName: function(first, last, nameSystem) {
+        return nameSystem === 'sinotypic' ? last : first;
       },
-      _getLastName: function(first, last, orientation) {
-        return orientation === 'sinotypic' ? first : last;
+      _getLastName: function(first, last, nameSystem) {
+        return nameSystem === 'sinotypic' ? first : last;
       }
     });
   </script>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../webcomponentsjs/webcomponents.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <!-- Step 1: import the element to test -->
+    <link rel="import" href="../styles-wc.html">
+
+  </head>
+  <body>
+
+    <!-- You can use the document as a place to set up your fixtures. -->
+    <test-fixture id="fs-person">
+      <template>
+        <fs-person></fs-person>
+      </template>
+    </test-fixture>
+
+    <script>
+    (function(){
+      describe('<fs-person>', function() {
+        var fsPerson;
+
+        beforeEach(function() {
+          fsPerson = fixture('fs-person');
+        });
+
+        describe('properties', function() {
+          it('should set default values for "", "", and "" properties', function() {
+          });
+        });
+      });
+    })();
+    </script>
+
+  </body>
+</html>
