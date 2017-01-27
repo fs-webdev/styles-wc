@@ -14,28 +14,126 @@
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
-    <test-fixture id="fs-person">
+    <test-fixture id="fs-person-default">
       <template>
         <fs-person></fs-person>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="fs-person-passed-values">
+      <template>
+        <fs-person
+          colored-icon
+          first-name = "John Jacob"
+          full-name = "John Jacob Schmidt"
+          gender = "male"
+          hide-gender
+          hide-pid
+          inline
+          last-name = "Schmidt"
+          lifespan = "1800-1900"
+          name-system = "sinotypic"
+          orientation = "portrait"
+          pid = "PID"
+          portrait-url = "portraitUrl"
+        ></fs-person>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="fs-person-set-show-portrait">
+      <template>
+        <fs-person show-portrait></fs-person>
       </template>
     </test-fixture>
 
     <script>
     (function(){
       describe('<fs-person>', function() {
-        var fsPerson;
+        var fsPersonDefault;
+        var fsPersonPassedValues;
+        var fsPersonSetShowPortrait;
 
         beforeEach(function() {
-          fsPerson = fixture('fs-person');
+          fsPersonDefault = fixture('fs-person-default');
+          fsPersonPassedValues = fixture('fs-person-passed-values');
+          fsPersonSetShowPortrait = fixture('fs-person-set-show-portrait');
         });
 
         describe('properties', function() {
-          it('should set default values for "", "", and "" properties', function() {
+          it('should set default values for "coloredIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
+            expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
+            expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
+            expect(fsPersonDefault.fullName, "fullName is not ''").to.equal('');
+            expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
+            expect(fsPersonDefault.hideGender, "hideGender is not false").to.be.false;
+            expect(fsPersonDefault.hidePid, "hidePid is not false").to.be.false;
+            expect(fsPersonDefault.inline, "inline is not false").to.be.false;
+            expect(fsPersonDefault.lastName, "lastName is not ''").to.equal('');
+            expect(fsPersonDefault.lifespan, "lifespan is not ''").to.equal('');
+            expect(fsPersonDefault.nameSystem, "nameSystem is not ''").to.equal('eurotypic');
+            expect(fsPersonDefault.orientation, "orientation is not 'landscape'").to.equal('landscape');
+            expect(fsPersonDefault.pid, "pid is not ''").to.equal('');
+            expect(fsPersonDefault.portraitUrl, "portraitUrl is not ''").to.equal('');
+            expect(fsPersonDefault.showPortrait, "showPortrait is not false").to.be.false;
+          });
+
+          it('should have coloredIcon true', function () {
+            expect(fsPersonPassedValues.coloredIcon, "coloredIcon is not true").to.be.true;
+          });
+
+          it('should set firstName', function () {
+            expect(fsPersonPassedValues.firstName, "firstName is not set correctly").to.equal('John Jacob');
+          });
+
+          it('should set fullName', function () {
+            expect(fsPersonPassedValues.fullName, "fullName is not set correctly").to.equal('John Jacob Schmidt');
+          });
+
+          it('should set gender', function () {
+            expect(fsPersonPassedValues.gender, "gender is not set correctly").to.equal('male');
+          });
+
+          it('should hide gender and pid ', function () {
+            expect(fsPersonPassedValues.hideGender, "hideGender is not true").to.be.true;
+            expect(fsPersonPassedValues.hidePid, "hidePid is not true").to.be.true;
+          });
+
+          it('should be inline ', function () {
+            expect(fsPersonPassedValues.inline, "inline is not true").to.be.true;
+          });
+
+          it('should set lastName', function () {
+            expect(fsPersonPassedValues.lastName, "lastName is not set correctly").to.equal('Schmidt');
+          });
+
+          it('should set lifespan', function () {
+            expect(fsPersonPassedValues.lifespan, "lifespan is not set correctly").to.equal('1800-1900');
+          });
+
+          it('should set nameSystem', function () {
+            expect(fsPersonPassedValues.nameSystem, "nameSystem is not set correctly").to.equal('sinotypic');
+          });
+
+          it('should set orientation to portrait & showPortrait to true', function () {
+            expect(fsPersonPassedValues.orientation, "orientation is not 'portrait'").to.equal('portrait');
+            expect(fsPersonPassedValues.showPortrait, "showPortrait is not true").to.be.true;
+          });
+
+          it('should set pid', function () {
+            expect(fsPersonPassedValues.pid, "pid is not set correctly").to.equal('PID');
+          });
+
+          it('should set portraitUrl', function () {
+            expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
+          });
+
+          it('should set showPortrait to true without changing orientation to "portrait"', function () {
+            expect(fsPersonSetShowPortrait.orientation, "orientation is not 'portrait'").to.not.equal('portrait');
+            expect(fsPersonSetShowPortrait.showPortrait, "showPortrait is not true").to.be.true;
           });
         });
       });
     })();
     </script>
-
   </body>
 </html>
