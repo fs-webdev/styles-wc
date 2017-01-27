@@ -18,7 +18,13 @@
   ],
   "ignore": [
     ".DS_Store",
-    ".gitignore"
+    ".gitignore",
+    ".*",
+    "bin/",
+    "bin/*",
+    "test/",
+    "test/*",
+    "wct.conf.json"
   ],
   "moduleType": "globals",
   "license": "SEE LICENSE IN LICENSE.txt",
