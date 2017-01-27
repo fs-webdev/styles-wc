@@ -1,4 +1,5 @@
 <link rel="import" href="../../polymer/polymer.html">
+<link rel="import" href="../../wc-i18n/wc-i18n.html">
 <link rel="import" href="../fs-icon/fs-icon.html">
 
 <!--
@@ -241,7 +242,7 @@ fs-person:not([inline]) {
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
               <span class='fs-person-details__pid' on-click='_copyPid'>
-                <fs-icon class='copy-icon' icon='copy'></fs-icon>
+                <fs-icon class='copy-icon' icon='copy' title='[[i18n("COPY_TOOLTIP")]]'></fs-icon>
                 [[pid]]
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
@@ -389,6 +390,9 @@ fs-person:not([inline]) {
         }
 
       },
+      behaviors: [
+        WCI18n()
+      ],
       observers: [
         '_portraitDefault(showPortrait, orientation)'
       ],
