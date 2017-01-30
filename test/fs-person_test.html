@@ -132,6 +132,82 @@
             expect(fsPersonSetShowPortrait.showPortrait, "showPortrait is not true").to.be.true;
           });
         });
+
+        describe('handlePortraitError', function() {
+          it('should set portraitUrl to false', function () {
+            expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
+
+            fsPersonPassedValues.handlePortraitError({});
+
+            expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not false").to.be.false;
+          });
+        });
+
+        describe('_and', function() {
+          it('should return a and b', function () {
+            expect(fsPersonDefault._and(true, true), "true & true returned false").to.be.true;
+            expect(fsPersonDefault._and(true, false), "true & false returned true").to.be.false;
+            expect(fsPersonDefault._and(false, true), "false & true returned true").to.be.false;
+            expect(fsPersonDefault._and(false, false), "false & false returned true").to.be.false;
+          });
+        });
+
+        describe('_copyPid', function() {
+          var mockEvent;
+          var preventDefaultStub;
+          var stopImmediatePropagationStub;
+          var execCommandSpy;
+
+          beforeEach(function() {
+            mockEvent = {
+              preventDefault: function(){},
+              stopImmediatePropagation: function(){}
+            };
+
+            preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
+            stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
+            execCommandSpy = sinon.spy(document, "execCommand");
+          });
+
+          afterEach(function() {
+            preventDefaultStub.restore();
+            stopImmediatePropagationStub.restore();
+            execCommandSpy.restore();
+
+            delete mockEvent;
+          });
+
+          it('should call e.preventDefault()', function () {
+            fsPersonDefault._copyPid(mockEvent);
+
+            expect(preventDefaultStub.callCount, "_copyPid did not call preventDefault only once").to.equal(1);
+          });
+
+          it('should call e.stopImmediatePropagation()', function () {
+            fsPersonDefault._copyPid(mockEvent);
+
+            expect(preventDefaultStub.callCount, "_copyPid did not call stopImmediatePropagation only once").to.equal(1);
+          });
+
+          it('should call document.execCommand()', function () {
+            fsPersonDefault._copyPid(mockEvent);
+
+            expect(execCommandSpy.callCount, "_copyPid did not call execCommand only once").to.equal(1);
+            expect(execCommandSpy.calledWith("copy"), "_copyPid did not call execCommand with the correct parameters").to.be.true;
+          });
+        });
+
+        describe('_showPid', function() {
+          it('should show the pid', function () {
+            expect(fsPersonDefault._showPid(true, false), "pid exists and don't hide it returned false").to.be.true;
+          });
+
+          it('should not show pid', function () {
+            expect(fsPersonDefault._showPid(true, true), "pid exists and hide it returned true").to.be.false;
+            expect(fsPersonDefault._showPid(false, true), "no pid exists and hide it returned true").to.be.false;
+            expect(fsPersonDefault._showPid(false, false), "no pid exists and don't hide it returned true").to.be.false;
+          });
+        });
       });
     })();
     </script>
