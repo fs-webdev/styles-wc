@@ -115,6 +115,11 @@ fs-person:not([inline]) {
         align-items: center;
       }
 
+      /* Bug fix to keep portrait container from shrinking in ie11. */
+      .fs-person-portrait {
+        flex-shrink: 0;
+      }
+
       .fs-person__container > .v-center,
       .fs-person-vitals > .v-center {
         overflow-x: hidden;
@@ -192,6 +197,10 @@ fs-person:not([inline]) {
       .fs-person-portrait__portrait-image {
         width: 100%;
         height: 100%;
+        /* Bug fix so portraits and broken images don't appear side-by-side with icon: */
+        position: absolute;
+        top: 0px; /* Required for ie11 */
+        left: 0px;
         @apply(--fs-person-portrait-image);
       }
       a:visited {
