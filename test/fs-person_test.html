@@ -208,6 +208,25 @@
             expect(fsPersonDefault._showPid(false, false), "no pid exists and don't hide it returned true").to.be.false;
           });
         });
+
+        describe('_portraitDefault', function() {
+          it('should set showPortrait to true', function () {
+            fsPersonDefault._portraitDefault(false, 'portrait');
+
+            expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='portrait' returned false").to.be.true;
+          });
+
+          it('should set showPortrait to false', function () {
+            fsPersonDefault._portraitDefault(true, 'portrait');
+            expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='portrait' returned true").to.be.false;
+
+            fsPersonDefault._portraitDefault(true, 'landscape');
+            expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='landscape' returned true").to.be.false;
+
+            fsPersonDefault._portraitDefault(false, 'landscape');
+            expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='landscape' returned true").to.be.false;
+          });
+        });
       });
     })();
     </script>
