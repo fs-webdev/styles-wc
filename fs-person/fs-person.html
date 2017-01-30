@@ -421,10 +421,8 @@ fs-person:not([inline]) {
         return gender && !showPortrait && !this._isPortrait(orientation);
       },
       _showGenderDot: function(inline, showPortrait, hideGender, orientation) {
-        if (inline) return true;
-        if (this._isPortrait(orientation)) return false;
-        if (!hideGender) return true;
-        return false;
+        if (inline && !hideGender) return true;
+        return !hideGender && showPortrait && !this._isPortrait(orientation);
       },
       _getDetailsClass: function(inline, showPortrait, hideGender, orientation) {
         return this._showGenderDot(inline,showPortrait, hideGender, orientation) ? 'indented' : '';
