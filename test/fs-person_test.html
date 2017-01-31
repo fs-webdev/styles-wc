@@ -227,6 +227,61 @@
             expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='landscape' returned true").to.be.false;
           });
         });
+
+        describe('_showGenderIcon', function() {
+          var inline;
+          var showPortrait;
+          var gender;
+          var orientation;
+          var result;
+
+          describe('inline = true', function() {
+            beforeEach(function() {
+              inline = true;
+              showPortrait = 'doesntMatter';
+              gender = 'doesntMatter';
+              orientation = 'doesntMatter';
+            });
+
+            it('should always return false', function () {
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation); // other params don't matter in this case
+
+              expect(result, "inline=true returned true").to.be.false;
+            });
+          });
+
+          describe('inline = false', function() {
+            beforeEach(function() {
+              inline = false;
+              showPortrait = false;
+              gender = 'female';
+              orientation = 'landscape';
+            });
+
+            it('should return true', function () {
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              expect(result, "showPortrait=false, gender='female', orientation='landscape' returned false").to.be.true;
+            });
+
+            it('should return false', function () {
+              // What are possibilities for the 'gender' parameter and should it be 'hideGender' instead?
+
+              showPortrait = true;
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
+
+              showPortrait = true;
+              orientation = 'portrait';
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              expect(result, "showPortrait=true, gender='female', orientation='portrait' returned true").to.be.false;
+
+              showPortrait = false;
+              orientation = 'portrait';
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
+            });
+          });
+        });
       });
     })();
     </script>
