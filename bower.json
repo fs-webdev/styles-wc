@@ -1,6 +1,6 @@
 {
   "name": "styles-wc",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -29,7 +29,8 @@
   "moduleType": "globals",
   "license": "SEE LICENSE IN LICENSE.txt",
   "dependencies": {
-    "polymer": "Polymer/Polymer#^1.6.1"
+    "polymer": "Polymer/Polymer#^1.6.1",
+    "wc-i18n": "git+https://github.com/jshcrowthe/wc-i18n#^2.1.0"
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.1",
