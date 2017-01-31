@@ -264,8 +264,11 @@
             });
 
             it('should return false', function () {
-              // What are possibilities for the 'gender' parameter and should it be 'hideGender' instead?
+              gender = null;
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              expect(result, "showPortrait=true, gender=null, orientation='landscape' returned true").to.be.null; // falsey
 
+              gender='female';
               showPortrait = true;
               result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
@@ -280,6 +283,178 @@
               result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
               expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
             });
+          });
+        });
+
+        describe('_showGenderDot', function() {
+          var inline;
+          var showPortrait;
+          var hideGender;
+          var orientation;
+          var result;
+
+          describe('inline and hideGender', function() {
+            beforeEach(function() {
+              inline = true;
+              showPortrait = 'doesntMatter';
+              hideGender = false;
+              orientation = 'doesntMatter';
+            });
+
+            it('should always return true', function () {
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation); // other params don't matter in this case
+
+              expect(result, "inline=true and hideGender=false returned false").to.be.true;
+            });
+          });
+
+          describe('inline=true (and/or hideGender=true)', function() {
+            beforeEach(function() {
+              inline = false;
+              showPortrait = true;
+              hideGender = false;
+              orientation = 'landscape';
+            });
+
+            it('should return true', function () {
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              expect(result, "showPortrait=true, hideGender=false, orientation='landscape' returned false").to.be.true;
+            });
+
+            it('should return false', function () {
+              hideGender = true;
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              expect(result, "showPortrait=true, hideGender=true, orientation='landscape' returned true").to.be.false;
+
+              hideGender=false;
+              showPortrait = false;
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              expect(result, "showPortrait=false, hideGender=false, orientation='landscape' returned true").to.be.false;
+
+              showPortrait = true;
+              orientation = 'portrait';
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              expect(result, "showPortrait=true, hideGender=false, orientation='portrait' returned true").to.be.false;
+
+              showPortrait = false;
+              orientation = 'portrait';
+              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              expect(result, "showPortrait=false, hideGender=false, orientation='portrait' returned true").to.be.false;
+            });
+          });
+        });
+
+        describe('_getDetailsClass', function() {
+          beforeEach(function() {
+            inline = 'doesntMatter';
+            showPortrait = 'doesntMatter';
+            hideGender = 'doesntMatter';
+            orientation = 'doesntMatter';
+          });
+
+          it('should call _showGenderDot', function () {
+            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot");
+
+            fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation);
+
+            expect(_showGenderDotStub.callCount, "did not call _showGenderDot only once").to.equal(1);
+            expect(_showGenderDotStub.calledWith(inline, showPortrait, hideGender, orientation), "did not call _showGenderDot with the correct parameters").to.be.true;
+
+            _showGenderDotStub.restore();
+          });
+
+          it('should return "indented"', function () {
+            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return true });
+
+            expect(fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation), "did not return 'indented'").to.equal('indented');
+
+            _showGenderDotStub.restore();
+          });
+
+          it('should return ""', function () {
+            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return false });
+
+            expect(fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation), "did not return ''").to.equal('');
+
+            _showGenderDotStub.restore();
+          });
+        });
+
+        describe('_getGender', function() {
+          it('should return female', function () {
+            expect(fsPersonDefault._getGender('female'), "did not return 'female'").to.equal('female');
+          });
+
+          it('should return male', function () {
+            expect(fsPersonDefault._getGender('male'), "did not return 'male'").to.equal('male');
+            expect(fsPersonDefault._getGender('unknown'), "did not return 'male'").to.equal('male');
+            expect(fsPersonDefault._getGender('anythingNotFemale'), "did not return 'male'").to.equal('male');
+          });
+        });
+
+        describe('_getGenderIcon', function() {
+          it('should return male', function () {
+            expect(fsPersonDefault._getGenderIcon('male', true), "did not return 'male'").to.equal('male');
+          });
+
+          it('should return female', function () {
+            expect(fsPersonDefault._getGenderIcon('female', true), "did not return 'female'").to.equal('female');
+          });
+
+          it('should return gray-male', function () {
+            expect(fsPersonDefault._getGenderIcon('male', false), "did not return 'gray-male'").to.equal('gray-male');
+          });
+
+          it('should return gray-female', function () {
+            expect(fsPersonDefault._getGenderIcon('female', false), "did not return 'gray-female'").to.equal('gray-female');
+          });
+
+          it('should return unknown-portrait', function () {
+            expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', true), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
+
+            expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', false), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
+          });
+        });
+
+        describe('_isPortrait', function() {
+          it('should return true', function () {
+            expect(fsPersonDefault._isPortrait('portrait'), "did not return true").to.be.true;
+          });
+
+          it('should return false', function () {
+            expect(fsPersonDefault._isPortrait('anythingNotPortrait'), "did not return false").to.be.false;
+          });
+        });
+
+        describe('_usingNameParts', function() {
+          it('should return "first" or "last"', function () {
+            expect(fsPersonDefault._usingNameParts('first', 'last'), "did not return 'first'").to.equal('first');
+
+            expect(fsPersonDefault._usingNameParts(null, 'last'), "did not return 'last'").to.equal('last');
+
+            expect(fsPersonDefault._usingNameParts('first', null), "did not return 'first'").to.equal('first');
+
+            expect(fsPersonDefault._usingNameParts(null, null), "did not return null").to.be.null;
+          });
+        });
+
+        describe('_getFirstName', function() {
+          it('should return the first name', function () {
+            expect(fsPersonDefault._getFirstName('first', 'last', 'anythingNotSinotypic'), "did not return 'first'").to.equal('first');
+          });
+
+          it('should return the last name', function () {
+            expect(fsPersonDefault._getFirstName('first', 'last', 'sinotypic'), "did not return 'last'").to.equal('last');
+          });
+        });
+
+        describe('_getLastName', function() {
+          it('should return the first name', function () {
+            expect(fsPersonDefault._getLastName('first', 'last', 'sinotypic'), "did not return 'first'").to.equal('first');
+          });
+
+          it('should return the last name', function () {
+            expect(fsPersonDefault._getLastName('first', 'last', 'anythingNotSinotypic'), "did not return 'last'").to.equal('last');
           });
         });
       });
