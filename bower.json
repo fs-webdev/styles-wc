@@ -18,7 +18,13 @@
   ],
   "ignore": [
     ".DS_Store",
-    ".gitignore"
+    ".gitignore",
+    ".*",
+    "bin/",
+    "bin/*",
+    "test/",
+    "test/*",
+    "wct.conf.json"
   ],
   "moduleType": "globals",
   "license": "SEE LICENSE IN LICENSE.txt",
@@ -28,6 +34,7 @@
   },
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.1",
-    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7"
+    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "es6-promise-polyfill": "git+https://github.com/taylorhakes/promise-polyfill#6.0.2"
   }
 }
