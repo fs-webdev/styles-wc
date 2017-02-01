@@ -241,8 +241,8 @@ fs-person:not([inline]) {
             <span>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
-              <span class='fs-person-details__pid' on-click='_copyPid'>
-                <fs-icon class='copy-icon' icon='copy' title='[[i18n("COPY_TOOLTIP")]]'></fs-icon>
+              <span class='fs-person-details__pid'>
+                <fs-icon class='copy-icon' icon='copy' title='[[i18n("COPY_TOOLTIP")]]' on-click='_copyPid'></fs-icon>
                 [[pid]]
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
