@@ -68,7 +68,7 @@ fs-person:not([inline]) {
       .fs-person-vitals__name-block {
         /*https://css-tricks.com/flexbox-truncated-text*/
         min-width: 0;
-        width: 100%;
+        width: 370px
       }
 
       :host([orientation='portrait']) .fs-person-vitals {
@@ -111,7 +111,7 @@ fs-person:not([inline]) {
       .v-center,
       .fs-person-portrait,
       .fs-person__container {
-        display: flex;
+        display: inline-flex;
         flex-direction: row;
         align-items: center;
       }
@@ -147,9 +147,73 @@ fs-person:not([inline]) {
       }
 
       .copy-icon {
-        width: 15px;
         height: 12px;
+        position: relative;
+        width: 15px;
       }
+
+      /* Begin GitHub-like css-only accessible tooltip */
+
+      .tooltipped:hover::before,
+      .tooltipped:hover::after,
+      .tooltipped:active::before,
+      .tooltipped:active::after,
+      .tooltipped:focus::before,
+      .tooltipped:focus::after {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .tooltipped::before {
+        position: absolute;
+        z-index: 1000001;
+        display: none;
+        width: 0;
+        height: 0;
+        color: rgba(0,0,0,0.8);
+        content: "";
+        border: 5px solid transparent;
+      }
+
+      .tooltipped::after {
+        -webkit-transform: translateX(50%);
+        transform: translateX(50%);
+      }
+
+      .tooltipped::after {
+        top: 100%;
+        right: 50%;
+        margin-top: 5px;
+      }
+
+      .tooltipped::before {
+        top: auto;
+        right: 50%;
+        bottom: -5px;
+        margin-right: -5px;
+        border-bottom-color: rgba(0,0,0,0.8);
+      }
+
+      .tooltipped::after {
+        position: absolute;
+        z-index: 1000000;
+        display: none;
+        padding: 5px 8px;
+        -webkit-font-smoothing: subpixel-antialiased;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        text-shadow: none;
+        text-transform: none;
+        letter-spacing: normal;
+        word-wrap: break-word;
+        white-space: pre;
+        content: attr(aria-label);
+        background: rgba(0,0,0,0.8);
+        border-radius: 3px;
+      }
+
+      /* End GitHub-like css-only accessible tooltip */
 
       .fs-person__container {
         color: #333331;
@@ -157,6 +221,10 @@ fs-person:not([inline]) {
 
       :host([orientation='portrait']) .fs-person__container {
         flex-direction: column;
+      }
+
+      .fs-person__container > .v-center {
+        overflow: visible;
       }
 
       .fs-person-gender__icon {
@@ -242,7 +310,7 @@ fs-person:not([inline]) {
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
               <span class='fs-person-details__pid'>
-                <fs-icon class='copy-icon' icon='copy' title='[[i18n("COPY_TOOLTIP")]]' on-click='_copyPid'></fs-icon>
+                <fs-icon class='copy-icon tooltipped' icon='copy' aria-label$='[[i18n("COPY_TOOLTIP")]]' on-click='_copyPid'></fs-icon>
                 [[pid]]
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
