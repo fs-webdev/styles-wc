@@ -163,7 +163,10 @@
           beforeEach(function() {
             mockEvent = {
               preventDefault: function(){},
-              stopImmediatePropagation: function(){}
+              stopImmediatePropagation: function(){},
+              target: {
+                setAttribute: function(){}
+              }
             };
 
             preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
