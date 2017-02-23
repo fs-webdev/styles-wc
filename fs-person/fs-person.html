@@ -68,7 +68,7 @@ fs-person:not([inline]) {
       .fs-person-vitals__name-block {
         /*https://css-tricks.com/flexbox-truncated-text*/
         min-width: 0;
-        width: 370px
+        width: 100%;
       }
 
       :host([orientation='portrait']) .fs-person-vitals {
@@ -224,7 +224,7 @@ fs-person:not([inline]) {
       }
 
       .fs-person__container > .v-center {
-        overflow: visible;
+        @apply(--fs-person-name-v-center);
       }
 
       .fs-person-gender__icon {
@@ -310,7 +310,7 @@ fs-person:not([inline]) {
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[!_and(pid, lifespan)]]'>&nbsp;•&nbsp;</span>
               <span class='fs-person-details__pid'>
-                <fs-icon class='copy-icon tooltipped' icon='copy' aria-label$='[[i18n("COPY_TOOLTIP")]]' on-click='_copyPid'></fs-icon>
+                <fs-icon class='copy-icon tooltipped' icon='copy' aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' on-click='_copyPid' title=''></fs-icon>
                 [[pid]]
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
@@ -473,11 +473,17 @@ fs-person:not([inline]) {
         return a && b;
       },
       _copyPid: function(e) {
+        var that = this,
+            target = e.target;
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
         this.$._pidInput.select();
         document.execCommand('copy');
+        target.setAttribute("aria-label", this.i18n("COPY_TO_CLIPBOARD_COMPLETE"));
+        setTimeout(function(){
+          target.setAttribute("aria-label", that.i18n("COPY_TO_CLIPBOARD"));
+        }, 3000);
         window.getSelection().removeAllRanges();
       },
       _showPid: function(pid, hidePid) {

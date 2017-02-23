@@ -1,3 +1,4 @@
 {
-  "COPY_TOOLTIP": "Copy ID to clipboard."
+  "COPY_TO_CLIPBOARD": "Copy ID to clipboard.",
+  "COPY_TO_CLIPBOARD_COMPLETE": "ID copied to clipboard."
 }
