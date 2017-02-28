@@ -288,12 +288,14 @@ fs-person:not([inline]) {
     <div class='fs-person__container' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
-          <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" hidden='[[!portraitUrl]]' data-test-person-portrait>
+          <template is='dom-if' if='[[portraitUrl]]'>
+            <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
+          </template>
           <fs-icon icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
         </div>
       </div>
       <div class='v-center'>
-        <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, showPortrait, gender, orientation)]]'></fs-icon>
+        <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, showPortrait, gender, hideGender, orientation)]]'></fs-icon>
         <div class="fs-person-vitals">
           <div class='v-center'>
             <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, hideGender, orientation)]]'></fs-icon>
@@ -494,9 +496,9 @@ fs-person:not([inline]) {
           this.showPortrait = true;
         }
       },
-      _showGenderIcon: function(inline, showPortrait, gender, orientation) {
+      _showGenderIcon: function(inline, showPortrait, gender, hideGender, orientation) {
         if (inline) return false;
-        return gender && !showPortrait && !this._isPortrait(orientation);
+        return gender && !hideGender && !showPortrait && !this._isPortrait(orientation);
       },
       _showGenderDot: function(inline, showPortrait, hideGender, orientation) {
         if (inline && !hideGender) return true;

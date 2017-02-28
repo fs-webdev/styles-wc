@@ -245,11 +245,12 @@
               inline = true;
               showPortrait = 'doesntMatter';
               gender = 'doesntMatter';
+              hideGender = 'doesntMatter';
               orientation = 'doesntMatter';
             });
 
             it('should always return false', function () {
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation); // other params don't matter in this case
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation); // other params don't matter in this case
 
               expect(result, "inline=true returned true").to.be.false;
             });
@@ -260,32 +261,38 @@
               inline = false;
               showPortrait = false;
               gender = 'female';
+              hideGender = false;
               orientation = 'landscape';
             });
 
             it('should return true', function () {
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=false, gender='female', orientation='landscape' returned false").to.be.true;
             });
 
             it('should return false', function () {
               gender = null;
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender=null, orientation='landscape' returned true").to.be.null; // falsey
 
-              gender='female';
+              gender = 'female';
               showPortrait = true;
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
 
-              showPortrait = true;
+              showPortrait = false;
+              hideGender = true;
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
+
+              hideGender = false;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='portrait' returned true").to.be.false;
 
-              showPortrait = false;
+              showPortrait = true;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
             });
           });
