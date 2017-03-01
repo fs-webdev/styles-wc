@@ -1,5 +1,10 @@
 .DS_Store
-node_modules
 .env
-buildAssets
+.vscode/*
 bower_components
+bower-debug.log
+buildAssets
+node_modules
+npm-debug.log
+reports
+wct.log
