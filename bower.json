@@ -1,6 +1,6 @@
 {
   "name": "styles-wc",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -35,6 +35,7 @@
   "devDependencies": {
     "web-component-tester": "Polymer/web-component-tester#^4.3.1",
     "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "iron-demo-helpers": "git+https://github.com/PolymerElements/iron-demo-helpers#^1.0.0",
     "es6-promise-polyfill": "git+https://github.com/taylorhakes/promise-polyfill#6.0.2"
   }
 }
