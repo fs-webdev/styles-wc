@@ -84,7 +84,7 @@ fs-person:not([inline]) {
         font-weight: normal;
         line-height: 1.625rem;
         margin: 0;
-        @apply(--fs-person-name);
+        @apply --fs-person-name;
       }
       .fs-person-name__container {
         display: -webkit-flex;
@@ -98,6 +98,7 @@ fs-person:not([inline]) {
         -webkit-flex-wrap: nowrap;
         flex-wrap: nowrap;
         white-space: nowrap;
+        @apply --fs-person-details;
       }
       .fs-person-details__pid {
         cursor: pointer;
@@ -132,7 +133,7 @@ fs-person:not([inline]) {
       .fs-person__container {
         position: relative;
         z-index:0;
-        @apply(--fs-person-container);
+        @apply --fs-person-container;
       }
 
       /* This is a CSS hack to allow for easy copying of the PID */
@@ -224,7 +225,7 @@ fs-person:not([inline]) {
       }
 
       .fs-person__container > .v-center {
-        @apply(--fs-person-name-v-center);
+        @apply --fs-person-name-v-center;
       }
 
       .fs-person-gender__icon {
@@ -246,7 +247,7 @@ fs-person:not([inline]) {
         justify-content: center;
         overflow: hidden;
         position: relative;
-        @apply(--fs-person-portrait);
+        @apply --fs-person-portrait;
       }
       :host([orientation='portrait']) .fs-person-portrait__container {
         margin-right: 0;
@@ -255,13 +256,13 @@ fs-person:not([inline]) {
       .fs-person-portrait__portrait-icon[icon='male'] {
         width: 100%;
         height: 100%;
-        @apply(--fs-person-portrait-icon);
+        @apply --fs-person-portrait-icon;
       }
       .fs-person-portrait__portrait-icon[icon^='gray'],
       .fs-person-portrait__portrait-icon[icon^='unknown'] {
         width: 60%;
         height: 60%;
-        @apply(--fs-person-portrait-icon);
+        @apply --fs-person-portrait-icon;
       }
       .fs-person-portrait__portrait-image {
         width: 100%;
@@ -270,7 +271,7 @@ fs-person:not([inline]) {
         position: absolute;
         top: 0px; /* Required for ie11 */
         left: 0px;
-        @apply(--fs-person-portrait-image);
+        @apply --fs-person-portrait-image;
       }
       a:visited {
         color: blue;
