@@ -68,6 +68,7 @@
             expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
             expect(fsPersonDefault.hideGender, "hideGender is not false").to.be.false;
             expect(fsPersonDefault.hidePid, "hidePid is not false").to.be.false;
+            expect(fsPersonDefault.hideSeparator, "hideSeparator is not false").to.be.false;
             expect(fsPersonDefault.inline, "inline is not false").to.be.false;
             expect(fsPersonDefault.lastName, "lastName is not ''").to.equal('');
             expect(fsPersonDefault.lifespan, "lifespan is not ''").to.equal('');
@@ -97,6 +98,7 @@
           it('should hide gender and pid ', function () {
             expect(fsPersonPassedValues.hideGender, "hideGender is not true").to.be.true;
             expect(fsPersonPassedValues.hidePid, "hidePid is not true").to.be.true;
+            expect(fsPersonPassedValues.hideSeparator, "hideSeparator is not false").to.be.false;
           });
 
           it('should be inline ', function () {
@@ -144,15 +146,6 @@
         //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not false").to.be.false;
         //   });
         // });
-
-        describe('_and', function() {
-          it('should return a and b', function () {
-            expect(fsPersonDefault._and(true, true), "true & true returned false").to.be.true;
-            expect(fsPersonDefault._and(true, false), "true & false returned true").to.be.false;
-            expect(fsPersonDefault._and(false, true), "false & true returned true").to.be.false;
-            expect(fsPersonDefault._and(false, false), "false & false returned true").to.be.false;
-          });
-        });
 
         describe('_copyPid', function() {
           var mockEvent;
@@ -211,6 +204,20 @@
             expect(fsPersonDefault._showPid(true, true), "pid exists and hide it returned true").to.be.false;
             expect(fsPersonDefault._showPid(false, true), "no pid exists and hide it returned true").to.be.false;
             expect(fsPersonDefault._showPid(false, false), "no pid exists and don't hide it returned true").to.be.false;
+          });
+        });
+
+        describe('_hideSeparator', function() {
+          it('should return true (not show the separator)', function () {
+            expect(fsPersonDefault._hideSeparator(true, true, true), "hideSeparator=true, pid=true, lifespan=true").to.be.true;
+            expect(fsPersonDefault._hideSeparator(true, false, false), "hideSeparator=true, pid=false, lifespan=false").to.be.true;
+            expect(fsPersonDefault._hideSeparator(false, false, true), "hideSeparator=false, pid=false, lifespan=true").to.be.true;
+            expect(fsPersonDefault._hideSeparator(false, true, false), "hideSeparator=false, pid=true, lifespan=false").to.be.true;
+            expect(fsPersonDefault._hideSeparator(false, false, false), "hideSeparator=false, pid=false, lifespan=false").to.be.true;
+          });
+
+          it('should return false (show the separator)', function () {
+            expect(fsPersonDefault._hideSeparator(false, true, true), "hideSeparator=false, pid=true, lifespan=true").to.be.false;
           });
         });
 
