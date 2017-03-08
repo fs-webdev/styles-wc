@@ -216,6 +216,21 @@ Example:
         opacity: 1;
       }
 
+      /* Resets children elements to not include any inherited styles from fs-button */
+      .loading-icon, template {
+        background-color: initial;
+        border: initial;
+        padding:initial;
+        text-decoration: initial;
+      }
+
+      .loading-icon:hover, template:hover, fs-button:hover {
+        background-color: initial;
+        color: initial;
+        padding: initial;
+      }
+      /* Ends reset */
+
       .loading-icon {
         background-size: contain;
         height: 20px;
@@ -226,7 +241,10 @@ Example:
         width: 20px;
       }
     </style>
-    <content></content><fs-icon class='loading-icon' icon='[[_spinnerType(option)]]'></fs-icon>
+    <content></content>
+    <template is="dom-if" if="[[loading]]">
+      <fs-icon class="loading-icon" icon="[[_spinnerType(option)]]"></fs-icon>
+    </template>
   </template>
   <script>
     Polymer({
