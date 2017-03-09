@@ -29,12 +29,13 @@
   "moduleType": "globals",
   "license": "SEE LICENSE IN LICENSE.txt",
   "dependencies": {
-    "polymer": "Polymer/Polymer#^1.6.1",
+    "oak-i18n-behavior": "git+https://github.com/FamilySearchElements/oak-i18n-behavior#~1.1.0",
+    "polymer": "git+https://github.com/Polymer/Polymer#^1.6.1",
     "wc-i18n": "git+https://github.com/jshcrowthe/wc-i18n#^2.1.0"
   },
   "devDependencies": {
-    "web-component-tester": "Polymer/web-component-tester#^4.3.1",
-    "iron-component-page": "PolymerElements/iron-component-page#^1.1.7",
+    "web-component-tester": "git+https://github.com/Polymer/web-component-tester#^4.3.1",
+    "iron-component-page": "git+https://github.com/PolymerElements/iron-component-page#^1.1.7",
     "iron-demo-helpers": "git+https://github.com/PolymerElements/iron-demo-helpers#^1.0.0",
     "es6-promise-polyfill": "git+https://github.com/taylorhakes/promise-polyfill#6.0.2"
   }

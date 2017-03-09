@@ -1,5 +1,6 @@
 <link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../wc-i18n/wc-i18n.html">
+<link rel="import" href="../../oak-i18n-behavior/oak-i18n-behavior.html">
 <link rel="import" href="../fs-icon/fs-icon.html">
 
 <!--
@@ -471,7 +472,8 @@ fs-person:not([inline]) {
 
       },
       behaviors: [
-        WCI18n()
+        WCI18n(),
+        OakI18nBehavior
       ],
       observers: [
         '_portraitDefault(showPortrait, orientation)'
