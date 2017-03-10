@@ -37,6 +37,6 @@
     "web-component-tester": "git+https://github.com/Polymer/web-component-tester#^5.0.0",
     "iron-component-page": "git+https://github.com/PolymerElements/iron-component-page#^1.1.8",
     "iron-demo-helpers": "git+https://github.com/PolymerElements/iron-demo-helpers#^1.2.5",
-    "es6-promise-polyfill": "git+https://github.com/taylorhakes/promise-polyfill#6.0.2"
+    "es6-promise": "git+https://github.com/stefanpenner/es6-promise.git#^4.1.0",
   }
 }
