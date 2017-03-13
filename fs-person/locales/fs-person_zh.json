@@ -1,4 +1,6 @@
 {
-  "_LRM_PKTAG307": "styles-wc_1_108 - FULL-FILE",
-  "COPY_TOOLTIP": "複製 ID 到剪貼簿"
+  "_LRM_PKTAG946": "styles-wc_2_108 - CHANGES-ONLY",
+  "COPY_TOOLTIP": "複製 ID 到剪貼簿",
+  "COPY_TO_CLIPBOARD": "複製 ID 到剪貼簿。",
+  "COPY_TO_CLIPBOARD_COMPLETE": "已複製 ID。"
 }
