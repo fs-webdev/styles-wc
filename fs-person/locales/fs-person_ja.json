@@ -1,4 +1,6 @@
 {
-  "_LRM_PKTAG815": "styles-wc_1_104 - FULL-FILE",
-  "COPY_TOOLTIP": "クリップボードにIDをコピーします。"
+  "_LRM_PKTAG166": "styles-wc_2_104 - CHANGES-ONLY",
+  "COPY_TOOLTIP": "クリップボードにIDをコピーします。",
+  "COPY_TO_CLIPBOARD": "クリップボードにIDをコピーします。",
+  "COPY_TO_CLIPBOARD_COMPLETE": "IDをコピーしました。"
 }
