@@ -1,4 +1,6 @@
 {
-  "_LRM_PKTAG267": "styles-wc_1_102 - FULL-FILE",
-  "COPY_TOOLTIP": "Copier le numéro d’identification dans le presse-papier."
+  "_LRM_PKTAG995": "styles-wc_2_102 - CHANGES-ONLY",
+  "COPY_TOOLTIP": "Copier le numéro d’identification dans le presse-papier.",
+  "COPY_TO_CLIPBOARD": "Copier le numéro d’identification dans le presse-papier.",
+  "COPY_TO_CLIPBOARD_COMPLETE": "N° d’identification copié."
 }
