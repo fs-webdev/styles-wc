@@ -1,4 +1,6 @@
 {
-  "_LRM_PKTAG789": "styles-wc_1_101 - FULL-FILE",
-  "COPY_TOOLTIP": "Copiar el ID al portapapeles."
+  "_LRM_PKTAG502": "styles-wc_2_101 - CHANGES-ONLY",
+  "COPY_TOOLTIP": "Copiar el ID al portapapeles.",
+  "COPY_TO_CLIPBOARD": "Copiar el ID al portapapeles.",
+  "COPY_TO_CLIPBOARD_COMPLETE": "Se ha copiado el ID"
 }
