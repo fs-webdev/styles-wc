@@ -317,7 +317,9 @@ fs-person:not([inline]) {
                 <fs-icon class='copy-icon tooltipped' icon='copy' aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' on-click='_copyPid' title='' data-test-person-copy-pid-button></fs-icon>
                 <span data-test-person-pid>[[pid]]</span>
               </span>
-              <input id='_pidInput' type="text" value$='[[pid]]'>
+              <label>
+                <input id="_pidInput" type="text" value$="[[pid]]">
+              </label>
             </div>
           </div>
         </div>
