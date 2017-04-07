@@ -286,6 +286,20 @@ fs-person:not([inline]) {
       :host([inline]) a:hover {
         text-decoration: underline;
       }
+
+      .fs-person-vitals__name {
+        @apply(--person-name);
+      }
+
+      .fs-person-vitals__name:hover {
+        text-decoration:underline;
+        @apply(--person-name-hover);
+      }
+
+      .fs-person-details__container:hover {
+        @apply(--person-details-hover);
+      }
+
     </style>
     <div class='fs-person__container' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
