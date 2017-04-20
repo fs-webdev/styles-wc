@@ -143,7 +143,7 @@ fs-person:not([inline]) {
       #_pidInput {
         opacity: 0;
         position: absolute;
-        width: 1px;
+        width: 40px; /* Fix for OFT-69102 - copy pid not working for person-card or tree. */
         height: 1px;
         top:0;
         left:0;
@@ -157,13 +157,16 @@ fs-person:not([inline]) {
       }
 
       /* Begin GitHub-like css-only accessible tooltip */
+      .copy-pid-container {
+        cursor: pointer;
+      }
 
-      .tooltipped:hover::before,
-      .tooltipped:hover::after,
-      .tooltipped:active::before,
-      .tooltipped:active::after,
-      .tooltipped:focus::before,
-      .tooltipped:focus::after {
+      .copy-pid-container:hover .tooltipped::before,
+      .copy-pid-container:hover .tooltipped::after,
+      .copy-pid-container:active .tooltipped::before,
+      .copy-pid-container:active .tooltipped::after,
+      .copy-pid-container:focus .tooltipped::before,
+      .copy-pid-container:focus .tooltipped::after {
         display: inline-block;
         text-decoration: none;
       }
@@ -336,8 +339,8 @@ fs-person:not([inline]) {
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               &nbsp;<span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>•</span>&nbsp;
-              <span class='fs-person-details__pid'>
-                <fs-icon class='copy-icon tooltipped' icon='copy' aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' on-click='_copyPid' title='' data-test-person-copy-pid-button></fs-icon>
+              <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
+                <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
                 <span data-test-person-pid>[[pid]]</span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
@@ -513,9 +516,9 @@ fs-person:not([inline]) {
         e.stopImmediatePropagation();
         this.$._pidInput.select();
         document.execCommand('copy');
-        target.setAttribute("aria-label", this.i18n("COPY_TO_CLIPBOARD_COMPLETE"));
+        this.$.CopyPIDIcon.setAttribute("aria-label", this.i18n("COPY_TO_CLIPBOARD_COMPLETE"));
         setTimeout(function(){
-          target.setAttribute("aria-label", that.i18n("COPY_TO_CLIPBOARD"));
+          that.$.CopyPIDIcon.setAttribute("aria-label", that.i18n("COPY_TO_CLIPBOARD"));
         }, 3000);
         window.getSelection().removeAllRanges();
       },
