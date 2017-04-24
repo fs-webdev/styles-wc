@@ -1,6 +1,6 @@
 {
   "name": "styles-wc",
-  "version": "2.1.15",
+  "version": "2.1.16",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -16,27 +16,25 @@
   "main": [
     "fs-styles.html"
   ],
+  "moduleType": "globals",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "oak-i18n-behavior": "git+https://github.com/FamilySearchElements/oak-i18n-behavior#~1.2.0",
+    "polymer": "git+https://github.com/Polymer/polymer#~1.9.1",
+    "wc-i18n": "git+https://github.com/fs-webdev/wc-i18n#~2.1.0"
+  },
+  "devDependencies": {
+    "es6-promise": "git+https://github.com/stefanpenner/es6-promise.git#~4.1.0",
+    "iron-component-page": "git+https://github.com/PolymerElements/iron-component-page#~1.1.9",
+    "iron-demo-helpers": "git+https://github.com/PolymerElements/iron-demo-helpers#~1.2.6",
+    "web-component-tester": "git+https://github.com/Polymer/web-component-tester#~5.0.1"
+  },
   "ignore": [
-    ".DS_Store",
-    ".gitignore",
     ".*",
     "bin/",
     "bin/*",
     "test/",
     "test/*",
     "wct.conf.json"
-  ],
-  "moduleType": "globals",
-  "license": "SEE LICENSE IN LICENSE.txt",
-  "dependencies": {
-    "oak-i18n-behavior": "git+https://github.com/FamilySearchElements/oak-i18n-behavior#~1.2.0",
-    "polymer": "git+https://github.com/Polymer/Polymer#^1.8.1",
-    "wc-i18n": "git+https://github.com/jshcrowthe/wc-i18n#^2.1.0"
-  },
-  "devDependencies": {
-    "web-component-tester": "git+https://github.com/Polymer/web-component-tester#^5.0.0",
-    "iron-component-page": "git+https://github.com/PolymerElements/iron-component-page#^1.1.8",
-    "iron-demo-helpers": "git+https://github.com/PolymerElements/iron-demo-helpers#^1.2.5",
-    "es6-promise": "git+https://github.com/stefanpenner/es6-promise.git#^4.1.0"
-  }
+  ]
 }
