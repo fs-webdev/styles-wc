@@ -11,14 +11,6 @@ if [ "$TRAVIS_PULL_REQUEST" == false ] && [ "$TRAVIS_BRANCH" == "master" ]; then
   git fetch
   git reset --hard "$TRAVIS_COMMIT"
 
-  # If there is no tag for the current build number, create one
-  if [ -z "$(git tag -l "$TRAVIS_BUILD_NUMBER")" ]; then
-
-    git tag -a "$TRAVIS_BUILD_NUMBER" -m "Travis CI auto-tag successful build" "$TRAVIS_COMMIT"
-
-    echo -e "created tag: $TRAVIS_BUILD_NUMBER"
-  fi
-
   BOWER_VERSION="$(cat bower.json \
     | grep version \
     | head -1 \
