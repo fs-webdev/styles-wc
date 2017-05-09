@@ -273,7 +273,7 @@ Basic usage:
       /**
        * Returns a bool based on whether a string is truthy and not empty.
        * @param {string} str - The string being checked if empty.
-       * @returns {boolean}
+       * @returns {boolean} - True or false.
        */
       _boolify: function(str){
         return str && str.length;
@@ -289,16 +289,16 @@ Basic usage:
         }
       },
       /**
-       * Allows for conditional classes
+       * Allows for conditional classes.
        * @param {string} className - The class to be applied.
        * @param {boolean} bool - The a boolean to determine is the class should be applied.
-       * @returns {boolean}
+       * @returns {boolean} - True or false.
        */
       _class: function(className, bool){
         return (bool) ? className : '';
       },
       /**
-       * Executes autoHide logic
+       * Executes autoHide logic.
        * @param {number} autoHide - The number in seconds to show the alert for.
        */
       _handleAutoHide: function(autoHide){
@@ -310,7 +310,7 @@ Basic usage:
         }
       },
       /**
-       * Executes fade-out transitioning
+       * Executes fade-out transitioning.
        * @param {boolean} fadeOut - Whether or not the message should fade out.
        */
       _handleFadeOut: function(fadeOut){
