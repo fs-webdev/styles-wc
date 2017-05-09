@@ -1,13 +1,4 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <html>
   <head>
     <meta charset="utf-8">
@@ -17,61 +8,61 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <script src="../../../web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../fs-alert.html">
+    <link rel="import" href="../fs-alert-message.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
     <test-fixture id="default-alert">
       <template>
-        <fs-alert>
+        <fs-alert-message>
           default alert
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <test-fixture id="error-alert">
       <template>
-        <fs-alert alert-type="error">
+        <fs-alert-message alert-type="error">
           error alert
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <test-fixture id="info-alert">
       <template>
-        <fs-alert alert-type="info">
+        <fs-alert-message alert-type="info">
           info alert
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <test-fixture id="warning-alert">
       <template>
-        <fs-alert alert-type="warning">
+        <fs-alert-message alert-type="warning">
           warning alert
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <test-fixture id="default-alert-with-title">
       <template>
-        <fs-alert alert-title="a title">
+        <fs-alert-message alert-title="a title">
           default alert with title
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <test-fixture id="dismissable-default-alert-with-title">
       <template>
-        <fs-alert alert-title="a title" dismissable>
+        <fs-alert-message alert-title="a title" dismissable>
           dismissable default alert with title
-        </fs-alert>
+        </fs-alert-message>
       </template>
     </test-fixture>
 
     <script>
-      suite('<fs-alert>', function() {
+      suite('<fs-alert-message>', function() {
 
         var defaultAlert;
         var errorAlert;
@@ -111,7 +102,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('setting dismissable shows a dismiss icon', function() {
           assert.equal(dismissableDefaultAlertWithTitle.dismissable, true);
-        });        
+        });
 
       });
     </script>
