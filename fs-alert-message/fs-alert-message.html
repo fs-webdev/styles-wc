@@ -206,6 +206,7 @@ Basic usage:
       },
       /**
        * Shows the alert--sets hidden to true.
+       * @param {number} autoHide - The number in seconds to show the alert for.
        */
       show: function(autoHide){
         this.hidden = false;
@@ -220,30 +221,46 @@ Basic usage:
       },
       /**
        * Styles, populates, and displays the modal.
+       * @param {string} title - The title text.
+       * @param {string} body - The body text.
+       * @param {boolean} dismissable - If the message can be dismissed.
        */
       success: function(title, body, dismissable){
         this._setProps('', title, body, dismissable);
       },
       /**
        * Styles, populates, and displays the modal.
+       * @param {string} title - The title text.
+       * @param {string} body - The body text.
+       * @param {boolean} dismissable - If the message can be dismissed.
        */
       info: function(title, body, dismissable){
         this._setProps('info', title, body, dismissable);
       },
       /**
        * Styles, populates, and displays the modal.
+       * @param {string} title - The title text.
+       * @param {string} body - The body text.
+       * @param {boolean} dismissable - If the message can be dismissed.
        */
       warning: function(title, body, dismissable){
         this._setProps('warning', title, body, dismissable);
       },
       /**
        * Styles, populates, and displays the modal.
+       * @param {string} title - The title text.
+       * @param {string} body - The body text.
+       * @param {boolean} dismissable - If the message can be dismissed.
        */
       error: function(title, body, dismissable){
         this._setProps('error', title, body, dismissable);
       },
       /**
        * Styles, populates, and displays the modal.
+       * @param {string} type - The type of alert being shown.
+       * @param {string} title - The title text.
+       * @param {string} body - The body text.
+       * @param {boolean} dismissable - If the message can be dismissed.
        */
       _setProps: function(type, title, body, dismissable){
         this.alertType = type;
@@ -255,12 +272,16 @@ Basic usage:
       },
       /**
        * Returns a bool based on whether a string is truthy and not empty.
+       * @param {string} str - The string being checked if empty.
+       * @returns {boolean}
        */
       _boolify: function(str){
         return str && str.length;
       },
       /**
        * Updates the alertBody property if it's truthy and not empty.
+       * @param {string} newVal - A new value to be applied.
+       * @param {string} oldVal - The previous value already applied.
        */
       _updateBody: function(newVal, oldVal){
         if(newVal && newVal.length){
@@ -269,12 +290,16 @@ Basic usage:
       },
       /**
        * Allows for conditional classes
+       * @param {string} className - The class to be applied.
+       * @param {boolean} bool - The a boolean to determine is the class should be applied.
+       * @returns {boolean}
        */
       _class: function(className, bool){
         return (bool) ? className : '';
       },
       /**
        * Executes autoHide logic
+       * @param {number} autoHide - The number in seconds to show the alert for.
        */
       _handleAutoHide: function(autoHide){
         var hideIn = autoHide || this.autoHide;
@@ -284,6 +309,10 @@ Basic usage:
           }.bind(this), hideIn * 1000);
         }
       },
+      /**
+       * Executes fade-out transitioning
+       * @param {boolean} fadeOut - Whether or not the message should fade out.
+       */
       _handleFadeOut: function(fadeOut){
         if(fadeOut || this.fadeOut){
           this.classList.add('fade-out');
