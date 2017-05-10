@@ -339,10 +339,10 @@ fs-person:not([inline]) {
         </div>
       </div>
       <div class='v-center'>
-        <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, showPortrait, gender, hideGender, orientation)]]'></fs-icon>
+        <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation)]]'></fs-icon>
         <div class="fs-person-vitals">
           <div class='v-center'>
-            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, showPortrait, hideGender, orientation)]]'></fs-icon>
+            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon>
             <span class="fs-person-vitals__name-block">
               <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
@@ -351,7 +351,7 @@ fs-person:not([inline]) {
               </p>
             </span>
           </div>
-          <div class$='fs-person-details__container [[_getDetailsClass(inline, showPortrait, hideGender, orientation)]]'>
+          <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               &nbsp;<span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>•</span>&nbsp;
@@ -377,6 +377,17 @@ fs-person:not([inline]) {
          * @type {Boolean}
          */
         coloredIcon: {
+          type: Boolean,
+          value: false
+        },
+
+        /**
+         * Whether or not to show the gender dot icon (instead of coloredIcon)
+         *
+         * **Valid values are true or false**
+         * @type {Boolean}
+         */
+        dotIcon: {
           type: Boolean,
           value: false
         },
@@ -546,16 +557,16 @@ fs-person:not([inline]) {
           this.showPortrait = true;
         }
       },
-      _showGenderIcon: function(inline, showPortrait, gender, hideGender, orientation) {
-        if (inline) return false;
+      _showGenderIcon: function(inline, dotIcon, showPortrait, gender, hideGender, orientation) {
+        if (inline || dotIcon) return false;
         return gender && !hideGender && !showPortrait && !this._isPortrait(orientation);
       },
-      _showGenderDot: function(inline, showPortrait, hideGender, orientation) {
-        if (inline && !hideGender) return true;
+      _showGenderDot: function(inline, dotIcon, showPortrait, hideGender, orientation) {
+        if ((inline && !hideGender) || (dotIcon && !hideGender)) return true;
         return !hideGender && showPortrait && !this._isPortrait(orientation);
       },
-      _getDetailsClass: function(inline, showPortrait, hideGender, orientation) {
-        return this._showGenderDot(inline,showPortrait, hideGender, orientation) ? 'indented' : '';
+      _getDetailsClass: function(inline, dotIcon, showPortrait, hideGender, orientation) {
+        return this._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation) ? 'indented' : '';
       },
       _getGender: function(gender) {
         if (gender === 'female') return gender;

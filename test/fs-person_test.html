@@ -25,6 +25,7 @@
       <template>
         <fs-person
           colored-icon
+          dot-icon
           first-name = "John Jacob"
           full-name = "John Jacob Schmidt"
           gender = "male"
@@ -61,8 +62,9 @@
         });
 
         describe('properties', function() {
-          it('should set default values for "coloredIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
+          it('should set default values for "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
             expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
+            expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;            
             expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
             expect(fsPersonDefault.fullName, "fullName is not ''").to.equal('');
             expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
@@ -81,6 +83,10 @@
 
           it('should have coloredIcon true', function () {
             expect(fsPersonPassedValues.coloredIcon, "coloredIcon is not true").to.be.true;
+          });
+
+          it('should have dotIcon true', function () {
+            expect(fsPersonPassedValues.dotIcon, "dotIcon is not true").to.be.true;
           });
 
           it('should set firstName', function () {
@@ -251,6 +257,7 @@
 
         describe('_showGenderIcon', function() {
           var inline;
+          var dotIcon;          
           var showPortrait;
           var gender;
           var orientation;
@@ -259,6 +266,7 @@
           describe('inline = true', function() {
             beforeEach(function() {
               inline = true;
+              dotIcon = 'doesntMatter';
               showPortrait = 'doesntMatter';
               gender = 'doesntMatter';
               hideGender = 'doesntMatter';
@@ -266,7 +274,7 @@
             });
 
             it('should always return false', function () {
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation); // other params don't matter in this case
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation); // other params don't matter in this case
 
               expect(result, "inline=true returned true").to.be.false;
             });
@@ -275,6 +283,7 @@
           describe('inline = false', function() {
             beforeEach(function() {
               inline = false;
+              dotIcon = false;
               showPortrait = false;
               gender = 'female';
               hideGender = false;
@@ -282,33 +291,33 @@
             });
 
             it('should return true', function () {
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=false, gender='female', orientation='landscape' returned false").to.be.true;
             });
 
             it('should return false', function () {
               gender = null;
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender=null, orientation='landscape' returned true").to.be.null; // falsey
 
               gender = 'female';
               showPortrait = true;
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
 
               showPortrait = false;
               hideGender = true;
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
 
               hideGender = false;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=true, gender='female', orientation='portrait' returned true").to.be.false;
 
               showPortrait = true;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, showPortrait, gender, hideGender, orientation);
+              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
               expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
             });
           });
@@ -316,6 +325,7 @@
 
         describe('_showGenderDot', function() {
           var inline;
+          var dotIcon;
           var showPortrait;
           var hideGender;
           var orientation;
@@ -324,13 +334,14 @@
           describe('inline and hideGender', function() {
             beforeEach(function() {
               inline = true;
+              dotIcon = 'doesntMatter';
               showPortrait = 'doesntMatter';
               hideGender = false;
               orientation = 'doesntMatter';
             });
 
             it('should always return true', function () {
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation); // other params don't matter in this case
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation); // other params don't matter in this case
 
               expect(result, "inline=true and hideGender=false returned false").to.be.true;
             });
@@ -339,34 +350,35 @@
           describe('inline=true (and/or hideGender=true)', function() {
             beforeEach(function() {
               inline = false;
+              dotIcon = false;
               showPortrait = true;
               hideGender = false;
               orientation = 'landscape';
             });
 
             it('should return true', function () {
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
               expect(result, "showPortrait=true, hideGender=false, orientation='landscape' returned false").to.be.true;
             });
 
             it('should return false', function () {
               hideGender = true;
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
               expect(result, "showPortrait=true, hideGender=true, orientation='landscape' returned true").to.be.false;
 
               hideGender=false;
               showPortrait = false;
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
               expect(result, "showPortrait=false, hideGender=false, orientation='landscape' returned true").to.be.false;
 
               showPortrait = true;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
               expect(result, "showPortrait=true, hideGender=false, orientation='portrait' returned true").to.be.false;
 
               showPortrait = false;
               orientation = 'portrait';
-              result = fsPersonDefault._showGenderDot(inline, showPortrait, hideGender, orientation);
+              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
               expect(result, "showPortrait=false, hideGender=false, orientation='portrait' returned true").to.be.false;
             });
           });
@@ -375,6 +387,7 @@
         describe('_getDetailsClass', function() {
           beforeEach(function() {
             inline = 'doesntMatter';
+            dotIcon = 'doesntMatter';            
             showPortrait = 'doesntMatter';
             hideGender = 'doesntMatter';
             orientation = 'doesntMatter';
@@ -383,10 +396,10 @@
           it('should call _showGenderDot', function () {
             var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot");
 
-            fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation);
+            fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation);
 
             expect(_showGenderDotStub.callCount, "did not call _showGenderDot only once").to.equal(1);
-            expect(_showGenderDotStub.calledWith(inline, showPortrait, hideGender, orientation), "did not call _showGenderDot with the correct parameters").to.be.true;
+            expect(_showGenderDotStub.calledWith(inline, dotIcon, showPortrait, hideGender, orientation), "did not call _showGenderDot with the correct parameters").to.be.true;
 
             _showGenderDotStub.restore();
           });
@@ -394,7 +407,7 @@
           it('should return "indented"', function () {
             var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return true });
 
-            expect(fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation), "did not return 'indented'").to.equal('indented');
+            expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return 'indented'").to.equal('indented');
 
             _showGenderDotStub.restore();
           });
@@ -402,7 +415,7 @@
           it('should return ""', function () {
             var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return false });
 
-            expect(fsPersonDefault._getDetailsClass(inline, showPortrait, hideGender, orientation), "did not return ''").to.equal('');
+            expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return ''").to.equal('');
 
             _showGenderDotStub.restore();
           });
