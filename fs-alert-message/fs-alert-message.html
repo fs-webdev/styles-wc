@@ -63,19 +63,8 @@ Basic usage:
         border-radius: 4px;
         border: 1px solid #bfd730;
         color: #44650f;
-        padding: 10px 40px 10px 34px;
-        padding: 0.625rem 2.5rem 0.625rem 2.125rem;
+        padding: 10px;
         position: relative;
-      }
-      .fs-alert-message-shadow:before {
-        background-size: 100%;
-        content: '';
-        height: 20px;
-        height: 1.25rem;
-        left: 7px;
-        position: absolute;
-        width: 20px;
-        width: 1.25rem;
       }
       .fs-alert-message-shadow__title {
         color: inherit;
@@ -134,13 +123,11 @@ Basic usage:
         opacity: 0.75;
       }
       fs-icon {
-        position: relative;
-        right: 26px;
-        bottom: 5px;
+        float: left;
+        padding-right: 7px;
       }
-      main{
-        position: relative;
-        bottom: 30px;
+      main {
+        margin-left: 35px;
       }
     </style>
     <div hidden="[[hidden]]" class$="fs-alert-message-shadow fs-alert-message-shadow--[[alertType]]">
