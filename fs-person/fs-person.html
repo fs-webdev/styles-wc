@@ -58,6 +58,12 @@ fs-person:not([inline]) {
       :host {
         display: inline-block;
         max-width: 100%;
+        /* z-index and position needed for hover tooltip to show above other elements.
+         * This is because of the stacking context and how z-index applies to it.
+         * Read more about the stacking context here:
+         * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */
+        z-index: 1;
+        position: relative;
       }
       :host([inline]) .fs-person-vitals {
         display: flex;
