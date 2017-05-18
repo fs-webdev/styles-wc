@@ -58,6 +58,12 @@ fs-person:not([inline]) {
       :host {
         display: inline-block;
         max-width: 100%;
+        /* z-index and position needed for hover tooltip to show above other elements.
+         * This is because of the stacking context and how z-index applies to it.
+         * Read more about the stacking context here:
+         * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */
+        z-index: 1;
+        position: relative;
       }
       :host([inline]) .fs-person-vitals {
         display: flex;
@@ -354,7 +360,7 @@ fs-person:not([inline]) {
           <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
-              &nbsp;<span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>•</span>&nbsp;
+              <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&nbsp;•&nbsp;</span>
               <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
                 <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
                 <span data-test-person-pid>[[pid]]</span>
