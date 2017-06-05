@@ -1,6 +1,6 @@
 {
   "name": "styles-wc",
-  "version": "2.3.4",
+  "version": "2.3.5",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -21,7 +21,7 @@
   "dependencies": {
     "oak-i18n-behavior": "git+https://github.com/FamilySearchElements/oak-i18n-behavior#~1.2.0",
     "polymer": "git+https://github.com/Polymer/polymer#~1.9.1",
-    "wc-i18n": "git+https://github.com/fs-webdev/wc-i18n#~2.1.0"
+    "wc-i18n": "git+https://github.com/fs-webdev/wc-i18n#~2.1.1"
   },
   "devDependencies": {
     "es6-promise": "git+https://github.com/stefanpenner/es6-promise.git#~4.1.0",
