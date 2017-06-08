@@ -350,8 +350,9 @@ fs-person:not([inline]) {
           <div class='v-center'>
             <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon>
             <span class="fs-person-vitals__name-block">
-              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name>[[fullName]]</p>
+              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
+                <span class="person-label" hidden$="[[!label]]">[[label]]: </span>
                 <span data-test-person-given-name>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
                 <span data-test-person-family-name>[[_getLastName(firstName, lastName, nameSystem)]]</span>
               </p>
@@ -421,6 +422,14 @@ fs-person:not([inline]) {
          * @type {String}
          */
         lastName: {
+          type: String,
+          value: ''
+        },
+        /**
+         * The label used for a person.
+         * @type {String}
+         */
+        label: {
           type: String,
           value: ''
         },
