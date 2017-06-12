@@ -43,6 +43,15 @@ Example:
         width: 4.125rem;
       }
 
+      :host([size='medium-small']) {
+        height: 12px;
+        height: .75rem;
+        min-height: 12px;
+        min-width: 12px;
+        width: 12px;
+        width: .75rem;
+      }
+
       :host([size='small']) {
         height: 8px;
         height: .5rem;
@@ -258,7 +267,7 @@ Example:
         /**
          * The size of the icon.
          *
-         * Valid values are `large` and `small`. _To get the default behavior simply omit this property_.
+         * Valid values are `large`, `medium-small`, and `small`. _To get the default behavior simply omit this property_.
          * @type {String}
          */
         size: {
