@@ -165,6 +165,8 @@ fs-person:not([inline]) {
       /* Begin GitHub-like css-only accessible tooltip */
       .copy-pid-container {
         cursor: pointer;
+        padding: 4px;
+        margin-left:-2px;
       }
 
       .copy-pid-container:hover .tooltipped::before,
@@ -335,7 +337,8 @@ fs-person:not([inline]) {
       }
 
       .fs-person-details__separator{
-        padding-left: 5px;
+        padding-left: 6px;
+        padding-right: 6px;
         color: #333331;
       }
     </style>
@@ -365,8 +368,7 @@ fs-person:not([inline]) {
           <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
-              <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
-              <span data-test-person-pid>[[pid]]</span>
+              <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span><span data-test-person-pid>[[pid]]</span>
               <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
                 <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
               </span>
