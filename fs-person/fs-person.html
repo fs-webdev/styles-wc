@@ -334,6 +334,10 @@ fs-person:not([inline]) {
         font-family: Verdana, sans-serif;
       }
 
+      .fs-person-details__separator{
+        padding-left: 5px;
+        color: #333331;
+      }
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -361,10 +365,10 @@ fs-person:not([inline]) {
           <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
-              <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&nbsp;•&nbsp;</span>
+              <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
+              <span data-test-person-pid>[[pid]]</span>
               <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
                 <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
-                <span data-test-person-pid>[[pid]]</span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
