@@ -596,9 +596,9 @@ fs-person:not([inline]) {
       },
       _showCopyID: function(e) {
         var popupList = document.querySelectorAll(".copy-popup");
-        for(var i=0; i<popupList.length; i++){
-          popupList[i].classList.toggle("show",false);
-        }
+        popupList.forEach(function(item){
+          item.classList.toggle("show",false);
+        })
         var CopyPopup = this.querySelector(".copy-popup");
 
         var sel, range;
