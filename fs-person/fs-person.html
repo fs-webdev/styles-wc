@@ -322,7 +322,7 @@ fs-person:not([inline]) {
       }
 
       span.hover-pid:hover,
-      #CopyPopup:hover{
+      .copy-popup:hover{
           text-decoration: underline;
           cursor: pointer;
       }
@@ -330,11 +330,11 @@ fs-person:not([inline]) {
           position: relative;
           display: inline-block;
       }
-      .popup:hover #CopyPopup{
+      .popup:hover .copy-popup{
           visibility: visible;
       }
       /* The actual popup (appears on top) */
-      .popup .popuptext {
+      .popup .popup-text {
           font-family: Verdana, sans-serif;
           font-size: 0.8rem;
           visibility: hidden;
@@ -354,11 +354,8 @@ fs-person:not([inline]) {
       .popup {
           margin-bottom: 5px;
       }
-      #CopyPopupDone {
-          color: black;
-      }
       /* Popup arrow */
-      .popup .popuptext::after {
+      .popup .popup-text::after {
           content: "";
           position: absolute;
           top: 100%;
@@ -383,8 +380,12 @@ fs-person:not([inline]) {
             visibility: visible;
         }
 
-        #pidToBeCopied{
+        .pid-to-be-copied{
             padding-top: 10px;
+        }
+
+        .popup .copy-popup-done {
+            color: black;
         }
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
@@ -415,9 +416,9 @@ fs-person:not([inline]) {
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
-                <span id="pidToBeCopied">[[pid]]</span>
-                <span class="popuptext" id="CopyPopup" on-click='_copyPid'>Copy Person ID</span>
-                <span class="popuptext" id="CopyPopupDone">ID Copied</span>
+                <span class="pid-to-be-copied">[[pid]]</span>
+                <span class="popup-text copy-popup" on-click='_copyPid'>Copy Person ID</span>
+                <span class="popup-text copy-popup-done">ID Copied</span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
@@ -604,14 +605,14 @@ fs-person:not([inline]) {
         this.portraitUrl = false;
       },
       _showCopyID: function(e) {
-        var popupList = document.querySelectorAll("#CopyPopup");
+        var popupList = document.querySelectorAll(".copy-popup");
         for(var i=0; i<popupList.length; i++){
           popupList[i].classList.toggle("show",false);
         }
-        var CopyPopup = this.querySelector("#CopyPopup");
+        var CopyPopup = this.querySelector(".copy-popup");
 
         var sel, range;
-        var el = this.querySelector("#pidToBeCopied");
+        var el = this.querySelector(".pid-to-be-copied");
         if (window.getSelection && document.createRange) { //Browser compatibility
           sel = window.getSelection();
           if(sel.toString() == ''){ //no text selection
@@ -644,9 +645,9 @@ fs-person:not([inline]) {
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        var CopyPopup = this.querySelector("#CopyPopup");
+        var CopyPopup = this.querySelector(".copy-popup");
         CopyPopup.classList.toggle("show", false);
-        var CopyPopupDone = this.querySelector("#CopyPopupDone");
+        var CopyPopupDone = this.querySelector(".copy-popup-done");
         CopyPopupDone.classList.toggle("show");
         setTimeout(function(){
           CopyPopupDone.classList.toggle("show", false);
