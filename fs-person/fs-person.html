@@ -162,23 +162,6 @@ fs-person:not([inline]) {
         width: 15px;
       }
 
-      /* Begin GitHub-like css-only accessible tooltip */
-      .copy-pid-container {
-        cursor: pointer;
-        padding: 4px;
-        margin-left:-2px;
-      }
-
-      .copy-pid-container:hover .tooltipped::before,
-      .copy-pid-container:hover .tooltipped::after,
-      .copy-pid-container:active .tooltipped::before,
-      .copy-pid-container:active .tooltipped::after,
-      .copy-pid-container:focus .tooltipped::before,
-      .copy-pid-container:focus .tooltipped::after {
-        display: inline-block;
-        text-decoration: none;
-      }
-
       .tooltipped::before {
         position: absolute;
         z-index: 1000001;
@@ -332,21 +315,77 @@ fs-person:not([inline]) {
         font-family: "黑體-繁","Heiti TC","华文细黑","STXihei","微軟正黑體","Microsoft JengHei","中易黑体","SimHei","HanaMinB",sans-serif;
       }
 
-      .fs-person__container .copy-pid-container span {
-        font-family: Verdana, sans-serif;
-      }
-
       .fs-person-details__separator{
         padding-left: 6px;
         padding-right: 6px;
         color: #333331;
       }
 
-      span.hover-pid:hover{
-        text-decoration: underline;
-        cursor: pointer;
+      span.hover-pid:hover,
+      #CopyPopup:hover{
+          text-decoration: underline;
+          cursor: pointer;
       }
+      .popup {
+          position: relative;
+          display: inline-block;
+      }
+      .popup:hover #CopyPopup{
+          visibility: visible;
+      }
+      /* The actual popup (appears on top) */
+      .popup .popuptext {
+          font-family: Verdana, sans-serif;
+          font-size: 0.8rem;
+          visibility: hidden;
+          width: 125px;
+          background-color: #fff;
+          color: #448ef7;
+          text-align: center;
+          border-radius: 6px;
+          padding: 8px 0;
+          position: absolute;
+          z-index: 1;
+          bottom: 125%;
+          left: 70%;
+          margin-left: -80px;
+          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+      }
+      .popup {
+          margin-bottom: 5px;
+      }
+      #CopyPopupDone {
+          color: black;
+      }
+      /* Popup arrow */
+      .popup .popuptext::after {
+          content: "";
+          position: absolute;
+          top: 100%;
+          left: 50%;
+          margin-left: -5px;
+          border-width: 5px;
+          border-style: solid;
+          /*border-color: #f4f4f4 transparent transparent;*/
 
+          box-sizing: border-box;
+
+          border-color: transparent transparent #fff #fff;
+
+          transform-origin: 0 0;
+          transform: rotate(-45deg);
+
+          box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
+        }
+
+        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+        .popup .show {
+            visibility: visible;
+        }
+
+        #pidToBeCopied{
+            padding-top: 10px;
+        }
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -375,9 +414,10 @@ fs-person:not([inline]) {
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
-              <span class="hover-pid" data-test-person-pid>[[pid]]</span>
-              <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
-                <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
+              <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
+                <span id="pidToBeCopied">[[pid]]</span>
+                <span class="popuptext" id="CopyPopup" on-click='_copyPid'>Copy Person ID</span>
+                <span class="popuptext" id="CopyPopupDone">ID Copied</span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
@@ -563,6 +603,38 @@ fs-person:not([inline]) {
       handlePortraitError: function(e) {
         this.portraitUrl = false;
       },
+      _showCopyID: function(e) {
+        var popupList = document.querySelectorAll("#CopyPopup");
+        for(var i=0; i<popupList.length; i++){
+          popupList[i].classList.toggle("show",false);
+        }
+        var CopyPopup = this.querySelector("#CopyPopup");
+
+        var sel, range;
+        var el = this.querySelector("#pidToBeCopied");
+        if (window.getSelection && document.createRange) { //Browser compatibility
+          sel = window.getSelection();
+          if(sel.toString() == ''){ //no text selection
+             window.setTimeout(function(){
+                range = document.createRange(); //range object
+                range.selectNodeContents(el); //sets Range
+                sel.removeAllRanges(); //remove all ranges from selection
+                sel.addRange(range);//add Range to a Selection.
+            },1);
+          }
+        }else if (document.selection) { //older ie
+            sel = document.selection.createRange();
+            if(sel.text == ''){ //no text selection
+                range = document.body.createTextRange();//Creates TextRange object
+                range.moveToElementText(el);//sets Range
+                range.select(); //make selection.
+            }
+        }
+        CopyPopup.classList.toggle("show");
+        setTimeout(function(){
+          CopyPopup.classList.toggle("show", false);
+        }, 1000);
+      },
       _copyPid: function(e) {
         var that = this,
             target = e.target;
@@ -571,11 +643,15 @@ fs-person:not([inline]) {
         e.stopImmediatePropagation();
         this.$._pidInput.select();
         document.execCommand('copy');
-        this.$.CopyPIDIcon.setAttribute("aria-label", this.i18n("COPY_TO_CLIPBOARD_COMPLETE"));
-        setTimeout(function(){
-          that.$.CopyPIDIcon.setAttribute("aria-label", that.i18n("COPY_TO_CLIPBOARD"));
-        }, 3000);
         window.getSelection().removeAllRanges();
+        var CopyPopup = this.querySelector("#CopyPopup");
+        CopyPopup.classList.toggle("show", false);
+        var CopyPopupDone = this.querySelector("#CopyPopupDone");
+        CopyPopupDone.classList.toggle("show");
+        setTimeout(function(){
+          CopyPopupDone.classList.toggle("show", false);
+        }, 3000);
+
       },
       _showPid: function(pid, hidePid) {
         return (pid && !hidePid);
