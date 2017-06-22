@@ -594,6 +594,7 @@ fs-person:not([inline]) {
       handlePortraitError: function(e) {
         this.portraitUrl = false;
       },
+      // this comes from stackoverflow: https://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse
       _showCopyID: function(e) {
         var popupList = document.querySelectorAll(".copy-popup");
         popupList.forEach(function(item){
@@ -602,7 +603,7 @@ fs-person:not([inline]) {
         var CopyPopup = this.querySelector(".copy-popup");
         var sel, range;
         var el = this.querySelector(".pid-to-be-copied");
-        if (window.getSelection && document.createRange) { //Browser compatibility
+        if (window.getSelection && document.createRange) {
           sel = window.getSelection();
           if(sel.toString() == ''){ //no text selection
              window.setTimeout(function(){
