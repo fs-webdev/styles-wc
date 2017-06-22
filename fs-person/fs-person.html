@@ -341,6 +341,12 @@ fs-person:not([inline]) {
         padding-right: 6px;
         color: #333331;
       }
+
+      span.hover-pid:hover{
+        text-decoration: underline;
+        cursor: pointer;
+      }
+
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -369,7 +375,7 @@ fs-person:not([inline]) {
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
-              <span data-test-person-pid>[[pid]]</span>
+              <span class="hover-pid" data-test-person-pid>[[pid]]</span>
               <span class="copy-pid-container" on-click='_copyPid' class='fs-person-details__pid'>
                 <fs-icon id="CopyPIDIcon" aria-label$='[[i18n("COPY_TO_CLIPBOARD")]]' title='' class='copy-icon tooltipped' icon='copy' data-test-person-copy-pid-button></fs-icon>
               </span>
