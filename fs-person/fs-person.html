@@ -600,7 +600,6 @@ fs-person:not([inline]) {
           item.classList.toggle("show",false);
         })
         var CopyPopup = this.querySelector(".copy-popup");
-
         var sel, range;
         var el = this.querySelector(".pid-to-be-copied");
         if (window.getSelection && document.createRange) { //Browser compatibility
@@ -642,7 +641,6 @@ fs-person:not([inline]) {
         setTimeout(function(){
           CopyPopupDone.classList.toggle("show", false);
         }, 3000);
-
       },
       _showPid: function(pid, hidePid) {
         return (pid && !hidePid);
