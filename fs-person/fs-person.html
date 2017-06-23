@@ -592,7 +592,6 @@ fs-person:not([inline]) {
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
         var CopyPopup = this.querySelector(".popup-text");
-        debugger;
         CopyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD_COMPLETE");
         CopyPopup.classList.toggle("black-text");
         setTimeout(function(){
