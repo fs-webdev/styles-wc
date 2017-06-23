@@ -273,14 +273,13 @@ fs-person:not([inline]) {
       .pid-to-be-copied{
           padding-top: 10px;
       }
+
       .popup {
           position: relative;
           display: inline-block;
           margin-bottom: 5px;
       }
-      .popup:hover .popup-text{
-          visibility: visible;
-      }
+
       /* The actual popup (appears on top) */
       .popup .popup-text {
           font-family: Verdana, sans-serif;
@@ -299,6 +298,7 @@ fs-person:not([inline]) {
           margin-left: -80px;
           box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
       }
+
       /* Popup arrow */
       .popup .popup-text::after {
           content: "";
@@ -315,10 +315,14 @@ fs-person:not([inline]) {
           box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
         }
 
+        .popup:hover .popup-text{
+            visibility: visible;
+        }
+
         .popup .black-text {
             color: black;
         }
-        /* Toggle this class when clicking on the popup container (hide and show the popup) */
+
         .popup .show {
             visibility: visible;
         }
