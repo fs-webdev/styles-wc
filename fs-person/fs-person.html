@@ -271,69 +271,69 @@ fs-person:not([inline]) {
       }
 
       .pid-to-be-copied{
-          padding-top: 10px;
+        padding-top: 10px;
       }
 
       .popup {
-          position: relative;
-          display: inline-block;
-          margin-bottom: 5px;
+        display: inline-block;
+        margin-bottom: 5px;
+        position: relative;
       }
 
       /* The actual popup (appears on top) */
       .popup .popup-text {
-          font-family: Verdana, sans-serif;
-          font-size: 0.875rem;
-          visibility: hidden;
-          width: 125px;
-          background-color: #fff;
-          color: #448ef7;
-          text-align: center;
-          border-radius: 6px;
-          padding: 8px 0;
-          position: absolute;
-          z-index: 1;
-          bottom: 125%;
-          left: 70%;
-          margin-left: -80px;
-          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        background-color: #fff;
+        border-radius: 6px;
+        bottom: 125%;
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+        color: #448ef7;
+        font-family: Verdana, sans-serif;
+        font-size: 0.875rem;
+        left: 70%;
+        margin-left: -80px;
+        padding: 8px 0;
+        position: absolute;
+        text-align: center;
+        visibility: hidden;
+        width: 125px;
+        z-index: 1;
       }
 
       /* Popup arrow */
       .popup .popup-text::after {
-          content: "";
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          margin-left: -5px;
-          border-width: 5px;
-          border-style: solid;
-          box-sizing: border-box;
-          border-color: transparent transparent #fff #fff;
-          transform-origin: 0 0;
-          transform: rotate(-45deg);
-          box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
-        }
+        border-color: transparent transparent #fff #fff;
+        border-style: solid;
+        border-width: 5px;
+        box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
+        box-sizing: border-box;
+        content: "";
+        left: 50%;
+        margin-left: -5px;
+        position: absolute;
+        top: 100%;
+        transform: rotate(-45deg);
+        transform-origin: 0 0;
+      }
 
-        .popup:hover .popup-text{
-            visibility: visible;
-        }
+      .popup:hover .popup-text{
+        visibility: visible;
+      }
 
-        span.hover-pid:hover,
-        .copy-popup-text:hover{
-            text-decoration: underline;
-            cursor: pointer;
-        }
+      span.hover-pid:hover,
+      .copy-popup-text:hover{
+        cursor: pointer;
+        text-decoration: underline;
+      }
 
-        .popup .black-text,
-        .popup .black-text .copy-popup-text:hover {
-            color: black;
-            text-decoration:none;
-        }
+      .popup .black-text,
+      .popup .black-text .copy-popup-text:hover {
+        color: black;
+        text-decoration:none;
+      }
 
-        .popup .show {
-            visibility: visible;
-        }
+      .popup .show {
+        visibility: visible;
+      }
 
 
     </style>
