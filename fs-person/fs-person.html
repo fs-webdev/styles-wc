@@ -270,10 +270,8 @@ fs-person:not([inline]) {
         color: #333331;
       }
 
-      span.hover-pid:hover,
-      .copy-popup-text:hover{
-          text-decoration: underline;
-          cursor: pointer;
+      .pid-to-be-copied{
+          padding-top: 10px;
       }
       .popup {
           position: relative;
@@ -316,15 +314,19 @@ fs-person:not([inline]) {
           transform: rotate(-45deg);
           box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
         }
+        
+        .popup .copy-popup-done {
+            color: black;
+        }
         /* Toggle this class when clicking on the popup container (hide and show the popup) */
         .popup .show {
             visibility: visible;
         }
-        .pid-to-be-copied{
-            padding-top: 10px;
-        }
-        .popup .copy-popup-done {
-            color: black;
+
+        span.hover-pid:hover,
+        .copy-popup-text:hover{
+            text-decoration: underline;
+            cursor: pointer;
         }
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
@@ -356,8 +358,8 @@ fs-person:not([inline]) {
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
-                <span class="popup-text copy-popup" on-click='_copyPid'><span class="copy-popup-text">Copy Person ID</span></span>
-                <span class="popup-text copy-popup-done">ID Copied</span>
+                <span class="popup-text copy-popup" on-click='_copyPid'><span class="copy-popup-text">[[i18n("COPY_PID")]]</span></span>
+                <span class="popup-text copy-popup-done">[[i18n("COPY_TO_CLIPBOARD_COMPLETE")]]</span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>

@@ -1,4 +1,4 @@
 {
-  "COPY_TO_CLIPBOARD": "Copy ID to clipboard.",
+  "COPY_PID": "Copy Person ID",
   "COPY_TO_CLIPBOARD_COMPLETE": "ID copied."
 }
