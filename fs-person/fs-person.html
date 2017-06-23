@@ -278,7 +278,7 @@ fs-person:not([inline]) {
           display: inline-block;
           margin-bottom: 5px;
       }
-      .popup:hover .copy-popup{
+      .popup:hover .popup-text{
           visibility: visible;
       }
       /* The actual popup (appears on top) */
@@ -314,8 +314,8 @@ fs-person:not([inline]) {
           transform: rotate(-45deg);
           box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
         }
-        
-        .popup .copy-popup-done {
+
+        .popup .black-text {
             color: black;
         }
         /* Toggle this class when clicking on the popup container (hide and show the popup) */
@@ -358,8 +358,9 @@ fs-person:not([inline]) {
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
-                <span class="popup-text copy-popup" on-click='_copyPid'><span class="copy-popup-text">[[i18n("COPY_PID")]]</span></span>
-                <span class="popup-text copy-popup-done">[[i18n("COPY_TO_CLIPBOARD_COMPLETE")]]</span>
+                <span class="popup-text" on-click='_copyPid'>
+                  <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
+                </span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
@@ -547,11 +548,11 @@ fs-person:not([inline]) {
       },
       // this comes from stackoverflow: https://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse
       _showCopyID: function(e) {
-        var popupList = document.querySelectorAll(".copy-popup");
+        var popupList = document.querySelectorAll(".popup-text");
         popupList.forEach(function(item){
           item.classList.toggle("show",false);
         })
-        var CopyPopup = this.querySelector(".copy-popup");
+        var CopyPopup = this.querySelector(".popup-text");
         var sel, range;
         var el = this.querySelector(".pid-to-be-copied");
         if (window.getSelection && document.createRange) {
@@ -586,12 +587,16 @@ fs-person:not([inline]) {
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        var CopyPopup = this.querySelector(".copy-popup");
-        CopyPopup.classList.toggle("show", false);
-        var CopyPopupDone = this.querySelector(".copy-popup-done");
-        CopyPopupDone.classList.toggle("show");
+        var CopyPopup = this.querySelector(".popup-text");
+        debugger;
+        CopyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD_COMPLETE");
+        CopyPopup.classList.toggle("black-text");
         setTimeout(function(){
-          CopyPopupDone.classList.toggle("show", false);
+          CopyPopup.classList.toggle("show", false);
+          CopyPopup.classList.toggle("black-text", false);
+        }, 3000);
+        setTimeout(function(){
+          CopyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD");
         }, 3000);
       },
       _showPid: function(pid, hidePid) {
