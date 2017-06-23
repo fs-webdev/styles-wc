@@ -319,19 +319,23 @@ fs-person:not([inline]) {
             visibility: visible;
         }
 
-        .popup .black-text {
+        span.hover-pid:hover,
+        .copy-popup-text:hover{
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .popup .black-text,
+        .popup .black-text .copy-popup-text:hover {
             color: black;
+            text-decoration:none;
         }
 
         .popup .show {
             visibility: visible;
         }
 
-        span.hover-pid:hover,
-        .copy-popup-text:hover{
-            text-decoration: underline;
-            cursor: pointer;
-        }
+
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>

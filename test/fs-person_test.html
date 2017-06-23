@@ -64,7 +64,7 @@
         describe('properties', function() {
           it('should set default values for "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
             expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
-            expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;            
+            expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;
             expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
             expect(fsPersonDefault.fullName, "fullName is not ''").to.equal('');
             expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
@@ -152,6 +152,9 @@
         //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not false").to.be.false;
         //   });
         // });
+        describe('_showCopyID', function(){
+          
+        });
 
         describe('_copyPid', function() {
           var mockEvent;
@@ -257,7 +260,7 @@
 
         describe('_showGenderIcon', function() {
           var inline;
-          var dotIcon;          
+          var dotIcon;
           var showPortrait;
           var gender;
           var orientation;
@@ -387,7 +390,7 @@
         describe('_getDetailsClass', function() {
           beforeEach(function() {
             inline = 'doesntMatter';
-            dotIcon = 'doesntMatter';            
+            dotIcon = 'doesntMatter';
             showPortrait = 'doesntMatter';
             hideGender = 'doesntMatter';
             orientation = 'doesntMatter';
