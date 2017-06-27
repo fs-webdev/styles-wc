@@ -316,7 +316,16 @@ fs-person:not([inline]) {
         transform-origin: 0 0;
       }
 
-      span.hover-pid:hover,
+      span.hover-pid{
+        border-bottom: 1px transparent solid;
+        cursor: pointer;
+      }
+
+      span.hover-pid:hover{
+        border-bottom: 1px black solid;
+        cursor: pointer;
+      }
+
       .copy-popup-text:hover{
         cursor: pointer;
         text-decoration: underline;
