@@ -265,6 +265,7 @@ fs-person:not([inline]) {
       }
 
       .fs-person-details__separator{
+        vertical-align: top;
         padding-left: 6px;
         padding-right: 6px;
         color: #333331;
@@ -315,11 +316,16 @@ fs-person:not([inline]) {
         transform-origin: 0 0;
       }
 
-      .popup:hover .popup-text{
-        visibility: visible;
+      span.hover-pid{
+        border-bottom: 1px transparent solid;
+        cursor: pointer;
       }
 
-      span.hover-pid:hover,
+      span.hover-pid:hover{
+        border-bottom: 1px black solid;
+        cursor: pointer;
+      }
+
       .copy-popup-text:hover{
         cursor: pointer;
         text-decoration: underline;
@@ -574,7 +580,7 @@ fs-person:not([inline]) {
         CopyPopup.classList.toggle("show");
         setTimeout(function(){
           CopyPopup.classList.toggle("show", false);
-        }, 1000);
+        }, 3000);
       },
       _copyPid: function(e) {
         var that = this,
