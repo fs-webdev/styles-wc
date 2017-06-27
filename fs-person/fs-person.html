@@ -556,6 +556,11 @@ fs-person:not([inline]) {
       },
       // this comes from stackoverflow: https://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse
       _showCopyID: function(e) {
+        var that = this,
+            target = e.target;
+        e.preventDefault();
+        // Stop any other events from firing (like opening the person card or person page)
+        e.stopImmediatePropagation();
         var CopyPopup = this.querySelector(".popup-text");
         var sel, range;
         var el = this.querySelector(".pid-to-be-copied");
