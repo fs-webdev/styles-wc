@@ -316,10 +316,6 @@ fs-person:not([inline]) {
         transform-origin: 0 0;
       }
 
-      .popup:hover .popup-text{
-        visibility: visible;
-      }
-
       span.hover-pid:hover,
       .copy-popup-text:hover{
         cursor: pointer;
@@ -575,7 +571,7 @@ fs-person:not([inline]) {
         CopyPopup.classList.toggle("show");
         setTimeout(function(){
           CopyPopup.classList.toggle("show", false);
-        }, 1000);
+        }, 3000);
       },
       _copyPid: function(e) {
         var that = this,
