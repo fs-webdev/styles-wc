@@ -153,14 +153,41 @@
         //   });
         // });
         describe('_showCopyID', function(){
+          var mockEvent;
+          var preventDefaultStub;
+          var stopImmediatePropagationStub;
+
+          beforeEach(function() {
+            mockEvent = {
+              preventDefault: function(){},
+              stopImmediatePropagation: function(){},
+              target: {
+                setAttribute: function(){}
+              }
+            };
+
+            preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
+            stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
+          });
+
+          afterEach(function() {
+            preventDefaultStub.restore();
+            stopImmediatePropagationStub.restore();
+
+            delete mockEvent;
+          });
+
           it('should have nothing selected starting off', function () {
             expect(window.getSelection().toString()).to.equal('');
           });
-          it('should have added class show and remove it after 1 second', function(){
-            fsPersonDefault._showCopyID();
+          it('should have added class show and remove it after 1 second', function(done){
+            fsPersonDefault._showCopyID(mockEvent);
+            expect(preventDefaultStub.callCount, "_showPid did not call preventDefault only once").to.equal(1);
+            expect(stopImmediatePropagationStub.callCount, "_showPid did not call stopImmediatePropagation only once").to.equal(1);
             expect(fsPersonDefault.querySelector(".popup-text").classList.contains("show")).to.be.true;
             setTimeout(function(){
               expect(fsPersonDefault.querySelector(".popup-text").classList.contains("show")).to.be.false;
+              done();
             }, 1000);
           });
         });
