@@ -275,7 +275,6 @@ fs-person:not([inline]) {
       .popup-text {
         background-color: #fff;
         border-radius: 6px;
-        /* bottom: 104%; */
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
         color: #448ef7;
         font-family: Verdana, sans-serif;
@@ -554,8 +553,9 @@ fs-person:not([inline]) {
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
-        var CopyPopup = this.querySelector('.popup-text');
-        var sel, range;
+        var copyPopup = this.querySelector('.popup-text');
+        var sel;
+        var range;
         var el = this.querySelector(".pid-to-be-copied");
         sel = window.getSelection();
         if(sel.toString() == ''){ //no text selection
@@ -564,12 +564,12 @@ fs-person:not([inline]) {
           sel.removeAllRanges(); //remove all ranges from selection
           sel.addRange(range);//add Range to a Selection.
         }
-        CopyPopup.classList.toggle("show");
-        CopyPopup.style.position = "absolute";
-        CopyPopup.style.left = e.target.offsetLeft + 20 + "px";
-        CopyPopup.style.top = e.target.offsetTop - 25 + "px";
+        copyPopup.classList.toggle("show");
+        copyPopup.style.position = "absolute";
+        copyPopup.style.left = e.target.offsetLeft + 20 + "px";
+        copyPopup.style.top = e.target.offsetTop - 25 + "px";
         setTimeout(function(){
-          CopyPopup.classList.toggle("show", false);
+          copyPopup.classList.toggle("show", false);
         }, 3000);
       },
       _copyPid: function(e) {
@@ -581,15 +581,15 @@ fs-person:not([inline]) {
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        var CopyPopup = this.querySelector(".popup-text");
-        CopyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD_COMPLETE");
-        CopyPopup.classList.toggle("black-text");
+        var copyPopup = this.querySelector(".popup-text");
+        copyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD_COMPLETE");
+        copyPopup.classList.toggle("black-text");
         setTimeout(function(){
-          CopyPopup.classList.toggle("show", false);
-          CopyPopup.classList.toggle("black-text", false);
+          copyPopup.classList.toggle("show", false);
+          copyPopup.classList.toggle("black-text", false);
         }, 3000);
         setTimeout(function(){
-          CopyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD");
+          copyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD");
         }, 3000);
       },
       _showPid: function(pid, hidePid) {
