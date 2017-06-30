@@ -271,42 +271,32 @@ fs-person:not([inline]) {
         color: #333331;
       }
 
-      .pid-to-be-copied{
-        padding-top: 10px;
-      }
-
-      .popup {
-        display: inline-block;
-        margin-bottom: 5px;
-        position: relative;
-      }
-
       /* The actual popup (appears on top) */
-      .popup .popup-text {
+      .popup-text {
         background-color: #fff;
         border-radius: 6px;
-        bottom: 125%;
+        /* bottom: 104%; */
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
         color: #448ef7;
         font-family: Verdana, sans-serif;
         font-size: 0.875rem;
-        left: 70%;
-        margin-left: -80px;
-        padding: 8px 8px;
+        left: 75%;
+        margin-left: -60px;
+        padding: 0px 5px;
         position: absolute;
         text-align: center;
+        top: 0px;
         visibility: hidden;
         white-space: nowrap;
         z-index: 1;
       }
 
       /* Popup arrow */
-      .popup .popup-text::after {
+      .popup-text::after {
         border-color: transparent transparent #fff #fff;
         border-style: solid;
-        border-width: 5px;
-        box-shadow: -2px 2px 1px 1px rgba(0, 0, 0, 0.16);
-        box-sizing: border-box;
+        border-width: 3px;
+        box-shadow: -2px 2px 4px 0px rgba(0, 0, 0, 0.16);
         content: "";
         left: 45px;
         margin-left: -5px;
@@ -331,16 +321,15 @@ fs-person:not([inline]) {
         text-decoration: underline;
       }
 
-      .popup .black-text,
-      .popup .black-text .copy-popup-text:hover {
+      .black-text,
+      .black-text .copy-popup-text:hover {
         color: black;
         text-decoration:none;
       }
 
-      .popup .show {
+      .show {
         visibility: visible;
       }
-
 
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
@@ -372,9 +361,6 @@ fs-person:not([inline]) {
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
-                <span class="popup-text" on-click='_copyPid'>
-                  <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
-                </span>
               </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
@@ -382,6 +368,9 @@ fs-person:not([inline]) {
         </div>
       </div>
     </div>
+    <span class="popup-text" on-click='_copyPid'>
+      <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
+    </span>
   </template>
   <script>
     Polymer({
@@ -565,19 +554,20 @@ fs-person:not([inline]) {
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
-        var CopyPopup = this.querySelector(".popup-text");
+        var CopyPopup = this.querySelector('.popup-text');
         var sel, range;
         var el = this.querySelector(".pid-to-be-copied");
         sel = window.getSelection();
         if(sel.toString() == ''){ //no text selection
-           window.setTimeout(function(){
-              range = document.createRange(); //range object
-              range.selectNodeContents(el); //sets Range
-              sel.removeAllRanges(); //remove all ranges from selection
-              sel.addRange(range);//add Range to a Selection.
-          },1);
+          range = document.createRange(); //range object
+          range.selectNodeContents(el); //sets Range
+          sel.removeAllRanges(); //remove all ranges from selection
+          sel.addRange(range);//add Range to a Selection.
         }
         CopyPopup.classList.toggle("show");
+        CopyPopup.style.position = "absolute";
+        CopyPopup.style.left = e.target.offsetLeft + 20 + "px";
+        CopyPopup.style.top = e.target.offsetTop - 25 + "px";
         setTimeout(function(){
           CopyPopup.classList.toggle("show", false);
         }, 3000);
