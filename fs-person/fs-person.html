@@ -279,8 +279,6 @@ fs-person:not([inline]) {
         color: #448ef7;
         font-family: Verdana, sans-serif;
         font-size: 0.875rem;
-        left: 75%;
-        margin-left: -60px;
         padding: 0px 5px;
         position: absolute;
         text-align: center;
@@ -294,10 +292,10 @@ fs-person:not([inline]) {
       .popup-text::after {
         border-color: transparent transparent #fff #fff;
         border-style: solid;
-        border-width: 3px;
+        border-width: 2px;
         box-shadow: -2px 2px 4px 0px rgba(0, 0, 0, 0.16);
         content: "";
-        left: 45px;
+        left: 44px;
         margin-left: -5px;
         position: absolute;
         top: 100%;
@@ -566,8 +564,8 @@ fs-person:not([inline]) {
         }
         copyPopup.classList.toggle("show");
         copyPopup.style.position = "absolute";
-        copyPopup.style.left = e.target.offsetLeft + 20 + "px";
-        copyPopup.style.top = e.target.offsetTop - 25 + "px";
+        copyPopup.style.left = e.target.offsetLeft - 38 + "px";
+        copyPopup.style.top = e.target.offsetTop - 22 + "px";
         setTimeout(function(){
           copyPopup.classList.toggle("show", false);
         }, 3000);
