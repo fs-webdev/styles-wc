@@ -359,15 +359,15 @@ fs-person:not([inline]) {
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
               </span>
+              <span class="popup-text" on-click='_copyPid'>
+                <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
+              </span>
               <input id='_pidInput' type="text" value$='[[pid]]'>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <span class="popup-text" on-click='_copyPid'>
-      <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
-    </span>
   </template>
   <script>
     Polymer({
