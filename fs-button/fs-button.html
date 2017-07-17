@@ -243,7 +243,7 @@ Example:
     </style>
     <content></content>
     <template is="dom-if" if="[[loading]]">
-      <fs-icon class="loading-icon" icon="[[_spinnerType(option)]]"></fs-icon>
+      <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
     </template>
   </template>
   <script>
@@ -274,6 +274,15 @@ Example:
           reflectToAttribute: true
         },
         /**
+         * If provided this will render a different style of button and spinner.
+         * @type {Boolean}
+         */
+        disabled: {
+          type: String,
+          value: false,
+          reflectToAttribute: true
+        },
+        /**
          * If provided this will render different sizes of button (based
          * on input).
          *
@@ -289,9 +298,10 @@ Example:
        * Computes the spinner that needs to be used for the button
        * @param  {String} option 
        */
-      _spinnerType: function(option) {
-        if (option === 'recommended' || option === 'destructive') return 'spinner-light';
-        return 'spinner';
+      _spinnerType: function(option, disabled) {
+        var light = (option === 'recommended' || option === 'destructive');
+        if (disabled || !light) return 'spinner';
+        return 'spinner'
       }
     });
   </script>
