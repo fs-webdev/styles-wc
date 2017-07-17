@@ -136,7 +136,7 @@ Basic usage:
         <button on-tap='hide' hidden="[[!dismissable]]" class="fs-dialog-shadow__close"></button>
         <h4 hidden="[[!_boolify(alertTitle)]]">[[alertTitle]]</h4>
         <p id="content">
-          <content></content>
+          <slot></slot>
         </p>
       </main>
     </div>

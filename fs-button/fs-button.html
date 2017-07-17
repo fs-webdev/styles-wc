@@ -247,10 +247,12 @@ Example:
         width: 20px;
       }
     </style>
-    <content></content>
-    <template is="dom-if" if="[[loading]]">
-      <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
-    </template>
+    <slot></slot>
+    <dom-if>
+      <template is="dom-if" if="[[loading]]">
+        <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
+      </template>
+    </dom-if>
   </template>
   <script>
     Polymer({
