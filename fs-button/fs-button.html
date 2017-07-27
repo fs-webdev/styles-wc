@@ -22,13 +22,13 @@ Example:
         border: 1px solid #beb8a7;
         color: #333331;
         cursor: pointer;
-        display: inline-block;  
+        display: inline-block;
         font-size: 16px;
         font-size: 1rem;
         font-weight: normal;
         line-height: 1;
-        padding: 8.5px 20px; 
-        padding: 0.531rem 1.25rem; 
+        padding: 8.5px 20px;
+        padding: 0.531rem 1.25rem;
         position: relative;
         text-decoration: none;
         transition: padding 0.2s;
@@ -218,6 +218,12 @@ Example:
 
       /* Resets children elements to not include any inherited styles from fs-button */
       .loading-icon, template {
+
+        /* IE does not support initial */
+        background-color: inherit;
+        border: none;
+        padding: 0;
+
         background-color: initial;
         border: initial;
         padding:initial;
@@ -253,7 +259,7 @@ Example:
       properties: {
         /**
          * If provided the button will render a spinner until
-         * the attribute is removed. 
+         * the attribute is removed.
          * @type {Boolean}
          */
         loading: {
@@ -263,7 +269,7 @@ Example:
         },
         /**
          * If provided this will render a different style of button (based
-         * upon input). 
+         * upon input).
          *
          * Possible Values: `recommended`, `minor`
          * @type {String}
@@ -296,7 +302,7 @@ Example:
       },
       /**
        * Computes the spinner that needs to be used for the button
-       * @param  {String} option 
+       * @param  {String} option
        */
       _spinnerType: function(option, disabled) {
         var light = (option === 'recommended' || option === 'destructive');
