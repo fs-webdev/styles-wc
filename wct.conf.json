@@ -25,28 +25,28 @@
         }
       ]
     },
-   "istanbul": {
-     "dir": "./reports/coverage",
-     "reporters": ["text", "text-summary", "lcov"],
-     "include": [
-       "**/fs-*.html",
-       "**/fs-*.js"
-     ],
-     "exclude": [
-       "**/bin/*",
-       "**/bower_components/**/*",
-       "**/demo/*",
-       "**/locales/*",
-       "**/reports/*",
-       "**/test/*"
-     ],
-     "thresholds": {
-       "global": {
-         "statements": 0,
-         "branches": 0,
-         "functions": 0
-       }
-     }
-   }
- }
+    "istanbul": {
+      "dir": "./reports/coverage",
+      "reporters": ["text", "text-summary", "lcov"],
+      "include": [
+        "**/fs-*.html",
+        "**/fs-*.js"
+      ],
+      "exclude": [
+        "**/bin/*",
+        "**/bower_components/**/*",
+        "**/demo/*",
+        "**/locales/*",
+        "**/reports/*",
+        "**/test/*"
+      ],
+      "thresholds": {
+        "global": {
+          "statements": 0,
+          "branches": 0,
+          "functions": 0
+        }
+      }
+    }
+  }
 }
