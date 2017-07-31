@@ -333,9 +333,11 @@ fs-person:not([inline]) {
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
-          <template is='dom-if' if='[[portraitUrl]]'>
-            <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
-          </template>
+          <dom-if>
+            <template is='dom-if' if='[[portraitUrl]]'>
+              <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
+            </template>
+          </dom-if>
           <fs-icon icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
         </div>
       </div>
@@ -547,15 +549,21 @@ fs-person:not([inline]) {
       handlePortraitError: function(e) {
         this.portraitUrl = false;
       },
+      _querySelector: function(selector){
+        if(this.shadowRoot){
+          return this.shadowRoot.querySelector(selector);
+        }
+        return this.querySelector(selector);
+      },
       // this comes from stackoverflow: https://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse
       _showCopyID: function(e) {
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
-        var copyPopup = this.querySelector('.popup-text');
+        var copyPopup = this._querySelector('.popup-text');
         var sel;
         var range;
-        var el = this.querySelector(".pid-to-be-copied");
+        var el = this._querySelector(".pid-to-be-copied");
         sel = window.getSelection();
         if(sel.toString() == ''){ //no text selection
           range = document.createRange(); //range object
@@ -580,7 +588,7 @@ fs-person:not([inline]) {
         this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        var copyPopup = this.querySelector(".popup-text");
+        var copyPopup = this._querySelector(".popup-text");
         copyPopup.querySelector(".copy-popup-text").innerHTML = that.i18n("COPY_TO_CLIPBOARD_COMPLETE");
         copyPopup.classList.toggle("black-text");
         setTimeout(function(){

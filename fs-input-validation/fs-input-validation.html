@@ -36,7 +36,7 @@ Example:
           $INVALID_STATE
         \*------------------------------------*/
       }
-      ::content .fs-field-validation input {
+      ::slotted(.fs-field-validation) input {
         background-repeat: no-repeat;
         background-position: 98% center; /* [1] */
         background-position: right 10px center;
@@ -49,11 +49,11 @@ Example:
         background: #f1f6d3;
         border: 1px solid #bfd730;
       }
-      :host([status='valid']) ::content input {
+      :host([status='valid']) ::slotted(input) {
         background-color: #fff;
         border-color: #bfd730;
       }
-      :host([status='valid']) ::content input:focus {
+      :host([status='valid']) ::slotted(input:focus) {
         border-color: #356635;
       }
       :host([status='valid']) .message {
@@ -64,10 +64,10 @@ Example:
         background: #fdeeee;
         border: 1px solid #f8b0ab;
       }
-      :host([status='invalid']) ::content input {
+      :host([status='invalid']) ::slotted(input) {
         border-color: #f8b0ab;
       }
-      :host([status='invalid']) ::content input:focus {
+      :host([status='invalid']) ::slotted(input:focus) {
         border-color: #953b39;
       }
       :host([status='invalid']) .message {
@@ -76,13 +76,13 @@ Example:
       }
     </style>
     <div class='wrap'>
-      <content select='input[type=text]'></content>
+      <slot name="input"></slot>
       <div class='message'>
-        <div hidden='[[_isInvalid(status)]]'>
-          <content select='[valid-text]'></content>
+        <div hidden$='[[_isInvalid(status)]]'>
+          <slot name="valid-text"></slot>
         </div>
-        <div hidden='[[_isValid(status)]]'>
-          <content select='[invalid-text]'></content>
+        <div hidden$='[[_isValid(status)]]'>
+          <slot name="invalid-text"></slot>
         </div>
       </div>
     </div>

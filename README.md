@@ -14,9 +14,10 @@ FamilySearch component catalog entry: [styles-wc](https://beta.familysearch.org/
 
 ## Running the component
 
-1. (Once) Install the [Polymer CLI](https://www.npmjs.com/package/polymer-cli): ```npm i -g polymer-cli```
+1. (Once) Install or update the [Polymer CLI](https://www.npmjs.com/package/polymer-cli): ```npm i -g polymer-cli```
 1. (Once) Install the [frontier-cli](https://github.com/fs-webdev/frontier-cli): ```npm i -g https://github.com/fs-webdev/frontier-cli```
 1. Run `bower i` to load all of the dependencies.
+1. Run `polymer analyze > analysis.json` to set up docs/demo pages.
 
 This component's auto-generated documentation and associated demo pages are viewable by running:
 

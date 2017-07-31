@@ -6,7 +6,8 @@ A type extension button modeled after the FamilySearch styleguide
 
 Example:
 
-    <button is='fs-button'>Button Text!</button>
+    <fs-button>Button Text!</fs-button>
+    <fs-button option="recommended">Button Text!</fs-button>
 
 @demo fs-button/demo/index.html
 -->
@@ -15,6 +16,9 @@ Example:
   <template>
     <style>
       :host {
+        display: block;
+      }
+      button {
         -webkit-appearance: none;
         -webkit-touch-callout: none;
         background-color: #f5f4f1;
@@ -39,88 +43,88 @@ Example:
         vertical-align: middle;
         white-space: nowrap;
       }
-      :host(:hover) {
+      button:hover {
         background: #fbfaf9;
         color: #333331;
         text-decoration: none;
       }
-      :host:after {
+      button:after {
         content: '';
         opacity: 0;
         transition: opacity 0.3s;
       }
 
-      :host(:disabled),
-      :host(:disabled:hover) {
+      button:disabled,
+      button:disabled:hover {
         background-color: #f5f4f1;
         color: rgba(51,51,49,0.3);
         text-decoration: none;
       }
-      :host(:active) {
+      button:active {
         background-color: #e8e6e0;
       }
 
-      :host(:focus),
-      :host(:visited) {
+      button:focus,
+      button:visited {
         color: #333331; /* [2] */
         text-decoration: none;
         outline-offset: 2px; /* [4] */
       }
-      :host([option=recommended]) {
+      button[option=recommended] {
         background-color: #3073dd;
         border: 1px solid #246bdb;
         color: #fff;
       }
-      :host([option=recommended]:hover) {
+      button[option=recommended]:hover {
       /* [3] */
         background: #3882f8;
         color: #fff;
       }
-      :host([option=recommended]:active) {
+      button[option=recommended]:active{
         background-color: #1f61c9;
       }
-      :host([option=recommended]:focus),
-      :host([option=recommended]:visited) {
+      button[option=recommended]:focus,
+      button[option=recommended]:visited{
         color: #fff; /* [2] */
       }
-      :host([option=destructive]) {
+      button[option=destructive] {
         background-color: #cc3227;
         color: #fff;
       }
-      :host([option=destructive]:hover) {
+      button[option=destructive]:hover {
       /* [3] */
         background: #e64034;
         color: #fff;
       }
-      :host([option=destructive]:active) {
+      button[option=destructive]:active {
         background-color: #af180d;
       }
-      :host([option=destructive]:focus),
-      :host([option=destructive]:visited) {
+      button[option=destructive]:focus,
+      button[option=destructive]:visited {
         color: #fff; /* [2] */
       }
-      :host([option=minor]) {
+      button[option=minor] {
         background: transparent;
         color: #0060d7;
         border-color: transparent;
       }
-      :host([option=minor]:hover) {
+      button[option=minor]:hover {
       /* [3] */
         background: transparent;
         color: #0060d7;
         text-decoration: underline;
       }
-      :host([option=minor]:active) {
+      button[option=minor]:active {
         background: transparent;
         color: #0060d7;
         text-decoration: underline;
       }
-      :host([option=minor]:focus),
-      :host([option=minor]:visited) {
+      button[option=minor]:focus,
+      button[option=minor]:visited {
         color: #0060d7; /* [2] */
       }
 
-      :host([option=close]) {
+      button[option=close] {
         -webkit-appearance: none;
         -webkit-touch-callout: none;
         background: transparent;
@@ -141,8 +145,8 @@ Example:
         width: 1.25rem;
       /* [1] */
       }
-      :host([option=close]):before,
-      :host([option=close]):after {
+      button[option=close]:before,
+      button[option=close]:after {
         background-color: #a8a8a8;
         border-radius: 4px;
         content: '';
@@ -157,41 +161,41 @@ Example:
         width: 12px;
         -webkit-transform: translateY(-50%);
       }
-      :host([option=close]):before {
+      button[option=close]:before {
         -webkit-transform: translate(-50%, -50%) rotate(45deg);
         transform: translate(-50%, -50%) rotate(45deg);
       }
-      :host([option=close]):after {
+      button[option=close]:after {
         -webkit-transform: translate(-50%, -50%) rotate(-45deg);
         transform: translate(-50%, -50%) rotate(-45deg);
       }
-      :host([option=close]:hover):before,
-      :host([option=close]:focus):before,
-      :host([option=close]:hover):after,
-      :host([option=close]:focus):after {
+      button[option=close]:hover:before,
+      button[option=close]:focus:before,
+      button[option=close]:hover:after,
+      button[option=close]:focus:after {
         background-color: #333331;
         opacity: 1;
         transition: none;
       }
-      :host([option=close]:active):before,
-      :host([option=close]:active):after {
+      button[option=close]:active:before,
+      button[option=close]:active:after {
         background-color: #6f6f6f;
       }
 
-      :host([size=large]) {
+      button[size=large] {
         border-radius: 5px;
         padding: 16px 20px !important;
         padding: 1rem 1.25rem !important;
       }
-      :host([size=small]) {
+      button[size=small] {
         padding: 6px 20px !important;
         padding: 0.375rem 1.25rem !important;
       }
-      :host([loading]) {
+      button[loading] {
         padding-right: 47px !important;
       }
 
-      :host([loading]):after {
+      button[loading]:after {
         background-size: contain;
         height: 20px;
         margin-top: -2px;
@@ -201,18 +205,18 @@ Example:
         width: 20px;
       }
 
-      :host:disabled,
-      :host([option=recommended]:disabled),
-      :host([option=destructive]:disabled),
-      :host([option=recommended]:disabled:hover),
-      :host([option=destructive]:disabled:hover) {
+      button:disabled,
+      button[option=recommended]:disabled,
+      button[option=destructive]:disabled,
+      button[option=recommended]:disabled:hover,
+      button[option=destructive]:disabled:hover {
         cursor: not-allowed;
         background-color: #f5f4f1;
         border: 1px solid #cbc6b9;
         color: rgba(51,51,49,0.3);
       }
 
-      :host([loading]) .loading-icon {
+      button[loading] .loading-icon {
         opacity: 1;
       }
 
@@ -247,15 +251,18 @@ Example:
         width: 20px;
       }
     </style>
-    <content></content>
-    <template is="dom-if" if="[[loading]]">
-      <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
-    </template>
+    <button disabled="[[disabled]]" option$="[[option]]" size$="[[size]]" loading$="[[loading]]">
+      <slot></slot>
+      <dom-if>
+        <template is="dom-if" if="[[loading]]">
+          <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
+        </template>
+      </dom-if>
+    </button>
   </template>
   <script>
     Polymer({
       is: 'fs-button',
-      extends: 'button',
       properties: {
         /**
          * If provided the button will render a spinner until

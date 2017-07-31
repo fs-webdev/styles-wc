@@ -184,9 +184,9 @@
             fsPersonDefault._showCopyID(mockEvent);
             expect(preventDefaultStub.callCount, "_showPid did not call preventDefault only once").to.equal(1);
             expect(stopImmediatePropagationStub.callCount, "_showPid did not call stopImmediatePropagation only once").to.equal(1);
-            expect(fsPersonDefault.querySelector(".popup-text").classList.contains("show")).to.be.true;
+            expect(fsPersonDefault._querySelector(".popup-text").classList.contains("show")).to.be.true;
             setTimeout(function(){
-              expect(fsPersonDefault.querySelector(".popup-text").classList.contains("show")).to.be.false;
+              expect(fsPersonDefault._querySelector(".popup-text").classList.contains("show")).to.be.false;
             }, 1000);
             done();
           });

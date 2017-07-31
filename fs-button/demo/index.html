@@ -26,32 +26,33 @@
 <body >
   <p>
     <label>Options</label>
-    <button is="fs-button" type="button" option='recommended'>Recommended</button>
-    <button is="fs-button" type="button" option='destructive'>Destructive</button>
-    <button is="fs-button" type="button">Button</button>
-    <button is="fs-button" type="button" option='minor'>Minor</button>
+    <fs-button option='recommended'>Recommended</fs-button>
+    <fs-button option='destructive'>Destructive</fs-button>
+    <fs-button>Button</fs-button>
+    <fs-button option='minor'>Minor</fs-button>
+    <fs-button option='close'></fs-button>
   </p>
 
   <p>
     <label>Sizes</label>
-    <button is="fs-button" type="button" size='large'>Large</button>
-    <button is="fs-button" type="button">Default</button>
-    <button is="fs-button" type="button" size='small'>Small</button>
+    <fs-button size='large'>Large</fs-button>
+    <fs-button>Default</fs-button>
+    <fs-button size='small'>Small</fs-button>
   </p>
 
   <p>
     <label>Disabled</label>
-    <button is="fs-button" type="button" option='recommended' disabled>Recommended</button>
-    <button is="fs-button" type="button" disabled>Button</button>
+    <fs-button option='recommended' disabled>Recommended</fs-button>
+    <fs-button disabled>Button</fs-button>
   </p>
 
   <p>
     <label>Loading</label>
-    <button is="fs-button" type="button" class='loadingButton'>Button</button>
-    <button is="fs-button" type="button" disabled loading>Button</button>
-    <button is="fs-button" type="button" option='destructive' class='loadingButton'>Button</button>
-    <button is="fs-button" type="button" option='recommended' class='loadingButton'>Button</button>
-    <button is="fs-button" type="button" size='large' class='loadingButton'>Button</button>
+    <fs-button class='loadingButton'>Button</fs-button>
+    <fs-button disabled loading>Button</fs-button>
+    <fs-button option='destructive' class='loadingButton'>Button</fs-button>
+    <fs-button option='recommended' class='loadingButton'>Button</fs-button>
+    <fs-button size='large' class='loadingButton'>Button</fs-button>
   </p>
   <script>
     Array.prototype.slice.call(document.querySelectorAll('.loadingButton'))

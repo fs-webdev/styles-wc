@@ -47,9 +47,9 @@
   <h1><code>fs-input-validation</code></h1>
   <h2>Manual Validation</h2>
   <fs-input-validation id='v1'>
-    <input type="text" id='i1' />
-    <p valid-text>This is valid</p>
-    <p invalid-text>This is invalid</p>
+    <input slot="input" type="text" id='i1'>
+    <p slot="valid-text">This is valid</p>
+    <p slot="invalid-text">This is invalid</p>
   </fs-input-validation>
   <script>
     var input1 = document.querySelector('#i1');
@@ -80,9 +80,9 @@
 
   <h2>HTML5 Input Validation</h2>
   <fs-input-validation id='v2'>
-    <input type="text" id='i2' required pattern='^[0-9]+$'/>
-    <p valid-text>This is valid</p>
-    <p invalid-text>This is invalid</p>
+    <input slot="input" type="text" id='i2' required pattern='^[0-9]+$'/>
+    <p slot="valid-text">This is valid</p>
+    <p slot="invalid-text">This is invalid</p>
   </fs-input-validation>
   <script>
     var input2 = document.querySelector('#i2');
