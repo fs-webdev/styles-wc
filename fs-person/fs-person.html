@@ -365,7 +365,7 @@ fs-person:not([inline]) {
               <span class="popup-text" on-click='_copyPid'>
                 <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
               </span>
-              <input id='_pidInput' type="text" value$='[[pid]]'>
+              <input id='_pidInput' type="text" value$='[[pid]]' aria-hidden="true" readonly tabindex="-1">
             </div>
           </div>
         </div>
