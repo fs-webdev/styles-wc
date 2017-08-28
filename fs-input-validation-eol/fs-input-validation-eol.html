@@ -9,16 +9,16 @@ You can specify the text body of the `valid`/`invalid` states by creating a node
 
 Example:
 
-    <fs-input-validation>
+    <fs-input-validation-eol>
       <input type="text" />
       <p valid-text>This is valid</p>
       <p invalid-text>This is invalid</p>
-    </fs-input-validation>
+    </fs-input-validation-eol>
 
-@demo fs-input-validation/demo/index.html
+@demo fs-input-validation-eol/demo/index.html
 -->
 
-<dom-module id="fs-input-validation">
+<dom-module id="fs-input-validation-eol">
   <template>
     <style>
       :host {
@@ -89,7 +89,7 @@ Example:
   </template>
   <script>
     Polymer({
-      is: 'fs-input-validation',
+      is: 'fs-input-validation-eol',
       properties: {
         /**
          * The status of the validated input[type=text] field.

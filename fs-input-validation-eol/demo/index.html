@@ -21,7 +21,7 @@
 
   <!-- Web Components -->
   <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../fs-input-validation.html">
+  <link rel="import" href="../fs-input-validation-eol.html">
   <style>
     fs-icon-eol {
       vertical-align: bottom;
@@ -44,13 +44,13 @@
   </style>
 </head>
 <body>
-  <h1><code>fs-input-validation</code></h1>
+  <h1><code>fs-input-validation-eol</code></h1>
   <h2>Manual Validation</h2>
-  <fs-input-validation id='v1'>
+  <fs-input-validation-eol id='v1'>
     <input slot="input" type="text" id='i1'>
     <p slot="valid-text">This is valid</p>
     <p slot="invalid-text">This is invalid</p>
-  </fs-input-validation>
+  </fs-input-validation-eol>
   <script>
     var input1 = document.querySelector('#i1');
     var validation1 = document.querySelector('#v1');
@@ -62,11 +62,11 @@
   <h3>Code</h3>
   <pre>
     <code>
-      &lt;fs-input-validation id=&#39;v1&#39;&gt;
+      &lt;fs-input-validation-eol id=&#39;v1&#39;&gt;
         &lt;input type=&quot;text&quot; /&gt;
         &lt;p valid-text&gt;This is valid&lt;/p&gt;
         &lt;p invalid-text&gt;This is invalid&lt;/p&gt;
-      &lt;/fs-input-validation&gt;
+      &lt;/fs-input-validation-eol&gt;
       &lt;script&gt;
         var input = document.querySelector(&#39;#i1&#39;);
         var validation = document.querySelector(&#39;#v1&#39;);
@@ -79,11 +79,11 @@
   </pre>
 
   <h2>HTML5 Input Validation</h2>
-  <fs-input-validation id='v2'>
+  <fs-input-validation-eol id='v2'>
     <input slot="input" type="text" id='i2' required pattern='^[0-9]+$'/>
     <p slot="valid-text">This is valid</p>
     <p slot="invalid-text">This is invalid</p>
-  </fs-input-validation>
+  </fs-input-validation-eol>
   <script>
     var input2 = document.querySelector('#i2');
     var validation2 = document.querySelector('#v2');
@@ -95,11 +95,11 @@
   <h3>Code</h3>
   <pre>
     <code>
-      &lt;fs-input-validation id=&#39;v2&#39;&gt;
+      &lt;fs-input-validation-eol id=&#39;v2&#39;&gt;
         &lt;input type=&quot;text&quot; id=&#39;i2&#39; required pattern=&#39;^[0-9]+$&#39;/&gt;
         &lt;p valid-text&gt;This is valid&lt;/p&gt;
         &lt;p invalid-text&gt;This is invalid&lt;/p&gt;
-      &lt;/fs-input-validation&gt;
+      &lt;/fs-input-validation-eol&gt;
       &lt;script&gt;
         var input2 = document.querySelector(&#39;#i2&#39;);
         var validation2 = document.querySelector(&#39;#v2&#39;);
