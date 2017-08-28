@@ -9,17 +9,17 @@ If you specify an `h1`-`h6` with the attribute `card-title` it will render a pre
 
 Example:
 
-    <fs-card>
+    <fs-card-eol>
       <h1 card-title>My Title!</h1>
       <div>
         <h2>This is a thing</h2>
       </div>
-    </fs-card>
+    </fs-card-eol>
 
-@demo fs-card/demo/index.html
+@demo fs-card-eol/demo/index.html
 -->
 
-<dom-module id="fs-card">
+<dom-module id="fs-card-eol">
   <template>
     <style>
       :host {
@@ -59,7 +59,7 @@ Example:
   </template>
   <script>
     Polymer({
-      is: 'fs-card',
+      is: 'fs-card-eol',
       properties: {
         /**
          * Whether or not the card should render with 15px padding
