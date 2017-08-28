@@ -5,15 +5,15 @@ A tooltip that models the FamilySearch styleguide.
 
 Example:
 
-    <fs-tooltip text="Click Me" direction="top">
+    <fs-tooltip-eol text="Click Me" direction="top">
       <button>Hover</button>
-    </fs-tooltip>
+    </fs-tooltip-eol>
 
 @group Seed Elements
-@element fs-tooltip
-@demo fs-tooltip/demo/index.html
+@element fs-tooltip-eol
+@demo fs-tooltip-eol/demo/index.html
 -->
-<dom-module id="fs-tooltip">
+<dom-module id="fs-tooltip-eol">
   <template>
     <style>
       :host {
@@ -124,7 +124,7 @@ Example:
 
 <script>
   Polymer({
-    is: 'fs-tooltip',
+    is: 'fs-tooltip-eol',
     properties: {
       /**
        * Valid Values: 'top', `bottom`, `left`, `right`
