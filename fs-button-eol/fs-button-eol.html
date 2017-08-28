@@ -6,13 +6,13 @@ A type extension button modeled after the FamilySearch styleguide
 
 Example:
 
-    <fs-button>Button Text!</fs-button>
-    <fs-button option="recommended">Button Text!</fs-button>
+    <fs-button-eol>Button Text!</fs-button-eol>
+    <fs-button-eol option="recommended">Button Text!</fs-button-eol>
 
-@demo fs-button/demo/index.html
+@demo fs-button-eol/demo/index.html
 -->
 
-<dom-module id="fs-button">
+<dom-module id="fs-button-eol">
   <template>
     <style>
       :host {
@@ -220,7 +220,7 @@ Example:
         opacity: 1;
       }
 
-      /* Resets children elements to not include any inherited styles from fs-button */
+      /* Resets children elements to not include any inherited styles from fs-button-eol */
       .loading-icon, template {
 
         /* IE does not support initial */
@@ -234,7 +234,7 @@ Example:
         text-decoration: initial;
       }
 
-      .loading-icon:hover, template:hover, fs-button:hover {
+      .loading-icon:hover, template:hover, fs-button-eol:hover {
         background-color: initial;
         color: initial;
         padding: initial;
@@ -251,7 +251,7 @@ Example:
         width: 20px;
       }
 
-      /* hack for polymer 1 shady dom with .fs-button styles in style guide */
+      /* hack for polymer 1 shady dom with .fs-button-eol styles in style guide */
       dom-if {
         background: none;
         border: none;
@@ -269,7 +269,7 @@ Example:
   </template>
   <script>
     Polymer({
-      is: 'fs-button',
+      is: 'fs-button-eol',
       properties: {
         /**
          * If provided the button will render a spinner until
