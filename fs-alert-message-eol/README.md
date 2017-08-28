@@ -1,4 +1,4 @@
-# fs-alert-message
+# fs-alert-message-eol
 
 Demo: `/demo.index.html`
 

@@ -8,61 +8,61 @@
     <script src="../../../web-component-tester/browser.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../fs-alert-message.html">
+    <link rel="import" href="../fs-alert-message-eol.html">
   </head>
   <body>
 
     <!-- You can use the document as a place to set up your fixtures. -->
     <test-fixture id="default-alert">
       <template>
-        <fs-alert-message>
+        <fs-alert-message-eol>
           default alert
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="error-alert">
       <template>
-        <fs-alert-message alert-type="error">
+        <fs-alert-message-eol alert-type="error">
           error alert
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="info-alert">
       <template>
-        <fs-alert-message alert-type="info">
+        <fs-alert-message-eol alert-type="info">
           info alert
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="warning-alert">
       <template>
-        <fs-alert-message alert-type="warning">
+        <fs-alert-message-eol alert-type="warning">
           warning alert
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="default-alert-with-title">
       <template>
-        <fs-alert-message alert-title="a title">
+        <fs-alert-message-eol alert-title="a title">
           default alert with title
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="dismissable-default-alert-with-title">
       <template>
-        <fs-alert-message alert-title="a title" dismissable>
+        <fs-alert-message-eol alert-title="a title" dismissable>
           dismissable default alert with title
-        </fs-alert-message>
+        </fs-alert-message-eol>
       </template>
     </test-fixture>
 
     <script>
-      suite('<fs-alert-message>', function() {
+      suite('<fs-alert-message-eol>', function() {
 
         var defaultAlert;
         var errorAlert;

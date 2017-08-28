@@ -2,20 +2,20 @@
 <link rel="import" href="../fs-icon/fs-icon.html">
 
 <!--
-`<fs-alert-message>` adds an fs-styles-compatible alert to your page
+`<fs-alert-message-eol>` adds an fs-styles-compatible alert to your page
 
 Basic usage:
 
     <body>
-      <fs-alert-message dismissable alert-type="info">
+      <fs-alert-message-eol dismissable alert-type="info">
         A dismissable info alert!
-      </fs-alert-message>
+      </fs-alert-message-eol>
 
-@element fs-alert-message
-@demo fs-alert-message/demo/index.html
-@homepage http://familysearchelements.github.io/fs-alert-message
+@element fs-alert-message-eol
+@demo fs-alert-message-eol/demo/index.html
+@homepage http://familysearchelements.github.io/fs-alert-message-eol
 -->
-<dom-module id="fs-alert-message">
+<dom-module id="fs-alert-message-eol">
   <template>
     <style>
       @font-face {
@@ -55,10 +55,10 @@ Basic usage:
         line-height: 1.25;
         margin: 0;
       }
-      .fs-alert-message-shadow.inline {
+      .fs-alert-message-eol-shadow.inline {
         display: inline-block;
       }
-      .fs-alert-message-shadow {
+      .fs-alert-message-eol-shadow {
         background: #f1f6d3;
         border-radius: 4px;
         border: 1px solid #bfd730;
@@ -66,23 +66,23 @@ Basic usage:
         padding: 10px;
         position: relative;
       }
-      .fs-alert-message-shadow__title {
+      .fs-alert-message-eol-shadow__title {
         color: inherit;
       }
-      .fs-alert-message-shadow a {
+      .fs-alert-message-eol-shadow a {
         text-decoration: underline;
       }
-      .fs-alert-message-shadow--info {
+      .fs-alert-message-eol-shadow--info {
         background: #e0f6fd;
         border-color: #6ed7f7;
         color: #0f5ba9;
       }
-      .fs-alert-message-shadow--warning {
+      .fs-alert-message-eol-shadow--warning {
         background: #fff8de;
         border-color: #ffd400;
         color: #79520f;
       }
-      .fs-alert-message-shadow--error {
+      .fs-alert-message-eol-shadow--error {
         background: #fdeeee;
         border-color: #f8b0ab;
         color: #a71e1a;
@@ -130,7 +130,7 @@ Basic usage:
         margin-left: 35px;
       }
     </style>
-    <div hidden="[[hidden]]" class$="fs-alert-message-shadow fs-alert-message-shadow--[[alertType]]">
+    <div hidden="[[hidden]]" class$="fs-alert-message-eol-shadow fs-alert-message-eol-shadow--[[alertType]]">
       <fs-icon icon="[[_setIcon(alertIcon, alertType)]]"></fs-icon>
       <main>
         <button on-tap='hide' hidden="[[!dismissable]]" class="fs-dialog-shadow__close"></button>
@@ -144,7 +144,7 @@ Basic usage:
 
   <script>
     Polymer({
-      is: 'fs-alert-message',
+      is: 'fs-alert-message-eol',
       properties: {
         /** Whether to hide the alert. Useful for hiding by default. Gets toggled by show() and hide(). */
         hidden: {
