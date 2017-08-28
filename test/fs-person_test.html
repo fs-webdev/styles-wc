@@ -9,7 +9,7 @@
     <script src="../../es6-promise/dist/es6-promise.auto.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../fs-person/fs-person.html">
+    <link rel="import" href="../fs-person-eol/fs-person-eol.html">
 
   </head>
   <body>
@@ -17,13 +17,13 @@
     <!-- You can use the document as a place to set up your fixtures. -->
     <test-fixture id="fs-person-default">
       <template>
-        <fs-person></fs-person>
+        <fs-person-eol></fs-person-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="fs-person-passed-values">
       <template>
-        <fs-person
+        <fs-person-eol
           colored-icon
           dot-icon
           first-name = "John Jacob"
@@ -38,19 +38,19 @@
           orientation = "portrait"
           pid = "PID"
           portrait-url = "portraitUrl"
-        ></fs-person>
+        ></fs-person-eol>
       </template>
     </test-fixture>
 
     <test-fixture id="fs-person-set-show-portrait">
       <template>
-        <fs-person show-portrait></fs-person>
+        <fs-person-eol show-portrait></fs-person-eol>
       </template>
     </test-fixture>
 
     <script>
     (function(){
-      describe('<fs-person>', function() {
+      describe('<fs-person-eol>', function() {
         var fsPersonDefault;
         var fsPersonPassedValues;
         var fsPersonSetShowPortrait;

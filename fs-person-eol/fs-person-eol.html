@@ -10,19 +10,19 @@ TODO: Looks like we need unit tests for this!
 
 Example:
 
-    <fs-person full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person>
+    <fs-person-eol full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person-eol>
 
 ### Styling
 You can use the `--fs-person-name`, `--fs-person-portrait`, `--fs-person-portrait-icon`, `--fs-person-portrait-image` and `--fs-person-container` mixin to style `fs-person` underneath:
 ```css
-fs-person {
+fs-person-eol {
   --fs-person-name: {
     font-size: 14px;
   };
 }
 
-fs-person:not([inline]) {
-  --fs-person: {
+fs-person-eol:not([inline]) {
+  --fs-person-eol: {
     width: 100%;
   };
   --fs-person-name: {
@@ -46,10 +46,10 @@ fs-person:not([inline]) {
   };
 }
 ```
-@demo fs-person/demo/index.html
+@demo fs-person-eol/demo/index.html
 -->
 
-<dom-module id="fs-person">
+<dom-module id="fs-person-eol">
   <template>
     <style>
       *[hidden] {
@@ -374,7 +374,7 @@ fs-person:not([inline]) {
   </template>
   <script>
     Polymer({
-      is: 'fs-person',
+      is: 'fs-person-eol',
       properties: {
         /**
          * Whether or not to use a colored icon (instead of gray), used to compute the gender icon
