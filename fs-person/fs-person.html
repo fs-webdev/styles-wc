@@ -1,7 +1,7 @@
 <link rel="import" href="../../polymer/polymer.html">
 <link rel="import" href="../../wc-i18n/wc-i18n.html">
 <link rel="import" href="../../oak-i18n-behavior/oak-i18n-behavior.html">
-<link rel="import" href="../fs-icon/fs-icon.html">
+<link rel="import" href="../fs-icon-eol/fs-icon-eol.html">
 
 <!--
 The styleguide person renderer
@@ -338,14 +338,14 @@ fs-person:not([inline]) {
               <img class='fs-person-portrait__portrait-image' src="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
             </template>
           </dom-if>
-          <fs-icon icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon>
+          <fs-icon-eol icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon-eol>
         </div>
       </div>
       <div class='v-center'>
-        <fs-icon class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation)]]'></fs-icon>
+        <fs-icon-eol class='fs-person-gender__icon' icon='[[gender]]' hidden='[[!_showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation)]]'></fs-icon-eol>
         <div class="fs-person-vitals">
           <div class='v-center'>
-            <fs-icon class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon>
+            <fs-icon-eol class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon-eol>
             <span class="fs-person-vitals__name-block">
               <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[fullName]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>

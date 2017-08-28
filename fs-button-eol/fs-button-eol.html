@@ -1,5 +1,5 @@
 <link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../fs-icon/fs-icon.html">
+<link rel="import" href="../fs-icon-eol/fs-icon-eol.html">
 
 <!--
 A type extension button modeled after the FamilySearch styleguide
@@ -262,7 +262,7 @@ Example:
       <slot></slot>
       <dom-if>
         <template is="dom-if" if="[[loading]]">
-          <fs-icon class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon>
+          <fs-icon-eol class="loading-icon" icon="[[_spinnerType(option, disabled)]]"></fs-icon-eol>
         </template>
       </dom-if>
     </button>

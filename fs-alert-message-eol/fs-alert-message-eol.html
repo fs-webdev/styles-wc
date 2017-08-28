@@ -1,5 +1,5 @@
 <link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../fs-icon/fs-icon.html">
+<link rel="import" href="../fs-icon-eol/fs-icon-eol.html">
 
 <!--
 `<fs-alert-message-eol>` adds an fs-styles-compatible alert to your page
@@ -122,7 +122,7 @@ Basic usage:
       .fs-dialog-shadow__close:active {
         opacity: 0.75;
       }
-      fs-icon {
+      fs-icon-eol {
         float: left;
         padding-right: 7px;
       }
@@ -131,7 +131,7 @@ Basic usage:
       }
     </style>
     <div hidden="[[hidden]]" class$="fs-alert-message-eol-shadow fs-alert-message-eol-shadow--[[alertType]]">
-      <fs-icon icon="[[_setIcon(alertIcon, alertType)]]"></fs-icon>
+      <fs-icon-eol icon="[[_setIcon(alertIcon, alertType)]]"></fs-icon-eol>
       <main>
         <button on-tap='hide' hidden="[[!dismissable]]" class="fs-dialog-shadow__close"></button>
         <h4 hidden="[[!_boolify(alertTitle)]]">[[alertTitle]]</h4>
@@ -173,7 +173,7 @@ Basic usage:
           value: '',
           observer: '_updateBody'
         },
-        /** Icon override by name. Put the name of the icon from fs-icon */
+        /** Icon override by name. Put the name of the icon from fs-icon-eol */
         alertIcon: {
           type: String,
           value: 'default',
