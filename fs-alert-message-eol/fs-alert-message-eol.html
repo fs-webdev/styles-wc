@@ -55,10 +55,10 @@ Basic usage:
         line-height: 1.25;
         margin: 0;
       }
-      .fs-alert-message-eol-shadow.inline {
+      .fs-alert-message-shadow.inline {
         display: inline-block;
       }
-      .fs-alert-message-eol-shadow {
+      .fs-alert-message-shadow {
         background: #f1f6d3;
         border-radius: 4px;
         border: 1px solid #bfd730;
@@ -66,23 +66,23 @@ Basic usage:
         padding: 10px;
         position: relative;
       }
-      .fs-alert-message-eol-shadow__title {
+      .fs-alert-message-shadow__title {
         color: inherit;
       }
-      .fs-alert-message-eol-shadow a {
+      .fs-alert-message-shadow a {
         text-decoration: underline;
       }
-      .fs-alert-message-eol-shadow--info {
+      .fs-alert-message-shadow--info {
         background: #e0f6fd;
         border-color: #6ed7f7;
         color: #0f5ba9;
       }
-      .fs-alert-message-eol-shadow--warning {
+      .fs-alert-message-shadow--warning {
         background: #fff8de;
         border-color: #ffd400;
         color: #79520f;
       }
-      .fs-alert-message-eol-shadow--error {
+      .fs-alert-message-shadow--error {
         background: #fdeeee;
         border-color: #f8b0ab;
         color: #a71e1a;
@@ -130,7 +130,7 @@ Basic usage:
         margin-left: 35px;
       }
     </style>
-    <div hidden="[[hidden]]" class$="fs-alert-message-eol-shadow fs-alert-message-eol-shadow--[[alertType]]">
+    <div hidden="[[hidden]]" class$="fs-alert-message-shadow fs-alert-message-shadow--[[alertType]]">
       <fs-icon-eol icon="[[_setIcon(alertIcon, alertType)]]"></fs-icon-eol>
       <main>
         <button on-tap='hide' hidden="[[!dismissable]]" class="fs-dialog-shadow__close"></button>
