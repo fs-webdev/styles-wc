@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <title>&lt;fs-button&gt;</title>
+  <title>&lt;fs-tooltip&gt;</title>
   <meta name="description" content="">
 
   <!-- Mobile -->
@@ -22,27 +22,27 @@
   <!-- Web Components -->
   <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../fs-tooltip.html">
-  <link rel="import" href="../../fs-button/fs-button.html">
+  <link rel="import" href="../../fs-button-eol/fs-button-eol.html">
 </head>
 <body>
   <h1>&lt;fs-tooltip&gt;</h1>
   <fs-tooltip>
-    <button is='fs-button'>Default (above)</button>
+    <button is='fs-button-eol'>Default (above)</button>
     <p slot="tooltip-body">Default tooltip position is above.</p>
   </fs-tooltip>
 
   <fs-tooltip direction='right'>
-    <button is='fs-button'>Right</button>
+    <button is='fs-button-eol'>Right</button>
     <p slot="tooltip-body">You can also position the tooltip to the right.</p>
   </fs-tooltip>
 
   <fs-tooltip direction='below'>
-    <button is='fs-button'>Below</button>
+    <button is='fs-button-eol'>Below</button>
     <p slot="tooltip-body">Or even below the element.</p>
   </fs-tooltip>
 
   <fs-tooltip direction='left'>
-    <button is='fs-button'>Left</button>
+    <button is='fs-button-eol'>Left</button>
     <p slot="tooltip-body">And lets not forget to the left.</p>
   </fs-tooltip>
 </body>
