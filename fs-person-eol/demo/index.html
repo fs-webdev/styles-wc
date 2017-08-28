@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>fs-person-eol demo</title>
+  <meta name="description" content="">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <!-- Chrome / Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icon.png">
+
+  <!-- Safari / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+
+  <!-- Web Components -->
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../../../iron-demo-helpers/demo-snippet.html">
+  <link rel="import" href="../fs-person-eol.html">
+</head>
+<body>
+  <style is="custom-style">
+    demo-snippet{
+      border: 1px solid #333;
+      margin-bottom: 5px;
+    }
+    fs-person-eol {
+      --fs-person-name-v-center: {
+        overflow: visible;
+      }
+    }
+    .big-portrait {
+      --fs-person-portrait: {
+        width: 200px;
+        height: 200px;
+      };
+    }
+    .bold-text {
+      --fs-person-name: {
+        font-weight: bold;
+      };
+    }
+    .top-align-text {
+      --fs-person-container: {
+        align-items: flex-start;
+      };
+    }
+    .wrapper {
+      max-width: 500px;
+    }
+  </style>
+  <div class="wrapper">
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='L5FF-YWL' full-name='Test Child' lifespan='1995-Deceased'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='Josh Crowther has a really really long name, ohhhhhhhhhhhh!!! Josh Crowther has a really really long name, ohhhhhhhhhhhh!!!' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol label="Father" gender='male' full-name='Samuel Sampson'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' first-name='Samuel' last-name='Peterson'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' hide-gender pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='L5FF-BZ9' full-name='Child 1'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther' show-portrait></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' colored-icon full-name='Josh Crowther' show-portrait></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='female' colored-icon full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='unknown' full-name='Uhhhh?' show-portrait pid='KWFF-1RH'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol inline gender='male' full-name='Josh Crowther' pid='KWFF-1RH' lifespan='Then-Now'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol class='big-portrait' gender='male' pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol class='bold-text' gender='male' pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol class='top-align-text' gender='female' pid='L5FF-YWG' full-name='Wife of Test Child' lifespan='1995–1999' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='Josh' last-name='Crowther' name-system='sinotypic' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <a href="#">
+        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='Josh' last-name='Crowther' name-system='sinotypic' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='Josh Crowther' name-system='sinotypic' dot-icon lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+  </div>
+</body>
+</html>

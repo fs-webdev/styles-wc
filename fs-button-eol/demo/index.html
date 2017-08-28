@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>&lt;fs-button-eol&gt;</title>
+  <meta name="description" content="">
+
+  <!-- Mobile -->
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+  <!-- Chrome / Android -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="black">
+  <link rel="icon" href="icon.png">
+
+  <!-- Safari / iOS -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
+
+  <!-- Web Components -->
+  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+  <link rel="import" href="../fs-button-eol.html">
+</head>
+<body >
+  <p>
+    <label>Options</label>
+    <fs-button-eol option='recommended'>Recommended</fs-button-eol>
+    <fs-button-eol option='destructive'>Destructive</fs-button-eol>
+    <fs-button-eol>Button</fs-button-eol>
+    <fs-button-eol option='minor'>Minor</fs-button-eol>
+    <fs-button-eol option='close'></fs-button-eol>
+  </p>
+
+  <p>
+    <label>Sizes</label>
+    <fs-button-eol size='large'>Large</fs-button-eol>
+    <fs-button-eol>Default</fs-button-eol>
+    <fs-button-eol size='small'>Small</fs-button-eol>
+  </p>
+
+  <p>
+    <label>Disabled</label>
+    <fs-button-eol option='recommended' disabled>Recommended</fs-button-eol>
+    <fs-button-eol disabled>Button</fs-button-eol>
+  </p>
+
+  <p>
+    <label>Loading</label>
+    <fs-button-eol class='loadingButton'>Button</fs-button-eol>
+    <fs-button-eol disabled loading>Button</fs-button-eol>
+    <fs-button-eol option='destructive' class='loadingButton'>Button</fs-button-eol>
+    <fs-button-eol option='recommended' class='loadingButton'>Button</fs-button-eol>
+    <fs-button-eol size='large' class='loadingButton'>Button</fs-button-eol>
+  </p>
+  <script>
+    Array.prototype.slice.call(document.querySelectorAll('.loadingButton'))
+    .forEach(function(button) {
+      button.addEventListener('click', function() {
+        button.loading = !button.loading;
+      });
+    });
+  </script>
+</body>
+</html>

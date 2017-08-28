@@ -1,0 +1,111 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+
+    <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../web-component-tester/browser.js"></script>
+
+    <!-- Step 1: import the element to test -->
+    <link rel="import" href="../fs-alert-message-eol.html">
+  </head>
+  <body>
+
+    <!-- You can use the document as a place to set up your fixtures. -->
+    <test-fixture id="default-alert">
+      <template>
+        <fs-alert-message-eol>
+          default alert
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="error-alert">
+      <template>
+        <fs-alert-message-eol alert-type="error">
+          error alert
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="info-alert">
+      <template>
+        <fs-alert-message-eol alert-type="info">
+          info alert
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="warning-alert">
+      <template>
+        <fs-alert-message-eol alert-type="warning">
+          warning alert
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="default-alert-with-title">
+      <template>
+        <fs-alert-message-eol alert-title="a title">
+          default alert with title
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="dismissable-default-alert-with-title">
+      <template>
+        <fs-alert-message-eol alert-title="a title" dismissable>
+          dismissable default alert with title
+        </fs-alert-message-eol>
+      </template>
+    </test-fixture>
+
+    <script>
+      suite('<fs-alert-message-eol>', function() {
+
+        var defaultAlert;
+        var errorAlert;
+        var infoAlert;
+        var warningAlert;
+        var defaultAlertWithTitle;
+        var dismissableDefaultAlertWithTitle;
+
+        setup(function() {
+          defaultAlert = fixture('default-alert');
+          errorAlert = fixture('error-alert');
+          infoAlert = fixture('info-alert');
+          warningAlert = fixture('warning-alert');
+          defaultAlertWithTitle = fixture('default-alert-with-title');
+          dismissableDefaultAlertWithTitle = fixture('dismissable-default-alert-with-title');
+        });
+
+        test('default alertType is an empty string', function() {
+          assert.equal(defaultAlert.alertType, '');
+        });
+
+        test('error alertType is \'error\'', function() {
+          assert.equal(errorAlert.alertType, 'error');
+        });
+
+        test('info alertType is \'error\'', function() {
+          assert.equal(infoAlert.alertType, 'info');
+        });
+
+        test('warning alertType is \'error\'', function() {
+          assert.equal(warningAlert.alertType, 'warning');
+        });
+
+        test('setting alert-title title shows a title', function() {
+          assert.equal(defaultAlertWithTitle.alertTitle, 'a title');
+        });
+
+        test('setting dismissable shows a dismiss icon', function() {
+          assert.equal(dismissableDefaultAlertWithTitle.dismissable, true);
+        });
+
+      });
+    </script>
+
+  </body>
+</html>
