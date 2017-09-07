@@ -258,7 +258,7 @@ Example:
         padding: 0;
       }
     </style>
-    <button disabled="[[disabled]]" option$="[[option]]" size$="[[size]]" loading$="[[loading]]">
+    <button type$="[[type]]" disabled="[[disabled]]" option$="[[option]]" size$="[[size]]" loading$="[[loading]]">
       <slot></slot>
       <dom-if>
         <template is="dom-if" if="[[loading]]">
@@ -312,7 +312,16 @@ Example:
         size: {
           type: String,
           reflectToAttribute: true
+        },
+        /**
+         * Reflect the type attribute to the inner button. (e.g. type="button")
+         * @type {String}
+         */
+        type: {
+          type: String,
+          reflectToAttribute: true
         }
+
       },
       /**
        * Computes the spinner that needs to be used for the button
