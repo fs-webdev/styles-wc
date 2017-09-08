@@ -347,7 +347,7 @@ fs-person-eol:not([inline]) {
           <div class='v-center'>
             <fs-icon-eol class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon-eol>
             <span class="fs-person-vitals__name-block">
-              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[fullName]]</p>
+              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[_checkValidName(fullName, pid, i18n)]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
                 <span class="person-label" hidden$="[[!label]]">[[label]]: </span>
                 <span data-test-person-given-name>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
@@ -355,7 +355,8 @@ fs-person-eol:not([inline]) {
               </p>
             </span>
           </div>
-          <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'>
+          <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'
+               hidden$='[[_hideDetials(pid)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
@@ -654,6 +655,13 @@ fs-person-eol:not([inline]) {
       },
       _getLastName: function(first, last, nameSystem) {
         return nameSystem === 'sinotypic' ? first : last;
+      },
+      _hideDetials: function (pid) {
+         return pid === '' || pid === 'UNKNOWN';
+      },
+      _checkValidName: function (fullName, pid, i18n) {
+         if (!i18n && typeof i18n("UNKNOWN_NAME") !== "string") return;
+         return (pid === '' || pid === 'UNKNOWN') ? i18n("UNKNOWN_NAME") : fullName;
       }
     });
   </script>
