@@ -329,6 +329,10 @@ fs-person-eol:not([inline]) {
         visibility: visible;
       }
 
+      .fs-person-details__container .fs-person-ls-pid-container {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
     </style>
     <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -358,7 +362,7 @@ fs-person-eol:not([inline]) {
           <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'
                hidden$='[[_hideDetials(pid)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
-            <div hidden$='[[!_showPid(pid, hidePid)]]'>
+            <div class="fs-person-ls-pid-container" hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
