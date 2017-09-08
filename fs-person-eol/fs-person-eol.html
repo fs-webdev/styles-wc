@@ -347,7 +347,7 @@ fs-person-eol:not([inline]) {
           <div class='v-center'>
             <fs-icon-eol class='fs-person-gender__icon' icon='[[gender]]-dot' size='small' hidden='[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]'></fs-icon-eol>
             <span class="fs-person-vitals__name-block">
-              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[_checkValidName(fullName, i18n)]]</p>
+              <p class='fs-person-vitals__name' hidden='[[_isPortrait(orientation)]]' data-test-person-full-name><span class="person-label" hidden$="[[!label]]">[[label]]: </span>[[_checkValidName(fullName, pid, i18n)]]</p>
               <p class='fs-person-vitals__name' hidden='[[!_isPortrait(orientation)]]'>
                 <span class="person-label" hidden$="[[!label]]">[[label]]: </span>
                 <span data-test-person-given-name>[[_getFirstName(firstName, lastName, nameSystem)]]</span>
@@ -659,9 +659,9 @@ fs-person-eol:not([inline]) {
       _showDetials: function (pid) {
          return ['', 'UNKNOWN'].includes(pid);
       },
-      _checkValidName(fullName, i18n) {
+      _checkValidName(fullName, pid, i18n) {
          if (!i18n && typeof i18n("UNKNOWN_NAME") !== "string") return;
-         return (fullName !== "UNKNOWN") ? fullName : i18n("UNKNOWN_NAME");
+         return (['', 'UNKNOWN'].includes(pid)) ? i18n("UNKNOWN_NAME") : fullName;
       }
     });
   </script>
