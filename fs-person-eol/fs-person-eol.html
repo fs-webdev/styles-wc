@@ -356,7 +356,7 @@ fs-person-eol:not([inline]) {
             </span>
           </div>
           <div class$='fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]'
-               hidden$='[[_showDetials(pid)]]'>
+               hidden$='[[_hideDetials(pid)]]'>
             <span data-test-person-lifespan>[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
@@ -656,12 +656,12 @@ fs-person-eol:not([inline]) {
       _getLastName: function(first, last, nameSystem) {
         return nameSystem === 'sinotypic' ? first : last;
       },
-      _showDetials: function (pid) {
-         return ['', 'UNKNOWN'].includes(pid);
+      _hideDetials: function (pid) {
+         return pid === '' || pid === 'UNKNOWN';
       },
       _checkValidName: function (fullName, pid, i18n) {
          if (!i18n && typeof i18n("UNKNOWN_NAME") !== "string") return;
-         return (['', 'UNKNOWN'].includes(pid)) ? i18n("UNKNOWN_NAME") : fullName;
+         return (pid === '' || pid === 'UNKNOWN') ? i18n("UNKNOWN_NAME") : fullName;
       }
     });
   </script>
