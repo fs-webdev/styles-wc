@@ -166,6 +166,15 @@ fs-person-eol:not([inline]) {
         color: #333331;
       }
 
+      .fs-person__container.nightfall .fs-person-vitals__name {
+        color: #fff;
+      }
+
+      .fs-person__container.nightfall .fs-person-details__container,
+      .fs-person__container.nightfall .fs-person-details__separator {
+        color: #ecebea;
+      }
+
       :host([orientation='portrait']) .fs-person__container {
         flex-direction: column;
       }
@@ -196,6 +205,12 @@ fs-person-eol:not([inline]) {
         position: relative;
         @apply(--fs-person-portrait);
       }
+
+      .fs-person__container.nightfall .fs-person-portrait__container {
+        background-color: #57585a;
+        border-color: #8c8d8f;
+      }
+
       :host([orientation='portrait']) .fs-person-portrait__container {
         margin-right: 0;
       }
@@ -265,10 +280,10 @@ fs-person-eol:not([inline]) {
       }
 
       .fs-person-details__separator{
-        vertical-align: top;
-        padding-left: 6px;
+        margin-top: -2px;
+        margin-bottom: 2px;
         padding-right: 6px;
-        color: #333331;
+        padding-left: 6px;
       }
 
       /* The actual popup (appears on top) */
@@ -334,7 +349,7 @@ fs-person-eol:not([inline]) {
         text-overflow: ellipsis;
       }
     </style>
-    <div class$='fs-person__container locale-[[language]]' data-test-person='[[pid]]'>
+    <div class$='fs-person__container locale-[[language]] [[colorScheme]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
           <dom-if>
@@ -390,6 +405,18 @@ fs-person-eol:not([inline]) {
         coloredIcon: {
           type: Boolean,
           value: false
+        },
+
+        /**
+         * Which color scheme to display: daybreak or nightfall.
+         *
+         * **Valid values are daybreak or nightfall. If not specified, default is daybreak.**
+         * @type {String}
+         */
+        colorScheme: {
+          type: String,
+          reflectToAttribute: true,
+          value: 'daybreak'
         },
 
         /**

@@ -25,36 +25,43 @@
   <link rel="import" href="../fs-person-eol.html">
 </head>
 <body>
-  <style is="custom-style">
-    demo-snippet{
-      border: 1px solid #333;
-      margin-bottom: 5px;
-    }
-    fs-person-eol {
-      --fs-person-name-v-center: {
-        overflow: visible;
+  <custom-style>
+    <style is="custom-style">
+      demo-snippet{
+        border: 1px solid #333;
+        margin-bottom: 5px;
       }
-    }
-    .big-portrait {
-      --fs-person-portrait: {
-        width: 200px;
-        height: 200px;
-      };
-    }
-    .bold-text {
-      --fs-person-name: {
-        font-weight: bold;
-      };
-    }
-    .top-align-text {
-      --fs-person-container: {
-        align-items: flex-start;
-      };
-    }
-    .wrapper {
-      max-width: 500px;
-    }
-  </style>
+      fs-person-eol {
+        --fs-person-name-v-center: {
+          overflow: visible;
+        };
+      }
+      demo-snippet.dark {
+        --demo-snippet-demo: {
+          background-color: #333331;
+        }
+      }
+      .big-portrait {
+        --fs-person-portrait: {
+          width: 200px;
+          height: 200px;
+        };
+      }
+      .bold-text {
+        --fs-person-name: {
+          font-weight: bold;
+        };
+      }
+      .top-align-text {
+        --fs-person-container: {
+          align-items: flex-start;
+        };
+      }
+      .wrapper {
+        max-width: 500px;
+      }
+    </style>
+  </custom-style>
   <div class="wrapper">
     <demo-snippet>
       <template>
@@ -109,6 +116,11 @@
     <demo-snippet>
       <template>
         <fs-person-eol gender='male' colored-icon full-name='Josh Crowther' show-portrait></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet class='dark'>
+      <template>
+        <fs-person-eol color-scheme='nightfall' gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
       </template>
     </demo-snippet>
     <demo-snippet>
