@@ -24,6 +24,7 @@
     <test-fixture id="fs-person-passed-values">
       <template>
         <fs-person-eol
+          color-scheme = 'nightfall'
           colored-icon
           dot-icon
           first-name = "John Jacob"
@@ -62,7 +63,8 @@
         });
 
         describe('properties', function() {
-          it('should set default values for "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
+          it('should set default values for "colorScheme", "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
+            expect(fsPersonDefault.colorScheme, "colorScheme is not daybreak").to.equal('daybreak');
             expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
             expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;
             expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
@@ -79,6 +81,10 @@
             expect(fsPersonDefault.pid, "pid is not ''").to.equal('');
             expect(fsPersonDefault.portraitUrl, "portraitUrl is not ''").to.equal('');
             expect(fsPersonDefault.showPortrait, "showPortrait is not false").to.be.false;
+          });
+
+          it('should set colorScheme to "nightfall"', function () {
+            expect(fsPersonPassedValues.colorScheme, "colorScheme is not 'nightfall'").to.equal('nightfall');
           });
 
           it('should have coloredIcon true', function () {
