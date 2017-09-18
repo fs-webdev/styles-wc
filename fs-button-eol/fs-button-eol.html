@@ -220,6 +220,17 @@ Example:
         opacity: 1;
       }
 
+      /* buttons styled as tabs */
+      :host[option=tab] button {
+        background-color: transparent;
+        border: none;
+        padding: 7px 10px;
+        margin-right: 20px;
+      }
+      :host.selected[option=tab] button {
+        background-color: #e1ecc3;
+      }
+
       /* Resets children elements to not include any inherited styles from fs-button-eol */
       .loading-icon, template {
 
