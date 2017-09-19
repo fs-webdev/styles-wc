@@ -36,13 +36,7 @@
           overflow: visible;
         };
       }
-      demo-info {
-        display: block;
-        font-style: italic;
-        margin-bottom: 5px;
-      }
       demo-snippet.dark {
-        color: white;
         --demo-snippet-demo: {
           background-color: #333331;
         };
@@ -64,124 +58,125 @@
         };
       }
       .wrapper {
-        max-width: 550px;
+        max-width: 500px;
       }
     </style>
   </custom-style>
   <div class="wrapper">
     <demo-snippet>
       <template>
-        <demo-info>Long data values</demo-info>
-        <fs-person-eol gender='male' pid='KNDX-MKG' full-name='1st President of the United States of America George Eskridge Washington' lifespan='11 February 1724 – December 14, 1799'></fs-person-eol>
+        <fs-person-eol gender='male' pid='L5FF-YWL' full-name='Test Child' lifespan='1995-Deceased'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <demo-info>Empty person</demo-info>
-        <fs-person-eol gender='unknown'></fs-person-eol>
+        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='Josh Crowther has a really really long name, ohhhhhhhhhhhh!!! Josh Crowther has a really really long name, ohhhhhhhhhhhh!!!' lifespan='1776-1980'></fs-person-eol>
       </template>
     </demo-snippet>
-
-    <demo-snippet>
-      <demo-info>Property: label</demo-info>
-      <template>
-        <fs-person-eol label="Father" gender='male' pid='KNDX-MKG' full-name='George Washington'></fs-person-eol>
-      </template>
-    </demo-snippet>
-
-    <demo-snippet>
-      <demo-info>Property: hide-gender</demo-info>
-      <template>
-        <fs-person-eol gender='male' hide-gender pid='KWFF-1RH' full-name='George Washington' lifespan='1724-1799'></fs-person-eol>
-      </template>
-    </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='male' full-name='George Washington' show-portrait></fs-person-eol>
+        <fs-person-eol label="Father" gender='male' full-name='Samuel Sampson'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='male' colored-icon full-name='George Washington' show-portrait></fs-person-eol>
+        <fs-person-eol gender='male' first-name='Samuel' last-name='Peterson'></fs-person-eol>
       </template>
     </demo-snippet>
-
+    <demo-snippet>
+      <template>
+        <fs-person-eol pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' hide-gender pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='L5FF-BZ9' full-name='Child 1'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther' lifespan='1776-1980'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' full-name='Josh Crowther' show-portrait></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' colored-icon full-name='Josh Crowther' show-portrait></fs-person-eol>
+      </template>
+    </demo-snippet>
     <demo-snippet class='dark'>
-      <demo-info>Property: color-scheme</demo-info>
       <template>
-        <fs-person-eol color-scheme='nightfall' gender='female' full-name='Martha Dandridge' show-portrait portrait-irl='https://www.familysearch.org/patron/v2/TH-904-73898-1227-65/thumb200s.jpg?ctx=ArtCtxPublic' pid='KNZC-6QV'></fs-person-eol>
+        <fs-person-eol color-scheme='nightfall' gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='female' full-name='Martha Dandridge' show-portrait portrait-irl='https://www.familysearch.org/patron/v2/TH-904-73898-1227-65/thumb200s.jpg?ctx=ArtCtxPublic' pid='KNZC-6QV'></fs-person-eol>
+        <fs-person-eol gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='female' colored-icon full-name='Martha Dandridge' show-portrait pid='KNZC-6QV'></fs-person-eol>
+        <fs-person-eol gender='female' colored-icon full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
         <fs-person-eol gender='unknown' full-name='Uhhhh?' show-portrait pid='KWFF-1RH'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='male' full-name='George Washington' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+        <fs-person-eol gender='male' full-name='Josh Crowther' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
       </template>
     </demo-snippet>
-
-    <demo-snippet>
-      <demo-info>Property: dot-icon</demo-info>
-      <template>
-        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='George Washington' name-system='sinotypic' dot-icon lifespan='1724-1799'></fs-person-eol>
-      </template>
-    </demo-snippet>
-
-    <demo-snippet>
-      <demo-info>Property: inline</demo-info>
-      <template>
-        <fs-person-eol inline gender='male' full-name='1st President of the United States of America George Eskridge Washington' pid='KWFF-1RH' lifespan='1724 – 1799'></fs-person-eol>
-      </template>
-    </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol class='bold-text' gender='male' pid='KWFF-1RH' full-name='George Washington' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+        <fs-person-eol inline gender='male' full-name='Josh Crowther' pid='KWFF-1RH' lifespan='Then-Now'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol class='top-align-text' gender='female' pid='L5FF-YWG' full-name='Wife of Test Child' lifespan='1995–1999' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+        <fs-person-eol class='big-portrait' gender='male' pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='George' last-name='Washington' name-system='eurotypic' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
+        <fs-person-eol class='bold-text' gender='male' pid='KWFF-1RH' full-name='Josh Crowther' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
       </template>
     </demo-snippet>
-
+    <demo-snippet>
+      <template>
+        <fs-person-eol class='top-align-text' gender='female' pid='L5FF-YWG' full-name='Wife of Test Child' lifespan='1995–1999' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+      </template>
+    </demo-snippet>
+    <demo-snippet>
+      <template>
+        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='Josh' last-name='Crowther' name-system='sinotypic' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
+      </template>
+    </demo-snippet>
     <demo-snippet>
       <template>
         <a href="#">
-        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='George' last-name='Washington' name-system='sinotypic' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
+        <fs-person-eol gender='male' pid='KWFF-1RH' first-name='Josh' last-name='Crowther' name-system='sinotypic' lifespan='1776-1980' show-portrait portrait-url='https://familysearch.org/patron/v2/TH-904-51257-1471-39/thumb200s.jpg?ctx=ArtCtxPublic' orientation='portrait'></fs-person-eol>
       </template>
     </demo-snippet>
-
     <demo-snippet>
       <template>
-        <fs-person-eol class='big-portrait' gender='male' pid='KWFF-1RH' full-name='George Washington' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='Josh Crowther' name-system='sinotypic' dot-icon lifespan='1776-1980'></fs-person-eol>
       </template>
     </demo-snippet>
   </div>
