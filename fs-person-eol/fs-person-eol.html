@@ -212,7 +212,7 @@ fs-person-eol:not([inline]) {
       }
 
       :host([orientation='portrait']) .fs-person-portrait__container {
-        margin-right: 0;
+        margin: 0 auto;
       }
       .fs-person-portrait__portrait-icon[icon='female'],
       .fs-person-portrait__portrait-icon[icon='male'] {
@@ -292,6 +292,7 @@ fs-person-eol:not([inline]) {
         border-radius: 6px;
         box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
         color: #448ef7;
+        display: none;
         font-family: Verdana, sans-serif;
         font-size: 0.875rem;
         line-height: 1.625rem;
@@ -299,7 +300,6 @@ fs-person-eol:not([inline]) {
         position: absolute;
         text-align: center;
         top: 0px;
-        visibility: hidden;
         white-space: nowrap;
         z-index: 1;
       }
@@ -341,7 +341,7 @@ fs-person-eol:not([inline]) {
       }
 
       .show {
-        visibility: visible;
+        display: block;
       }
 
       .fs-person-details__container .fs-person-ls-container {
