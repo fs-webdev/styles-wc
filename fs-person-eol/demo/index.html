@@ -69,10 +69,6 @@
     </style>
   </custom-style>
   <div class="wrapper">
-
-    <p>TODO: Add interactive demo mode, so that all properties and their interactions can be shown at once, instead of across a dozen demo elements</p>
-    <p>POINT OF CONCERN: IF NO PID IS PROVIDED, UNKNOWN NAME IS DISPLAYED</p>
-
     <demo-snippet>
       <template>
         <demo-info>Long data values</demo-info>
@@ -116,19 +112,19 @@
     <demo-snippet class='dark'>
       <demo-info>Property: color-scheme</demo-info>
       <template>
-        <fs-person-eol color-scheme='nightfall' gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
+        <fs-person-eol color-scheme='nightfall' gender='female' full-name='Martha Dandridge' show-portrait portrait-irl='https://www.familysearch.org/patron/v2/TH-904-73898-1227-65/thumb200s.jpg?ctx=ArtCtxPublic' pid='KNZC-6QV'></fs-person-eol>
       </template>
     </demo-snippet>
 
     <demo-snippet>
       <template>
-        <fs-person-eol gender='female' full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
+        <fs-person-eol gender='female' full-name='Martha Dandridge' show-portrait portrait-irl='https://www.familysearch.org/patron/v2/TH-904-73898-1227-65/thumb200s.jpg?ctx=ArtCtxPublic' pid='KNZC-6QV'></fs-person-eol>
       </template>
     </demo-snippet>
 
     <demo-snippet>
       <template>
-        <fs-person-eol gender='female' colored-icon full-name='Jenna Crowther' show-portrait pid='KWFF-1RH'></fs-person-eol>
+        <fs-person-eol gender='female' colored-icon full-name='Martha Dandridge' show-portrait pid='KNZC-6QV'></fs-person-eol>
       </template>
     </demo-snippet>
 
@@ -145,15 +141,16 @@
     </demo-snippet>
 
     <demo-snippet>
-      <demo-info>Property: inline</demo-info>
+      <demo-info>Property: dot-icon</demo-info>
       <template>
-        <fs-person-eol inline gender='male' full-name='1st President of the United States of America George Eskridge Washington' pid='KWFF-1RH' lifespan='1724 – 1799'></fs-person-eol>
+        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='George Washington' name-system='sinotypic' dot-icon lifespan='1724-1799'></fs-person-eol>
       </template>
     </demo-snippet>
 
     <demo-snippet>
+      <demo-info>Property: inline</demo-info>
       <template>
-        <fs-person-eol class='big-portrait' gender='male' pid='KWFF-1RH' full-name='George Washington' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
+        <fs-person-eol inline gender='male' full-name='1st President of the United States of America George Eskridge Washington' pid='KWFF-1RH' lifespan='1724 – 1799'></fs-person-eol>
       </template>
     </demo-snippet>
 
@@ -184,7 +181,7 @@
 
     <demo-snippet>
       <template>
-        <fs-person-eol gender='male' pid='KWFF-1RH' full-name='George Washington' name-system='sinotypic' dot-icon lifespan='1724-1799'></fs-person-eol>
+        <fs-person-eol class='big-portrait' gender='male' pid='KWFF-1RH' full-name='George Washington' lifespan='1724-1799' show-portrait portrait-url='https://www.familysearch.org/patron/v2/TH-301-43706-556-96/thumb200s.jpg?ctx=ArtCtxPublic'></fs-person-eol>
       </template>
     </demo-snippet>
   </div>
