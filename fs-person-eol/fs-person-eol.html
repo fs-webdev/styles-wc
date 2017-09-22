@@ -166,15 +166,6 @@ fs-person-eol:not([inline]) {
         color: #333331;
       }
 
-      .fs-person__container.nightfall .fs-person-vitals__name {
-        color: #fff;
-      }
-
-      .fs-person__container.nightfall .fs-person-details__container,
-      .fs-person__container.nightfall .fs-person-details__separator {
-        color: #ecebea;
-      }
-
       :host([orientation='portrait']) .fs-person__container {
         flex-direction: column;
       }
@@ -188,11 +179,11 @@ fs-person-eol:not([inline]) {
       }
 
       .fs-person-portrait__container {
-        background-color: #f4f4f4;
         background-position: center;
         background-size: 60%;
         border-radius: 50%;
-        border: solid 4px #d9d9d9;
+        border-style: solid;
+        border-width: 4px;
         box-shadow: 0 2px 3px 0 #636363;
         box-shadow: none;
         height: 66px;
@@ -204,11 +195,6 @@ fs-person-eol:not([inline]) {
         overflow: hidden;
         position: relative;
         @apply(--fs-person-portrait);
-      }
-
-      .fs-person__container.nightfall .fs-person-portrait__container {
-        background-color: #57585a;
-        border-color: #8c8d8f;
       }
 
       :host([orientation='portrait']) .fs-person-portrait__container {
@@ -348,6 +334,28 @@ fs-person-eol:not([inline]) {
         overflow: hidden;
         text-overflow: ellipsis;
       }
+
+      /* BEGIN DAYBREAK STYLES */
+      .fs-person__container.daybreak .fs-person-portrait__container {
+        background-color: #f4f4f4;
+        border-color: #d9d9d9;
+      }
+      /* END DAYBREAK STYLES */
+      /* BEGIN NIGHTFALL STYLES */
+      .fs-person__container.nightfall .fs-person-vitals__name {
+        color: #fff;
+      }
+
+      .fs-person__container.nightfall .fs-person-details__container,
+      .fs-person__container.nightfall .fs-person-details__separator {
+        color: #ecebea;
+      }
+
+      .fs-person__container.nightfall .fs-person-portrait__container {
+        background-color: #57585a;
+        border-color: #8c8d8f;
+      }
+      /* END NIGHTFALL STYLES */
     </style>
     <div class$='fs-person__container locale-[[language]] [[colorScheme]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
