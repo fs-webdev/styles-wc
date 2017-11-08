@@ -696,7 +696,7 @@ fs-person-eol:not([inline]) {
          return pid === '' || pid === 'UNKNOWN';
       },
       _checkValidName: function (fullName, pid, i18n) {
-         if (!i18n && typeof i18n("UNKNOWN_NAME") !== "string") return;
+         if (!i18n || typeof i18n("UNKNOWN_NAME") !== "string") return;
          return (pid === '' || pid === 'UNKNOWN') ? i18n("UNKNOWN_NAME") : fullName;
       }
     });
