@@ -23,7 +23,14 @@
   <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
   <link rel="import" href="../fs-icon-eol.html">
   <style>
+    body {
+      margin-left: 20px;
+    }
+    h1 {
+      margin: 5px auto;
+    }
     fs-icon-eol {
+      margin-right: 15px;
       vertical-align: bottom;
     }
     ul {
@@ -35,169 +42,84 @@
       display: flex;
       align-items: center;
     }
-    label {
-      margin-left: 15px;
-    }
     .dark {
       background-color: #333333;
+      padding: 3px;
     }
   </style>
 </head>
 <body>
-  <h1>Icons</h1>
-  <ul>
-    <li><fs-icon-eol icon='pedigree'></fs-icon-eol> <label>pedigree</label></li>
-    <li><fs-icon-eol icon='person'></fs-icon-eol> <label>person</label></li>
-    <li><fs-icon-eol icon='recents'></fs-icon-eol> <label>recents</label></li>
-    <li><fs-icon-eol icon='find'></fs-icon-eol> <label>find</label></li>
-    <li><fs-icon-eol icon='lists'></fs-icon-eol> <label>lists</label></li>
-    <li><fs-icon-eol icon='check'></fs-icon-eol> <label>check</label></li>
-    <li><fs-icon-eol icon='close'></fs-icon-eol> <label>close</label></li>
-    <li><fs-icon-eol icon='exclamation'></fs-icon-eol> <label>exclamation</label></li>
-    <li><fs-icon-eol icon='info'></fs-icon-eol> <label>info</label></li>
-    <li><fs-icon-eol icon='spinner'></fs-icon-eol> <label>spinner</label></li>
-    <li><span class='dark'><fs-icon-eol icon='spinner-light'></fs-icon-eol></span> <label>spinner-light</label></li>
-    <li><fs-icon-eol icon='warning'></fs-icon-eol> <label>warning</label></li>
-    <li><fs-icon-eol icon='female-dot'></fs-icon-eol> <label>female-dot</label></li>
-    <li><fs-icon-eol icon='female'></fs-icon-eol> <label>female</label></li>
-    <li><fs-icon-eol icon='female-portrait'></fs-icon-eol> <label>female-portrait</label></li>
-    <li><fs-icon-eol icon='gray-female'></fs-icon-eol> <label>gray-female</label></li>
-    <li><fs-icon-eol icon='male-dot'></fs-icon-eol> <label>male-dot</label></li>
-    <li><fs-icon-eol icon='male'></fs-icon-eol> <label>male</label></li>
-    <li><fs-icon-eol icon='male-portrait'></fs-icon-eol> <label>male-portrait</label></li>
-    <li><fs-icon-eol icon='gray-male'></fs-icon-eol> <label>gray-male</label></li>
-    <li><fs-icon-eol icon='white-male'></fs-icon-eol> <label>white-male</label></li>
-    <li><fs-icon-eol icon='white-tree'></fs-icon-eol> <label>white-tree</label></li>
-    <li><fs-icon-eol icon='unknown-dot'></fs-icon-eol> <label>unknown-dot</label></li>
-    <li><fs-icon-eol icon='unknown'></fs-icon-eol> <label>unknown</label></li>
-    <li><fs-icon-eol icon='unknown-portrait'></fs-icon-eol> <label>unknown-portrait</label></li>
-    <li><fs-icon-eol icon='temple-in-progress'></fs-icon-eol> <label>temple-in-progress</label></li>
-    <li><fs-icon-eol icon='temple-needs-more-information'></fs-icon-eol> <label>temple-needs-more-information</label></li>
-    <li><fs-icon-eol icon='temple-request-ordinances'></fs-icon-eol> <label>temple-request-ordinances</label></li>
-    <li><fs-icon-eol icon="temple-permissions"></fs-icon-eol> <label>temple-permissions</label></li>
-    <li><fs-icon-eol icon='temple-duplicates'></fs-icon-eol> <label>temple-duplicates</label></li>
-    <li><fs-icon-eol icon='tools'></fs-icon-eol> <label>tools</label></li>
-    <li><fs-icon-eol icon='print'></fs-icon-eol> <label>print</label></li>
-    <li><fs-icon-eol icon='arrow-up'></fs-icon-eol> <label>arrow-up</label></li>
-    <li><fs-icon-eol icon='arrow-down'></fs-icon-eol> <label>arrow-down</label></li>
-    <li><fs-icon-eol icon='arrow-left'></fs-icon-eol> <label>arrow-left</label></li>
-  </ul>
+  <form>
+    <legend> Icon Size</legend>
+    <label><input type="radio" name="size" value="large" onclick="generateIconList()"> large</label>
+    <label><input type="radio" name="size" value="" checked="checked" onclick="generateIconList()"> medium</label>
+    <label><input type="radio" name="size" value="medium-small" onclick="generateIconList()"> medium-small</label>
+    <label><input type="radio" name="size" value="small" onclick="generateIconList()"> small</label>
+  </form>
 
-  <h1>Sizes (large)</h1>
-  <ul>
-    <li><fs-icon-eol icon='pedigree' size='large'></fs-icon-eol> <label>pedigree</label></li>
-    <li><fs-icon-eol icon='person' size='large'></fs-icon-eol> <label>person</label></li>
-    <li><fs-icon-eol icon='recents' size='large'></fs-icon-eol> <label>recents</label></li>
-    <li><fs-icon-eol icon='find' size='large'></fs-icon-eol> <label>find</label></li>
-    <li><fs-icon-eol icon='lists' size='large'></fs-icon-eol> <label>lists</label></li>
-    <li><fs-icon-eol icon='check' size='large'></fs-icon-eol> <label>check</label></li>
-    <li><fs-icon-eol icon='close' size='large'></fs-icon-eol> <label>close</label></li>
-    <li><fs-icon-eol icon='exclamation' size='large'></fs-icon-eol> <label>exclamation</label></li>
-    <li><fs-icon-eol icon='info' size='large'></fs-icon-eol> <label>info</label></li>
-    <li><fs-icon-eol icon='spinner' size='large'></fs-icon-eol> <label>spinner</label></li>
-    <li><span class='dark'><fs-icon-eol icon='spinner-light' size='large'></fs-icon-eol></span> <label>spinner-light</label></li>
-    <li><fs-icon-eol icon='warning' size='large'></fs-icon-eol> <label>warning</label></li>
-    <li><fs-icon-eol icon='female-dot' size='large'></fs-icon-eol> <label>female-dot</label></li>
-    <li><fs-icon-eol icon='female' size='large'></fs-icon-eol> <label>female</label></li>
-    <li><fs-icon-eol icon='female-portrait' size='large'></fs-icon-eol> <label>female-portrait</label></li>
-    <li><fs-icon-eol icon='gray-female' size='large'></fs-icon-eol> <label>gray-female</label></li>
-    <li><fs-icon-eol icon='male-dot' size='large'></fs-icon-eol> <label>male-dot</label></li>
-    <li><fs-icon-eol icon='male' size='large'></fs-icon-eol> <label>male</label></li>
-    <li><fs-icon-eol icon='male-portrait' size='large'></fs-icon-eol> <label>male-portrait</label></li>
-    <li><fs-icon-eol icon='gray-male' size='large'></fs-icon-eol> <label>gray-male</label></li>
-    <li><fs-icon-eol icon='white-male' size='large'></fs-icon-eol> <label>white-male</label></li>
-    <li><fs-icon-eol icon='white-tree' size='large'></fs-icon-eol> <label>white-tree</label></li>
-    <li><fs-icon-eol icon='unknown-dot' size='large'></fs-icon-eol> <label>unknown-dot</label></li>
-    <li><fs-icon-eol icon='unknown' size='large'></fs-icon-eol> <label>unknown</label></li>
-    <li><fs-icon-eol icon='unknown-portrait' size='large'></fs-icon-eol> <label>unknown-portrait</label></li>
-    <li><fs-icon-eol icon='temple-in-progress' size='large'></fs-icon-eol> <label>temple-in-progress</label></li>
-    <li><fs-icon-eol icon='temple-needs-more-information' size='large'></fs-icon-eol> <label>temple-needs-more-information</label></li>
-    <li><fs-icon-eol icon='temple-request-ordinances' size='large'></fs-icon-eol> <label>temple-request-ordinances</label></li>
-    <li><fs-icon-eol icon="temple-permissions" size='large'></fs-icon-eol> <label>temple-permissions</label></li>
-    <li><fs-icon-eol icon='temple-duplicates' size='large'></fs-icon-eol> <label>temple-duplicates</label></li>
-    <li><fs-icon-eol icon='tools' size='large'></fs-icon-eol> <label>tools</label></li>
-    <li><fs-icon-eol icon='print' size='large'></fs-icon-eol> <label>print</label></li>
-    <li><fs-icon-eol icon='arrow-up' size='large'></fs-icon-eol> <label>arrow-up</label></li>
-    <li><fs-icon-eol icon='arrow-down' size='large'></fs-icon-eol> <label>arrow-down</label></li>
-    <li><fs-icon-eol icon='arrow-left' size='large'></fs-icon-eol> <label>arrow-left</label></li>
-  </ul>
+  <ul class="icon-demo"></ul>
 
-  <h1>Sizes (medium-small)</h1>
-  <ul>
-    <li><fs-icon-eol icon='pedigree' size='medium-small'></fs-icon-eol> <label>pedigree</label></li>
-    <li><fs-icon-eol icon='person' size='medium-small'></fs-icon-eol> <label>person</label></li>
-    <li><fs-icon-eol icon='recents' size='medium-small'></fs-icon-eol> <label>recents</label></li>
-    <li><fs-icon-eol icon='find' size='medium-small'></fs-icon-eol> <label>find</label></li>
-    <li><fs-icon-eol icon='lists' size='medium-small'></fs-icon-eol> <label>lists</label></li>
-    <li><fs-icon-eol icon='check' size='medium-small'></fs-icon-eol> <label>check</label></li>
-    <li><fs-icon-eol icon='close' size='medium-small'></fs-icon-eol> <label>close</label></li>
-    <li><fs-icon-eol icon='exclamation' size='medium-small'></fs-icon-eol> <label>exclamation</label></li>
-    <li><fs-icon-eol icon='info' size='medium-small'></fs-icon-eol> <label>info</label></li>
-    <li><fs-icon-eol icon='spinner' size='medium-small'></fs-icon-eol> <label>spinner</label></li>
-    <li><span class='dark'><fs-icon-eol icon='spinner-light' size='medium-small'></fs-icon-eol></span> <label>spinner-light</label></li>
-    <li><fs-icon-eol icon='warning' size='medium-small'></fs-icon-eol> <label>warning</label></li>
-    <li><fs-icon-eol icon='female-dot' size='medium-small'></fs-icon-eol> <label>female-dot</label></li>
-    <li><fs-icon-eol icon='female' size='medium-small'></fs-icon-eol> <label>female</label></li>
-    <li><fs-icon-eol icon='female-portrait' size='medium-small'></fs-icon-eol> <label>female-portrait</label></li>
-    <li><fs-icon-eol icon='gray-female' size='medium-small'></fs-icon-eol> <label>gray-female</label></li>
-    <li><fs-icon-eol icon='male-dot' size='medium-small'></fs-icon-eol> <label>male-dot</label></li>
-    <li><fs-icon-eol icon='male' size='medium-small'></fs-icon-eol> <label>male</label></li>
-    <li><fs-icon-eol icon='male-portrait' size='medium-small'></fs-icon-eol> <label>male-portrait</label></li>
-    <li><fs-icon-eol icon='gray-male' size='medium-small'></fs-icon-eol> <label>gray-male</label></li>
-    <li><fs-icon-eol icon='white-male' size='medium-small'></fs-icon-eol> <label>white-male</label></li>
-    <li><fs-icon-eol icon='white-tree' size='medium-small'></fs-icon-eol> <label>white-tree</label></li>
-    <li><fs-icon-eol icon='unknown-dot' size='medium-small'></fs-icon-eol> <label>unknown-dot</label></li>
-    <li><fs-icon-eol icon='unknown' size='medium-small'></fs-icon-eol> <label>unknown</label></li>
-    <li><fs-icon-eol icon='unknown-portrait' size='medium-small'></fs-icon-eol> <label>unknown-portrait</label></li>
-    <li><fs-icon-eol icon='temple-in-progress' size='medium-small'></fs-icon-eol> <label>temple-in-progress</label></li>
-    <li><fs-icon-eol icon='temple-needs-more-information' size='medium-small'></fs-icon-eol> <label>temple-needs-more-information</label></li>
-    <li><fs-icon-eol icon="temple-permissions" size='medium-small'></fs-icon-eol> <label>temple-permissions</label></li>
-    <li><fs-icon-eol icon='temple-request-ordinances' size='medium-small'></fs-icon-eol> <label>temple-request-ordinances</label></li>
-    <li><fs-icon-eol icon='temple-duplicates' size='medium-small'></fs-icon-eol> <label>temple-duplicates</label></li>
-    <li><fs-icon-eol icon='tools' size='medium-small'></fs-icon-eol> <label>tools</label></li>
-    <li><fs-icon-eol icon='print' size='medium-small'></fs-icon-eol> <label>print</label></li>
-    <li><fs-icon-eol icon='arrow-up' size='medium-small'></fs-icon-eol> <label>arrow-up</label></li>
-    <li><fs-icon-eol icon='arrow-down' size='medium-small'></fs-icon-eol> <label>arrow-down</label></li>
-    <li><fs-icon-eol icon='arrow-left' size='medium-small'></fs-icon-eol> <label>arrow-left</label></li>
-  </ul>
+  <script>
+    var iconList = [];
 
-  <h1>Sizes (small)</h1>
-  <ul>
-    <li><fs-icon-eol icon='pedigree' size='small'></fs-icon-eol> <label>pedigree</label></li>
-    <li><fs-icon-eol icon='person' size='small'></fs-icon-eol> <label>person</label></li>
-    <li><fs-icon-eol icon='recents' size='small'></fs-icon-eol> <label>recents</label></li>
-    <li><fs-icon-eol icon='find' size='small'></fs-icon-eol> <label>find</label></li>
-    <li><fs-icon-eol icon='lists' size='small'></fs-icon-eol> <label>lists</label></li>
-    <li><fs-icon-eol icon='check' size='small'></fs-icon-eol> <label>check</label></li>
-    <li><fs-icon-eol icon='close' size='small'></fs-icon-eol> <label>close</label></li>
-    <li><fs-icon-eol icon='exclamation' size='small'></fs-icon-eol> <label>exclamation</label></li>
-    <li><fs-icon-eol icon='info' size='small'></fs-icon-eol> <label>info</label></li>
-    <li><fs-icon-eol icon='spinner' size='small'></fs-icon-eol> <label>spinner</label></li>
-    <li><span class='dark'><fs-icon-eol icon='spinner-light' size='small'></fs-icon-eol></span> <label>spinner-light</label></li>
-    <li><fs-icon-eol icon='warning' size='small'></fs-icon-eol> <label>warning</label></li>
-    <li><fs-icon-eol icon='female-dot' size='small'></fs-icon-eol> <label>female-dot</label></li>
-    <li><fs-icon-eol icon='female' size='small'></fs-icon-eol> <label>female</label></li>
-    <li><fs-icon-eol icon='female-portrait' size='small'></fs-icon-eol> <label>female-portrait</label></li>
-    <li><fs-icon-eol icon='gray-female' size='small'></fs-icon-eol> <label>gray-female</label></li>
-    <li><fs-icon-eol icon='male-dot' size='small'></fs-icon-eol> <label>male-dot</label></li>
-    <li><fs-icon-eol icon='male' size='small'></fs-icon-eol> <label>male</label></li>
-    <li><fs-icon-eol icon='male-portrait' size='small'></fs-icon-eol> <label>male-portrait</label></li>
-    <li><fs-icon-eol icon='gray-male' size='small'></fs-icon-eol> <label>gray-male</label></li>
-    <li><fs-icon-eol icon='white-male' size='small'></fs-icon-eol> <label>white-male</label></li>
-    <li><fs-icon-eol icon='white-tree' size='small'></fs-icon-eol> <label>white-tree</label></li>
-    <li><fs-icon-eol icon='unknown-dot' size='small'></fs-icon-eol> <label>unknown-dot</label></li>
-    <li><fs-icon-eol icon='unknown' size='small'></fs-icon-eol> <label>unknown</label></li>
-    <li><fs-icon-eol icon='unknown-portrait' size='small'></fs-icon-eol> <label>unknown-portrait</label></li>
-    <li><fs-icon-eol icon='temple-in-progress' size='small'></fs-icon-eol> <label>temple-in-progress</label></li>
-    <li><fs-icon-eol icon='temple-needs-more-information' size='small'></fs-icon-eol> <label>temple-needs-more-information</label></li>
-    <li><fs-icon-eol icon="temple-permissions" size='small'></fs-icon-eol> <label>temple-permissions</label></li>
-    <li><fs-icon-eol icon='temple-request-ordinances' size='small'></fs-icon-eol> <label>temple-request-ordinances</label></li>
-    <li><fs-icon-eol icon='temple-duplicates' size='small'></fs-icon-eol> <label>temple-duplicates</label></li>
-    <li><fs-icon-eol icon='tools' size='small'></fs-icon-eol> <label>tools</label></li>
-    <li><fs-icon-eol icon='print' size='small'></fs-icon-eol> <label>print</label></li>
-    <li><fs-icon-eol icon='arrow-up' size='small'></fs-icon-eol> <label>arrow-up</label></li>
-    <li><fs-icon-eol icon='arrow-down' size='small'></fs-icon-eol> <label>arrow-down</label></li>
-    <li><fs-icon-eol icon='arrow-left' size='small'></fs-icon-eol> <label>arrow-left</label></li>
-  </ul>
+    // dynamically parse fs-icon-eol.html dynamically for all
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', './../fs-icon-eol.html');
+    xhr.send(null);
+
+    xhr.onreadystatechange = function() {
+      var DONE = 4; // readyState 4 means the request is done.
+      var OK = 200; // status 200 is a successful return.
+      if (xhr.readyState === DONE) {
+        if (xhr.status === OK) {
+          iconStyleEntries = xhr.responseText.split(":host([icon=");
+          // parse out icon values
+          iconList = iconStyleEntries.map(function(currentValue, index) {
+            temp = currentValue.match(/(?:'|").+(?:'|")/g);
+            if (temp[0]) {
+              return temp[0].replace(/\'|\"/g, "");
+            } else {
+              return null;
+            }
+          });
+          iconList.shift();// remove leading garbage
+          iconList = iconList.sort();
+          generateIconList();
+        } else {
+          console.error('Could not load fs-icon-eol.html for parsing. Error: ' + xhr.status); // An error occurred during the request.
+        }
+      }
+    };
+
+    function generateIconList() {
+      var demoBlock = document.querySelector("[class='icon-demo']"), i, el, wrapperEl, textEl, size;
+      demoBlock.innerHTML = "";
+
+      // Loop through icon list to add all icons dynamically
+
+      // set the correct size
+      size = document.querySelector("input:checked").value;
+
+      for (j = 0; j < iconList.length; j++) {
+        el = document.createElement("fs-icon-eol");
+        el.setAttribute("size", size);
+        el.setAttribute("icon", iconList[j]);
+
+        // set a dark background for light icons
+        if (iconList[j].indexOf("white") !== -1 || iconList[j].indexOf("light") !== -1) {
+          wrapperEl = document.createElement("span");
+          wrapperEl.appendChild(el);
+          wrapperEl.classList.add("dark");
+          el = wrapperEl;
+        }
+
+        // add the sized icons
+        wrapperEl = document.createElement("li");
+        wrapperEl.appendChild(el);
+        textEl = document.createTextNode(iconList[j]);
+        demoBlock.appendChild(wrapperEl).appendChild(textEl);
+      }
+    }
+  </script>
 </body>
 </html>
