@@ -193,7 +193,6 @@ fs-person-eol:not([inline]) {
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        position: relative;
         @apply(--fs-person-portrait);
       }
 
@@ -215,10 +214,7 @@ fs-person-eol:not([inline]) {
       .fs-person-portrait__portrait-image {
         width: 100%;
         height: 100%;
-        /* Bug fix so portraits and broken images don't appear side-by-side with icon: */
-        position: absolute;
-        top: 0px; /* Required for ie11 */
-        left: 0px;
+        flex-shrink: 0;
         @apply(--fs-person-portrait-image);
       }
       a:visited {
