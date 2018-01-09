@@ -356,7 +356,7 @@ fs-person-eol:not([inline]) {
       <div class="fs-person-portrait" hidden='[[inline]]'>
         <div class='fs-person-portrait__container' hidden='[[!showPortrait]]'>
           <template is='dom-if' if='[[portraitUrl]]'>
-            <img class='fs-person-portrait__portrait-image' src$="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
+            <img alt="" class='fs-person-portrait__portrait-image' src$="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait>
           </template>
           <fs-icon-eol icon='[[_getGenderIcon(gender, coloredIcon)]]' class='fs-person-portrait__portrait-icon'></fs-icon-eol>
         </div>
