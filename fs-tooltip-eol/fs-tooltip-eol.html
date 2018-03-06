@@ -25,7 +25,7 @@ Example:
         background: #fff;
         border-radius: 4px;
         bottom: 100%;
-        box-shadow: 0px 0px 4px 0px rgba(0,0,0,0.35), 0px 3px 2px 0px rgba(0,0,0,0.18);
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35), 0 3px 2px 0 rgba(0, 0, 0, 0.18);
         clip: rect(0, 0, 0, 0);
         height: 1px;
         left: 50%;
@@ -39,7 +39,8 @@ Example:
         z-index: 99999;
         opacity: 0;
       }
-      .fs-tooltip__body:before {
+
+      .fs-tooltip__body::before {
         background: #fff;
         border-radius: 4px;
         bottom: 0;
@@ -47,14 +48,14 @@ Example:
         left: 0;
         position: absolute;
         right: 0;
-        right: 0;
         top: 0;
         z-index: -1;
       }
-      .fs-tooltip__body:after {
+
+      .fs-tooltip__body::after {
         background: #fff;
         bottom: -7px;
-        box-shadow: 1px 0px 4px 1px rgba(0,0,0,0.35), 0px 0px 2px 0px rgba(0,0,0,0.18);
+        box-shadow: 1px 0 4px 1px rgba(0, 0, 0, 0.35), 0 0 2px 0 rgba(0, 0, 0, 0.18);
         content: '';
         height: 15px;
         left: 50%;
@@ -64,45 +65,6 @@ Example:
         width: 15px;
         z-index: -2;
       }
-      :host([direction=below]) .fs-tooltip__body {
-        bottom: auto;
-        top: 100%;
-        -webkit-transform: translate(-50%, 15px);
-        transform: translate(-50%, 15px);
-      }
-      :host([direction=below]) .fs-tooltip__body:after {
-        top: -7px;
-      }
-      :host([direction=left]) .fs-tooltip__body,
-      :host([direction=right]) .fs-tooltip__body {
-        left: auto;
-        bottom: auto;
-        top: 50%;
-      }
-      :host([direction=left]) .fs-tooltip__body:after,
-      :host([direction=right]) .fs-tooltip__body:after {
-        top: 50%;
-        bottom: auto;
-        left: auto;
-        -webkit-transform: translateY(-50%) rotate(45deg);
-        transform: translateY(-50%) rotate(45deg);
-      }
-      :host([direction=left]) .fs-tooltip__body {
-        right: 100%;
-        -webkit-transform: translate(-20px, -50%);
-        transform: translate(-20px, -50%);
-      }
-      :host([direction=left]) .fs-tooltip__body:after {
-        right: -7px;
-      }
-      :host([direction=right]) .fs-tooltip__body {
-        left: 100%;
-        -webkit-transform: translate(15px, -50%);
-        transform: translate(15px, -50%);
-      }
-      :host([direction=right]) .fs-tooltip__body:after {
-        left: -7px;
-      }
 
       :host(:hover) .fs-tooltip__body {
         width: 200px;
@@ -111,8 +73,55 @@ Example:
         overflow: visible;
         opacity: 1;
       }
+
+      :host([direction=below]) .fs-tooltip__body {
+        bottom: auto;
+        top: 100%;
+        -webkit-transform: translate(-50%, 15px);
+        transform: translate(-50%, 15px);
+      }
+
+      :host([direction=below]) .fs-tooltip__body::after {
+        top: -7px;
+      }
+
+      :host([direction=left]) .fs-tooltip__body,
+      :host([direction=right]) .fs-tooltip__body {
+        left: auto;
+        bottom: auto;
+        top: 50%;
+      }
+
+      :host([direction=left]) .fs-tooltip__body::after,
+      :host([direction=right]) .fs-tooltip__body::after {
+        top: 50%;
+        bottom: auto;
+        left: auto;
+        -webkit-transform: translateY(-50%) rotate(45deg);
+        transform: translateY(-50%) rotate(45deg);
+      }
+
+      :host([direction=left]) .fs-tooltip__body {
+        right: 100%;
+        -webkit-transform: translate(-20px, -50%);
+        transform: translate(-20px, -50%);
+      }
+
+      :host([direction=left]) .fs-tooltip__body::after {
+        right: -7px;
+      }
+
+      :host([direction=right]) .fs-tooltip__body {
+        left: 100%;
+        -webkit-transform: translate(15px, -50%);
+        transform: translate(15px, -50%);
+      }
+
+      :host([direction=right]) .fs-tooltip__body::after {
+        left: -7px;
+      }
     </style>
-    
+
     <span role="tooltip" class='fs-tooltip__body'>
       <slot name="tooltip-body"></slot>
     </span>
@@ -138,7 +147,7 @@ Example:
       /**
        * The string that will be shown in the tooltip, if left
        * null the tooltip will be hidden
-       * 
+       *
        * @type {String}
        */
       text: {
