@@ -56,17 +56,17 @@
       ],
       "thresholds": {
         "global": {
-          "statements": 0,
-          "branches": 0,
-          "functions": 0,
-          "lines": 0
+          "statements": 85,
+          "branches": 90,
+          "functions": 80,
+          "lines": 85
         }
       }
     },
     "size-limit": {
       "path": "styles-wc.html",
       "limitNoPolymer": "155 KB",
-      "limitNoExternals": "10 KB"
+      "limitNoExternals": "1 KB"
     }
   }
 }
