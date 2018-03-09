@@ -24,52 +24,65 @@ Example:
       :host {
         display: block;
       }
+
       .wrap {
         border-radius: 4px;
         margin: -6px;
         padding: 6px;
         position: relative;
-      /*------------------------------------*
+
+        /* ------------------------------------*
           $VALID_STATE
-        \*------------------------------------*/
-      /*------------------------------------*
+        \*------------------------------------ */
+
+        /* ------------------------------------*
           $INVALID_STATE
-        \*------------------------------------*/
+        \*------------------------------------ */
       }
+
       ::slotted(.fs-field-validation) input {
         background-repeat: no-repeat;
         background-position: 98% center; /* [1] */
         background-position: right 10px center;
       }
+
       .message {
         display: none;
         margin: 10px 10px 4px 10px;
       }
+
       :host([status='valid']) .wrap {
         background: #f1f6d3;
         border: 1px solid #bfd730;
       }
+
       :host([status='valid']) ::slotted(input) {
         background-color: #fff;
         border-color: #bfd730;
       }
+
       :host([status='valid']) ::slotted(input:focus) {
         border-color: #356635;
       }
+
       :host([status='valid']) .message {
         color: #44650f;
         display: block;
       }
+
       :host([status='invalid']) .wrap {
         background: #fdeeee;
         border: 1px solid #f8b0ab;
       }
+
       :host([status='invalid']) ::slotted(input) {
         border-color: #f8b0ab;
       }
+
       :host([status='invalid']) ::slotted(input:focus) {
         border-color: #953b39;
       }
+
       :host([status='invalid']) .message {
         color: #a71e1a;
         display: block;
@@ -103,10 +116,10 @@ Example:
           reflectToAttribute: true
         }
       },
-      _isValid: function(status) {
+      _isValid: function (status) {
         return status === 'valid';
       },
-      _isInvalid: function(status) {
+      _isInvalid: function (status) {
         return status === 'invalid';
       }
     });

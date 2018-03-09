@@ -62,8 +62,8 @@
     </test-fixture>
 
     <script>
-      suite('<fs-alert-message-eol>', function() {
-
+      /* globals suite, setup, test, assert */
+      suite('<fs-alert-message-eol>', function () {
         var defaultAlert;
         var errorAlert;
         var infoAlert;
@@ -71,7 +71,7 @@
         var defaultAlertWithTitle;
         var dismissableDefaultAlertWithTitle;
 
-        setup(function() {
+        setup(function () {
           defaultAlert = fixture('default-alert');
           errorAlert = fixture('error-alert');
           infoAlert = fixture('info-alert');
@@ -80,30 +80,29 @@
           dismissableDefaultAlertWithTitle = fixture('dismissable-default-alert-with-title');
         });
 
-        test('default alertType is an empty string', function() {
+        test('default alertType is an empty string', function () {
           assert.equal(defaultAlert.alertType, '');
         });
 
-        test('error alertType is \'error\'', function() {
+        test('error alertType is \'error\'', function () {
           assert.equal(errorAlert.alertType, 'error');
         });
 
-        test('info alertType is \'error\'', function() {
+        test('info alertType is \'error\'', function () {
           assert.equal(infoAlert.alertType, 'info');
         });
 
-        test('warning alertType is \'error\'', function() {
+        test('warning alertType is \'error\'', function () {
           assert.equal(warningAlert.alertType, 'warning');
         });
 
-        test('setting alert-title title shows a title', function() {
+        test('setting alert-title title shows a title', function () {
           assert.equal(defaultAlertWithTitle.alertTitle, 'a title');
         });
 
-        test('setting dismissable shows a dismiss icon', function() {
+        test('setting dismissable shows a dismiss icon', function () {
           assert.equal(dismissableDefaultAlertWithTitle.dismissable, true);
         });
-
       });
     </script>
 
