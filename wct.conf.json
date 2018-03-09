@@ -65,8 +65,8 @@
     },
     "size-limit": {
       "path": "styles-wc.html",
-      "limitNoPolymer": "155 KB",
-      "limitNoExternals": "1 KB"
+      "limitNoPolymer": "80 KB",
+      "limitNoExternals": "40 KB"
     }
   }
 }
