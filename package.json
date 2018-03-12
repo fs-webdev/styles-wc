@@ -1,0 +1,102 @@
+{
+  "name": "styles-wc",
+  "version": "4.1.12",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fs-webdev/styles-wc.git"
+  },
+  "author": {
+    "name": "FamilySearch",
+    "url": "https://familysearch.org/"
+  },
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/fs-webdev/styles-wc/issues"
+  },
+  "homepage": "https://github.com/fs-webdev/styles-wc#readme",
+  "devDependencies": {
+    "eslint-plugin-html": "^4.0.2",
+    "husky": "^0.14.3",
+    "semistandard": "^12.0.0",
+    "snazzy": "^7.0.0",
+    "stylelint": "^8.4.0",
+    "stylelint-config-standard": "^18.0.0"
+  },
+  "scripts": {
+    "precommit": "semistandard --verbose '**/*.html' '**/*.js' --fix | snazzy && stylelint '**/*.html' '**/*.css' --fix && git add .",
+    "pretest": "semistandard --verbose '**/*.html' '**/*.js' --fix | snazzy && stylelint '**/*.html' '**/*.css' --fix",
+    "standard": "semistandard --verbose '**/*.html' '**/*.js' | snazzy && stylelint '**/*.html' '**/*.css'",
+    "standard-fix": "semistandard --verbose '**/*.html' '**/*.js' --fix | snazzy && stylelint '**/*.html' '**/*.css' --fix",
+    "stashandappend": "touch .gitcommithooktempfile && git stash --include-untracked --quiet && git add . && git stash pop --quiet && rm .gitcommithooktempfile",
+    "test": "wct --skip-plugin sauce"
+  },
+  "babel": {
+    "presets": [
+      "env"
+    ]
+  },
+  "semistandard": {
+    "about": "https://github.com/Flet/semistandard#javascript-semi-standard-style",
+    "globals": [
+      "__actions__",
+      "__services__",
+      "__state__",
+      "after",
+      "afterEach",
+      "axe",
+      "before",
+      "beforeEach",
+      "customElements",
+      "CustomEvent",
+      "describe",
+      "Event",
+      "expect",
+      "fixture",
+      "FS",
+      "FsBehaviors",
+      "Headers",
+      "HTMLElement",
+      "indexedDB",
+      "it",
+      "location",
+      "Polymer",
+      "ResettablePropertiesBehavior",
+      "sessionStorage",
+      "sinon",
+      "WCI18n"
+    ],
+    "ignore": [
+      "**/*min.*",
+      "**/*polyfill*",
+      "demo/",
+      "/reports/",
+      "/test/",
+      "/vendor/",
+      "analysis.json",
+      "gulpfile.js"
+    ],
+    "plugin": "html"
+  },
+  "stylelint": {
+    "about": "https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md#possible-errors",
+    "extends": "stylelint-config-standard",
+    "rules": {
+      "indentation": 2,
+      "media-feature-colon-space-after": null,
+      "selector-type-no-unknown": null,
+      "unit-whitelist": [
+        "%",
+        "deg",
+        "em",
+        "px",
+        "rem",
+        "s",
+        "vh",
+        "vw"
+      ]
+    }
+  }
+}

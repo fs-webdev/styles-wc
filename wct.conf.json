@@ -6,17 +6,9 @@
     "sauce": {
       "browsers": [
         {
-          "browserName":  "internet explorer",
-          "platform":     "Windows 8.1",
-          "version":      "11"
-        },
-        {
-          "browserName":  "microsoftedge",
-          "platform":     "Windows 10"
-        },
-        {
           "browserName":  "safari",
-          "platform":     "OS X 10.12"
+          "platform":     "OS X 10.12",
+          "version":      "11"
         },
         {
           "browserName":  "chrome",
@@ -24,7 +16,24 @@
         },
         {
           "browserName":  "firefox",
-          "platform":     "Linux"
+          "platform":     "OS X 10.12"
+        },
+        {
+          "browserName":  "chrome",
+          "platform":     "linux"
+        },
+        {
+          "browserName":  "microsoftedge",
+          "platform":     "Windows 10",
+          "version":      ""
+        },
+        {
+          "browserName":  "chrome",
+          "platform":     "Windows 10"
+        },
+        {
+          "browserName":  "firefox",
+          "platform":     "Windows 10"
         }
       ]
     },
@@ -37,6 +46,7 @@
         "**/fs-*.js"
       ],
       "exclude": [
+        "**/*polyfill*",
         "**/bin/*",
         "**/bower_components/**/*",
         "**/demo/*",
@@ -46,15 +56,17 @@
       ],
       "thresholds": {
         "global": {
-          "statements": 0,
-          "branches": 0,
-          "functions": 0
+          "statements": 85,
+          "branches": 90,
+          "functions": 80,
+          "lines": 85
         }
       }
     },
     "size-limit": {
       "path": "styles-wc.html",
-      "limit": "155 KB"
+      "limitNoPolymer": "80 KB",
+      "limitNoExternals": "40 KB"
     }
   }
 }

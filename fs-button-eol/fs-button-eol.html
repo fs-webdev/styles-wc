@@ -18,6 +18,7 @@ Example:
       :host {
         display: inline-block;
       }
+
       button {
         -webkit-appearance: none;
         -webkit-touch-callout: none;
@@ -43,25 +44,21 @@ Example:
         vertical-align: middle;
         white-space: nowrap;
       }
+
+      button:active {
+        background-color: #e8e6e0;
+      }
+
       button:hover {
         background: #fbfaf9;
         color: #333331;
         text-decoration: none;
       }
-      button:after {
+
+      button::after {
         content: '';
         opacity: 0;
         transition: opacity 0.3s;
-      }
-
-      button:disabled,
-      button:disabled:hover {
-        background-color: #f5f4f1;
-        color: rgba(51,51,49,0.3);
-        text-decoration: none;
-      }
-      button:active {
-        background-color: #e8e6e0;
       }
 
       button:focus,
@@ -70,55 +67,81 @@ Example:
         text-decoration: none;
         outline-offset: 2px; /* [4] */
       }
+
       button[option=recommended] {
         background-color: #3073dd;
         border: 1px solid #246bdb;
         color: #fff;
       }
+
+      button:disabled {
+        cursor: not-allowed;
+        background-color: #f5f4f1;
+        border: 1px solid #cbc6b9;
+        color: rgba(51, 51, 49, 0.3);
+      }
+
+      button:disabled,
+      button:disabled:hover {
+        background-color: #f5f4f1;
+        color: rgba(51, 51, 49, 0.3);
+        text-decoration: none;
+      }
+
       button[option=recommended]:hover {
-      /* [3] */
+        /* [3] */
         background: #3882f8;
         color: #fff;
       }
-      button[option=recommended]:active{
+
+      button[option=recommended]:active {
         background-color: #1f61c9;
       }
+
       button[option=recommended]:focus,
-      button[option=recommended]:visited{
+      button[option=recommended]:visited {
         color: #fff; /* [2] */
       }
+
       button[option=destructive] {
         background-color: #cc3227;
         color: #fff;
       }
+
       button[option=destructive]:hover {
-      /* [3] */
+        /* [3] */
         background: #e64034;
         color: #fff;
       }
+
       button[option=destructive]:active {
         background-color: #af180d;
       }
+
       button[option=destructive]:focus,
       button[option=destructive]:visited {
         color: #fff; /* [2] */
       }
+
       button[option=minor] {
         background: transparent;
         color: #0060d7;
         border-color: transparent;
       }
+
       button[option=minor]:hover {
-      /* [3] */
+        /* [3] */
         background: transparent;
         color: #0060d7;
         text-decoration: underline;
       }
+
       button[option=minor]:active {
         background: transparent;
         color: #0060d7;
         text-decoration: underline;
       }
+
       button[option=minor]:focus,
       button[option=minor]:visited {
         color: #0060d7; /* [2] */
@@ -143,10 +166,12 @@ Example:
         user-select: none;
         width: 20px;
         width: 1.25rem;
-      /* [1] */
+
+        /* [1] */
       }
-      button[option=close]:before,
-      button[option=close]:after {
+
+      button[option=close]::before,
+      button[option=close]::after {
         background-color: #a8a8a8;
         border-radius: 4px;
         content: '';
@@ -156,29 +181,33 @@ Example:
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
-        transition:none;
+        transition: none;
         width: 0.75rem;
         width: 12px;
         -webkit-transform: translateY(-50%);
       }
-      button[option=close]:before {
+
+      button[option=close]::before {
         -webkit-transform: translate(-50%, -50%) rotate(45deg);
         transform: translate(-50%, -50%) rotate(45deg);
       }
-      button[option=close]:after {
+
+      button[option=close]::after {
         -webkit-transform: translate(-50%, -50%) rotate(-45deg);
         transform: translate(-50%, -50%) rotate(-45deg);
       }
-      button[option=close]:hover:before,
-      button[option=close]:focus:before,
-      button[option=close]:hover:after,
-      button[option=close]:focus:after {
+
+      button[option=close]:hover::before,
+      button[option=close]:focus::before,
+      button[option=close]:hover::after,
+      button[option=close]:focus::after {
         background-color: #333331;
         opacity: 1;
         transition: none;
       }
-      button[option=close]:active:before,
-      button[option=close]:active:after {
+
+      button[option=close]:active::before,
+      button[option=close]:active::after {
         background-color: #6f6f6f;
       }
 
@@ -187,15 +216,17 @@ Example:
         padding: 16px 20px !important;
         padding: 1rem 1.25rem !important;
       }
+
       button[size=small] {
         padding: 6px 20px !important;
         padding: 0.375rem 1.25rem !important;
       }
+
       button[loading] {
         padding-right: 47px !important;
       }
 
-      button[loading]:after {
+      button[loading]::after {
         background-size: contain;
         height: 20px;
         margin-top: -2px;
@@ -205,7 +236,6 @@ Example:
         width: 20px;
       }
 
-      button:disabled,
       button[option=recommended]:disabled,
       button[option=destructive]:disabled,
       button[option=recommended]:disabled:hover,
@@ -213,33 +243,8 @@ Example:
         cursor: not-allowed;
         background-color: #f5f4f1;
         border: 1px solid #cbc6b9;
-        color: rgba(51,51,49,0.3);
+        color: rgba(51, 51, 49, 0.3);
       }
-
-      button[loading] .loading-icon {
-        opacity: 1;
-      }
-
-      /* Resets children elements to not include any inherited styles from fs-button-eol */
-      .loading-icon, template {
-
-        /* IE does not support initial */
-        background-color: inherit;
-        border: none;
-        padding: 0;
-
-        background-color: initial;
-        border: initial;
-        padding:initial;
-        text-decoration: initial;
-      }
-
-      .loading-icon:hover, template:hover, fs-button-eol:hover {
-        background-color: initial;
-        color: initial;
-        padding: initial;
-      }
-      /* Ends reset */
 
       .loading-icon {
         background-size: contain;
@@ -249,6 +254,31 @@ Example:
         position: absolute;
         right: 15px;
         width: 20px;
+      }
+
+      /* Resets children elements to not include any inherited styles from fs-button-eol */
+      .loading-icon,
+      template {
+        /* IE does not support initial */
+        background-color: inherit;
+        background-color: initial;
+        border: initial;
+        padding: initial;
+        text-decoration: initial;
+      }
+
+      .loading-icon:hover,
+      template:hover,
+      fs-button-eol:hover {
+        background-color: initial;
+        color: initial;
+        padding: initial;
+      }
+
+      /* Ends reset */
+
+      button[loading] .loading-icon {
+        opacity: 1;
       }
 
       /* hack for polymer 1 shady dom with .fs-button-eol styles in style guide */
@@ -327,10 +357,10 @@ Example:
        * Computes the spinner that needs to be used for the button
        * @param  {String} option
        */
-      _spinnerType: function(option, disabled) {
+      _spinnerType: function (option, disabled) {
         var light = (option === 'recommended' || option === 'destructive');
         if (disabled || !light) return 'spinner';
-        return 'spinner-light'
+        return 'spinner-light';
       }
     });
   </script>
