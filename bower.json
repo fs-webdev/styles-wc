@@ -1,6 +1,6 @@
 {
-  "name": "styles-wc",
-  "version": "4.1.12",
+  "name": "styles-wc-do-not-use",
+  "version": "4.1.13",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -21,7 +21,8 @@
   "dependencies": {
     "oak-i18n-behavior": "fs-webdev/oak-i18n-behavior#^1.3.1",
     "polymer": "polymer/polymer#1 - 2",
-    "wc-i18n": "jshcrowthe/wc-i18n#^2.2.0"
+    "wc-i18n": "jshcrowthe/wc-i18n#^2.2.0",
+    "fs-dialog": "fs-webdev/fs-dialog#^4.0.4"
   },
   "devDependencies": {
     "es6-promise": "stefanpenner/es6-promise#^4.1.1",

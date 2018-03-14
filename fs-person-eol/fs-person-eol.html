@@ -2,6 +2,7 @@
 <link rel="import" href="../../wc-i18n/wc-i18n.html">
 <link rel="import" href="../../oak-i18n-behavior/oak-i18n-behavior.html">
 <link rel="import" href="../fs-icon-eol/fs-icon-eol.html">
+<link rel="import" href="../../fs-dialog/fs-anchored-dialog.html">
 
 <!--
 The styleguide person renderer
@@ -184,7 +185,7 @@ fs-person-eol:not([inline]) {
       }
 
       /* This is a CSS hack to allow for easy copying of the PID */
-      #_pidInput {
+      #pid-input {
         opacity: 0;
         position: absolute;
         width: 40px; /* Fix for OFT-69102 - copy pid not working for person-card or tree. */
@@ -293,35 +294,9 @@ fs-person-eol:not([inline]) {
 
       /* The actual popup (appears on top) */
       .popup-text {
-        background-color: #fff;
-        border-radius: 6px;
-        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         color: #448ef7;
-        display: none;
         font-family: Verdana, sans-serif;
         font-size: 0.875rem;
-        line-height: 1.625rem;
-        padding: 0 5px;
-        position: absolute;
-        text-align: center;
-        top: 0;
-        white-space: nowrap;
-        z-index: 1;
-      }
-
-      /* Popup arrow */
-      .popup-text::after {
-        border-color: transparent transparent #fff #fff;
-        border-style: solid;
-        border-width: 2px;
-        box-shadow: -2px 2px 4px 0 rgba(0, 0, 0, 0.16);
-        content: "";
-        left: 42px;
-        margin-left: -5px;
-        position: absolute;
-        top: 100%;
-        transform: rotate(-45deg);
-        transform-origin: 0 0;
       }
 
       span.hover-pid {
@@ -332,13 +307,13 @@ fs-person-eol:not([inline]) {
         text-decoration: underline;
       }
 
-      .copy-popup-text:hover {
+      .popup-text:hover {
         cursor: pointer;
         text-decoration: underline;
       }
 
       .black-text,
-      .black-text .copy-popup-text:hover {
+      .black-text .popup-text:hover {
         color: black;
         text-decoration: none;
       }
@@ -377,6 +352,24 @@ fs-person-eol:not([inline]) {
       }
 
       /* END NIGHTFALL STYLES */
+
+      fs-anchored-dialog#copy-popup-dialog .fs-dialog__body {
+        padding: 0px 5px;
+        border-radius: 6px;
+      }
+
+      fs-anchored-dialog#copy-popup-dialog[opened]:not([no-transition]) {
+        margin-top:10px;
+      }
+
+      fs-anchored-dialog .fs-dialog-pointer {
+        top: 12px;
+      }
+
+      button#copy-text {
+        padding: 0px;
+        border: none;
+      }
     </style>
     <div class$='fs-person__container locale-[[language]] [[colorScheme]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -406,13 +399,15 @@ fs-person-eol:not([inline]) {
             <span data-test-person-lifespan class="fs-person-ls-container">[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
-              <span class="hover-pid popup" on-click="_showCopyID" data-test-person-pid>
+              <span class="hover-pid popup" on-tap="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
               </span>
-              <span class="popup-text" on-click='_copyPid'>
-                <span class="copy-popup-text">[[i18n("COPY_TO_CLIPBOARD")]]</span>
-              </span>
-              <input id='_pidInput' type="text" value$='[[pid]]' aria-hidden="true" readonly tabindex="-1">
+              <fs-anchored-dialog id="copy-popup-dialog" forced-pointer-direction="down" no-close-button>
+                <div class="fs-dialog__body">
+                  <button option="minor" class="fs-button fs-button--minor popup-text" on-tap="_copyPid" id="copy-text" aria-haspopup="true">[[i18n("COPY_TO_CLIPBOARD")]]</button>
+                </div>
+              </fs-anchored-dialog>
+              <input id='pid-input' type="text" value$='[[pid]]' aria-hidden="true" readonly tabindex="-1">
             </div>
           </div>
         </div>
@@ -619,7 +614,15 @@ fs-person-eol:not([inline]) {
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
-        var copyPopup = this._querySelector('.popup-text');
+
+        this.$['copy-popup-dialog'].open({"focusBackElement": e.target,"attachToElement": e.target});
+      },
+      _copyPid: function (e) {
+        var that = this;
+        e.preventDefault();
+        // Stop any other events from firing (like opening the person card or person page)
+        e.stopImmediatePropagation();
+
         var sel;
         var range;
         var el = this._querySelector('.pid-to-be-copied');
@@ -630,32 +633,20 @@ fs-person-eol:not([inline]) {
           sel.removeAllRanges(); // remove all ranges from selection
           sel.addRange(range);// add Range to a Selection.
         }
-        copyPopup.classList.toggle('show');
-        copyPopup.style.position = 'absolute';
-        copyPopup.style.left = e.target.offsetLeft - 38 + 'px';
-        copyPopup.style.top = e.target.offsetTop - 22 + 'px';
-        setTimeout(function () {
-          copyPopup.classList.toggle('show', false);
-        }, 3000);
-      },
-      _copyPid: function (e) {
-        var that = this;
-        e.preventDefault();
-        // Stop any other events from firing (like opening the person card or person page)
-        e.stopImmediatePropagation();
-        this.$._pidInput.select();
         document.execCommand('copy');
         window.getSelection().removeAllRanges();
-        var copyPopup = this._querySelector('.popup-text');
-        copyPopup.querySelector('.copy-popup-text').innerHTML = that.i18n('COPY_TO_CLIPBOARD_COMPLETE');
-        copyPopup.classList.toggle('black-text');
+
+        var copyPopupDialog = this.$['copy-popup-dialog'];
+        var copyText = this.$['copy-text'];
+        copyText.innerHTML = that.i18n('COPY_TO_CLIPBOARD_COMPLETE');
+        copyText.classList.toggle('black-text');
         setTimeout(function () {
-          copyPopup.classList.toggle('show', false);
-          copyPopup.classList.toggle('black-text', false);
-        }, 3000);
+          copyPopupDialog.close();
+        }, 2000);
         setTimeout(function () {
-          copyPopup.querySelector('.copy-popup-text').innerHTML = that.i18n('COPY_TO_CLIPBOARD');
-        }, 3000);
+          copyText.innerHTML = that.i18n('COPY_TO_CLIPBOARD');
+          copyText.classList.toggle('black-text', false);
+        }, 2200);
       },
       _showPid: function (pid, hidePid) {
         return (pid && !hidePid);
