@@ -41,9 +41,7 @@
       "dir": "./reports/coverage",
       "reporters": ["text", "text-summary", "lcov"],
       "include": [
-        "**/styles-wc.html",
-        "**/fs-*.html",
-        "**/fs-*.js"
+        "**/styles-wc/**/*.*"
       ],
       "exclude": [
         "**/*polyfill*",
