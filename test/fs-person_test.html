@@ -186,16 +186,6 @@
           it('should have nothing selected starting off', function () {
             expect(window.getSelection().toString()).to.equal('');
           });
-          it('should have added class show and remove it after 1 second', function(done){
-            fsPersonDefault._showCopyID(mockEvent);
-            expect(preventDefaultStub.callCount, "_showPid did not call preventDefault only once").to.equal(1);
-            expect(stopImmediatePropagationStub.callCount, "_showPid did not call stopImmediatePropagation only once").to.equal(1);
-            expect(fsPersonDefault._querySelector(".popup-text").classList.contains("show")).to.be.true;
-            setTimeout(function(){
-              expect(fsPersonDefault._querySelector(".popup-text").classList.contains("show")).to.be.false;
-            }, 1000);
-            done();
-          });
         });
 
         describe('_copyPid', function() {
