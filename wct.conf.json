@@ -41,9 +41,7 @@
       "dir": "./reports/coverage",
       "reporters": ["text", "text-summary", "lcov"],
       "include": [
-        "**/styles-wc.html",
-        "**/fs-*.html",
-        "**/fs-*.js"
+        "**/styles-wc/**/*.*"
       ],
       "exclude": [
         "**/*polyfill*",
@@ -65,7 +63,7 @@
     },
     "size-limit": {
       "path": "styles-wc.html",
-      "limitNoPolymer": "80 KB",
+      "limitNoPolymer": "100 KB",
       "limitNoExternals": "40 KB"
     }
   }
