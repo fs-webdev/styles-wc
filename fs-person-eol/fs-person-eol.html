@@ -299,11 +299,11 @@ fs-person-eol:not([inline]) {
         font-size: 0.875rem;
       }
 
-      span.hover-pid {
+      span.pid-container-span {
         cursor: pointer;
       }
 
-      span.hover-pid:hover {
+      span.pid-container-span:hover {
         text-decoration: underline;
       }
 
@@ -318,8 +318,22 @@ fs-person-eol:not([inline]) {
         text-decoration: none;
       }
 
-      .show {
-        display: block;
+      fs-anchored-dialog#copy-popup-dialog .fs-dialog__body {
+        padding: 5px;
+        border-radius: 6px;
+      }
+
+      fs-anchored-dialog#copy-popup-dialog[opened]:not([no-transition]) {
+        margin-top: 1px;
+      }
+
+      fs-anchored-dialog .fs-dialog-pointer {
+        top: 15px;
+      }
+
+      button#copy-text {
+        padding: 0;
+        border: none;
       }
 
       .fs-person-details__container .fs-person-ls-container {
@@ -352,24 +366,6 @@ fs-person-eol:not([inline]) {
       }
 
       /* END NIGHTFALL STYLES */
-
-      fs-anchored-dialog#copy-popup-dialog .fs-dialog__body {
-        padding: 5px;
-        border-radius: 6px;
-      }
-
-      fs-anchored-dialog#copy-popup-dialog[opened]:not([no-transition]) {
-        margin-top: 1px;
-      }
-
-      fs-anchored-dialog .fs-dialog-pointer {
-        top: 15px;
-      }
-
-      button#copy-text {
-        padding: 0;
-        border: none;
-      }
     </style>
     <div class$='fs-person__container locale-[[language]] [[colorScheme]]' data-test-person='[[pid]]'>
       <div class="fs-person-portrait" hidden='[[inline]]'>
@@ -399,12 +395,12 @@ fs-person-eol:not([inline]) {
             <span data-test-person-lifespan class="fs-person-ls-container">[[lifespan]]</span>
             <div hidden$='[[!_showPid(pid, hidePid)]]'>
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
-              <span class="hover-pid popup" on-tap="_showCopyID" data-test-person-pid>
+              <span class="pid-container-span popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
               </span>
-              <fs-anchored-dialog id="copy-popup-dialog" forced-pointer-direction="down" no-close-button>
+              <fs-anchored-dialog id="copy-popup-dialog" forced-pointer-direction="down" no-close-button no-transition no-fullscreen-mobile>
                 <div class="fs-dialog__body">
-                  <button option="minor" class="fs-button fs-button--minor popup-text" on-tap="_copyPid" id="copy-text" aria-haspopup="true">[[i18n("COPY_TO_CLIPBOARD")]]</button>
+                  <button option="minor" class="fs-button fs-button--minor popup-text" on-click="_copyPid" id="copy-text" aria-haspopup="true">[[i18n("COPY_TO_CLIPBOARD")]]</button>
                 </div>
               </fs-anchored-dialog>
               <input id='pid-input' type="text" value$='[[pid]]' aria-hidden="true" readonly tabindex="-1">
@@ -618,7 +614,6 @@ fs-person-eol:not([inline]) {
         this.$['copy-popup-dialog'].open({'focusBackElement': e.target, 'attachToElement': e.target});
       },
       _copyPid: function (e) {
-        var that = this;
         e.preventDefault();
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
@@ -638,13 +633,13 @@ fs-person-eol:not([inline]) {
 
         var copyPopupDialog = this.$['copy-popup-dialog'];
         var copyText = this.$['copy-text'];
-        copyText.innerHTML = that.i18n('COPY_TO_CLIPBOARD_COMPLETE');
+        copyText.innerHTML = this.i18n('COPY_TO_CLIPBOARD_COMPLETE');
         copyText.classList.toggle('black-text');
-        setTimeout(function () {
+        setTimeout(() => {
           copyPopupDialog.close();
         }, 2000);
-        setTimeout(function () {
-          copyText.innerHTML = that.i18n('COPY_TO_CLIPBOARD');
+        setTimeout(() => {
+          copyText.innerHTML = this.i18n('COPY_TO_CLIPBOARD');
           copyText.classList.toggle('black-text', false);
         }, 2200);
       },
