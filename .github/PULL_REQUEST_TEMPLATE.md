@@ -2,7 +2,7 @@ A few sentences describing the overall goals of the pull request's commits. Refe
 
 > If applied, this commit will **_your present-tense subject line here_**.
 
-Review: [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
+Review: [CONTRIBUTING.md](../tree/master/.github/CONTRIBUTING.md)
 
 ## Changes
 - Summarize
@@ -13,4 +13,4 @@ Review: [CONTRIBUTING.md](/.github/CONTRIBUTING.md)
 - [ ] Tests
 - [ ] Update demo
 - [ ] Update documentation & README
-- [ ] Increment bower.json version
+- [ ] Increment version in bower.json & package.json.

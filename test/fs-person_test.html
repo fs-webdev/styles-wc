@@ -180,7 +180,7 @@
             preventDefaultStub.restore();
             stopImmediatePropagationStub.restore();
 
-            delete mockEvent;
+            mockEvent = undefined;
           });
 
           it('should have nothing selected starting off', function () {
@@ -213,7 +213,7 @@
             stopImmediatePropagationStub.restore();
             execCommandSpy.restore();
 
-            delete mockEvent;
+            mockEvent = undefined;
           });
 
           it('should call e.preventDefault()', function () {
