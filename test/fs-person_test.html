@@ -297,6 +297,7 @@ describe('<fs-person-eol>', function() {
     var gender;
     var orientation;
     var result;
+    var hideGender;
 
     describe('inline = true', function() {
       beforeEach(function() {
@@ -316,6 +317,13 @@ describe('<fs-person-eol>', function() {
     });
 
     describe('inline = false', function() {
+      var inline;
+      var dotIcon;
+      var showPortrait;
+      var gender;
+      var hideGender;
+      var orientation;
+
       beforeEach(function() {
         inline = false;
         dotIcon = false;
@@ -420,6 +428,12 @@ describe('<fs-person-eol>', function() {
   });
 
   describe('_getDetailsClass', function() {
+    var inline;
+    var dotIcon;
+    var showPortrait;
+    var hideGender;
+    var orientation;
+    
     beforeEach(function() {
       inline = 'doesntMatter';
       dotIcon = 'doesntMatter';
