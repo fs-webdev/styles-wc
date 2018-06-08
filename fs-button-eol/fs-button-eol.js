@@ -1,7 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-<link rel="import" href="../fs-icon-eol/fs-icon-eol.html">
-
-<!--
+/**
 A type extension button modeled after the FamilySearch styleguide
 
 Example:
@@ -10,10 +7,19 @@ Example:
     <fs-button-eol option="recommended">Button Text!</fs-button-eol>
 
 @demo fs-button-eol/demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="fs-button-eol">
-  <template>
+import '../fs-icon-eol/fs-icon-eol.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
     <style>
       :host {
         display: inline-block;
@@ -288,7 +294,7 @@ Example:
         padding: 0;
       }
     </style>
-    <button type$="[[type]]" disabled="[[disabled]]" option$="[[option]]" size$="[[size]]" loading$="[[loading]]">
+    <button type\$="[[type]]" disabled="[[disabled]]" option\$="[[option]]" size\$="[[size]]" loading\$="[[loading]]">
       <slot></slot>
       <dom-if>
         <template is="dom-if" if="[[loading]]">
@@ -296,72 +302,71 @@ Example:
         </template>
       </dom-if>
     </button>
-  </template>
-  <script>
-    Polymer({
-      is: 'fs-button-eol',
-      properties: {
-        /**
-         * If provided the button will render a spinner until
-         * the attribute is removed.
-         * @type {Boolean}
-         */
-        loading: {
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
-        },
-        /**
-         * If provided this will render a different style of button (based
-         * upon input).
-         *
-         * Possible Values: `recommended`, `minor`
-         * @type {String}
-         */
-        option: {
-          type: String,
-          value: 'default',
-          reflectToAttribute: true
-        },
-        /**
-         * If provided this will render a different style of button and spinner.
-         * @type {Boolean}
-         */
-        disabled: {
-          type: Boolean,
-          value: false,
-          reflectToAttribute: true
-        },
-        /**
-         * If provided this will render different sizes of button (based
-         * on input).
-         *
-         * Possible Values: `large`, `small`
-         * @type {String}
-         */
-        size: {
-          type: String,
-          reflectToAttribute: true
-        },
-        /**
-         * Reflect the type attribute to the inner button. (e.g. type="button")
-         * @type {String}
-         */
-        type: {
-          type: String,
-          reflectToAttribute: true
-        }
+`,
 
-      },
-      /**
-       * Computes the spinner that needs to be used for the button
-       * @param  {String} option
-       */
-      _spinnerType: function (option, disabled) {
-        var light = (option === 'recommended' || option === 'destructive');
-        if (disabled || !light) return 'spinner';
-        return 'spinner-light';
-      }
-    });
-  </script>
-</dom-module>
+  is: 'fs-button-eol',
+
+  properties: {
+    /**
+     * If provided the button will render a spinner until
+     * the attribute is removed.
+     * @type {Boolean}
+     */
+    loading: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true
+    },
+    /**
+     * If provided this will render a different style of button (based
+     * upon input).
+     *
+     * Possible Values: `recommended`, `minor`
+     * @type {String}
+     */
+    option: {
+      type: String,
+      value: 'default',
+      reflectToAttribute: true
+    },
+    /**
+     * If provided this will render a different style of button and spinner.
+     * @type {Boolean}
+     */
+    disabled: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true
+    },
+    /**
+     * If provided this will render different sizes of button (based
+     * on input).
+     *
+     * Possible Values: `large`, `small`
+     * @type {String}
+     */
+    size: {
+      type: String,
+      reflectToAttribute: true
+    },
+    /**
+     * Reflect the type attribute to the inner button. (e.g. type="button")
+     * @type {String}
+     */
+    type: {
+      type: String,
+      reflectToAttribute: true
+    }
+
+  },
+
+  /**
+   * Computes the spinner that needs to be used for the button
+   * @param  {String} option
+   */
+  _spinnerType: function (option, disabled) {
+    var light = (option === 'recommended' || option === 'destructive');
+    if (disabled || !light) return 'spinner';
+    return 'spinner-light';
+  }
+});

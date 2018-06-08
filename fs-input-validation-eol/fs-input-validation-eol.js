@@ -1,6 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-
-<!--
+/**
 A input validation wrapper that models the FamilySearch styleguide.
 
 This web component will render a wrapper around a `input[type='text']` with a styleguide approved validation status.
@@ -16,10 +14,18 @@ Example:
     </fs-input-validation-eol>
 
 @demo fs-input-validation-eol/demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="fs-input-validation-eol">
-  <template>
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
     <style>
       :host {
         display: block;
@@ -32,12 +38,12 @@ Example:
         position: relative;
 
         /* ------------------------------------*
-          $VALID_STATE
-        \*------------------------------------ */
+          \$VALID_STATE
+        \\*------------------------------------ */
 
         /* ------------------------------------*
-          $INVALID_STATE
-        \*------------------------------------ */
+          \$INVALID_STATE
+        \\*------------------------------------ */
       }
 
       ::slotted(.fs-field-validation) input {
@@ -88,40 +94,40 @@ Example:
         display: block;
       }
     </style>
-    <div class='wrap'>
+    <div class="wrap">
       <slot name="input"></slot>
-      <div class='message'>
-        <div hidden$='[[_isInvalid(status)]]'>
+      <div class="message">
+        <div hidden\$="[[_isInvalid(status)]]">
           <slot name="valid-text"></slot>
         </div>
-        <div hidden$='[[_isValid(status)]]'>
+        <div hidden\$="[[_isValid(status)]]">
           <slot name="invalid-text"></slot>
         </div>
       </div>
     </div>
-  </template>
-  <script>
-    Polymer({
-      is: 'fs-input-validation-eol',
-      properties: {
-        /**
-         * The status of the validated input[type=text] field.
-         *
-         * Valid values for this are: `valid` or `invalid`.
-         * @type {String}
-         */
-        status: {
-          type: String,
-          value: '',
-          reflectToAttribute: true
-        }
-      },
-      _isValid: function (status) {
-        return status === 'valid';
-      },
-      _isInvalid: function (status) {
-        return status === 'invalid';
-      }
-    });
-  </script>
-</dom-module>
+`,
+
+  is: 'fs-input-validation-eol',
+
+  properties: {
+    /**
+     * The status of the validated input[type=text] field.
+     *
+     * Valid values for this are: `valid` or `invalid`.
+     * @type {String}
+     */
+    status: {
+      type: String,
+      value: '',
+      reflectToAttribute: true
+    }
+  },
+
+  _isValid: function (status) {
+    return status === 'valid';
+  },
+
+  _isInvalid: function (status) {
+    return status === 'invalid';
+  }
+});

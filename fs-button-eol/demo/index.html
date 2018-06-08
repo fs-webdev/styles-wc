@@ -20,8 +20,8 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
 
   <!-- Web Components -->
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../fs-button-eol.html">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../fs-button-eol.js"></script>
 </head>
 <body >
   <p>
@@ -54,13 +54,14 @@
     <fs-button-eol option='recommended' class='loadingButton'>Button</fs-button-eol>
     <fs-button-eol size='large' class='loadingButton'>Button</fs-button-eol>
   </p>
-  <script>
-    Array.prototype.slice.call(document.querySelectorAll('.loadingButton'))
-    .forEach(function(button) {
-      button.addEventListener('click', function() {
-        button.loading = !button.loading;
-      });
-    });
-  </script>
+  <script type="module">
+import '../fs-button-eol.js';
+Array.prototype.slice.call(document.querySelectorAll('.loadingButton'))
+.forEach(function(button) {
+  button.addEventListener('click', function() {
+    button.loading = !button.loading;
+  });
+});
+</script>
 </body>
 </html>

@@ -1,0 +1,734 @@
+/**
+The styleguide person renderer
+
+TODO: Looks like we need unit tests for this!
+
+Example:
+
+    <fs-person-eol full-name='Josh Crowther' pid='KWFF-1RH' gender='male'></fs-person-eol>
+
+### Styling
+You can use the `--fs-person-name`, `--fs-person-portrait`, `--fs-person-portrait-icon`, `--fs-person-portrait-image` and `--fs-person-container` mixin to style `fs-person` underneath:
+```css
+fs-person-eol {
+  --fs-person-name: {
+    font-size: 14px;
+  };
+}
+
+fs-person-eol:not([inline]) {
+  --fs-person-eol: {
+    width: 100%;
+  };
+  --fs-person-name: {
+    font-size: 20px;
+    font-family: museo, serif;
+  };
+  --fs-person-portrait: {
+    height: 40px;
+    width: 40px;
+  };
+  --fs-person-portrait-icon: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-portrait-image: {
+    height: 100%;
+    width: 100%;
+  };
+  --fs-person-container: {
+    padding: 5px;
+  };
+}
+```
+@demo fs-person-eol/demo/index.html
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import 'wc-i18n/wc-i18n-legacy.js';
+// import 'oak-i18n-behavior/oak-i18n-behavior.js';
+import '../fs-icon-eol/fs-icon-eol.js';
+// import 'fs-dialog/fs-anchored-dialog.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
+Polymer({
+  _template: html`
+    <style>
+      *[hidden] {
+        display: none !important;
+      }
+
+      .fs-person-vitals,
+      .fs-person-vitals__name-block {
+        /* https://css-tricks.com/flexbox-truncated-text */
+        min-width: 0;
+        width: 100%;
+      }
+
+      .fs-person-vitals__name {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 14px;
+        font-size: 1rem;
+        font-weight: normal;
+        line-height: 1.625rem;
+        margin: 0;
+
+        @apply(--fs-person-name);
+        @apply(--person-name);
+      }
+
+      .fs-person-vitals__name:hover {
+        text-decoration: underline;
+
+        @apply(--person-name-hover);
+      }
+
+      :host {
+        display: inline-block;
+        max-width: 100%;
+
+        /* z-index and position needed for hover tooltip to show above other elements.
+         * This is because of the stacking context and how z-index applies to it.
+         * Read more about the stacking context here:
+         * https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/The_stacking_context */
+        z-index: 1;
+        position: relative;
+      }
+
+      :host([inline]) .fs-person-vitals {
+        display: flex;
+        align-items: center;
+      }
+
+      :host([inline]) .fs-person-vitals__name {
+        margin-right: 15px;
+      }
+
+      :host([orientation='portrait']) .fs-person-vitals {
+        text-align: center;
+      }
+
+      .fs-person-name__container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+      }
+
+      .fs-person-details__container {
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+        white-space: nowrap;
+
+        @apply(--fs-person-details);
+      }
+
+      .copy-icon {
+        height: 12px;
+        position: relative;
+        width: 15px;
+      }
+
+      .fs-person-details__pid .copy-icon {
+        cursor: pointer;
+      }
+
+      .fs-person-details__container.indented {
+        margin-left: 16px;
+      }
+
+      .fs-person-details__container:hover {
+        @apply(--person-details-hover);
+      }
+
+      :host([orientation='portrait']) .fs-person-details__container {
+        justify-content: center;
+      }
+
+      .fs-person__container {
+        color: #333331;
+        position: relative;
+        z-index: 0;
+
+        @apply(--fs-person-container);
+      }
+
+      .v-center,
+      .fs-person-portrait,
+      .fs-person__container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        min-width: 0;
+      }
+
+      /* Bug fix to keep portrait container from shrinking in ie11. */
+      .fs-person-portrait {
+        flex-shrink: 0;
+      }
+
+      .fs-person__container > .v-center,
+      .fs-person-vitals > .v-center {
+        overflow-x: hidden;
+        width: 100%;
+      }
+
+      .fs-person__container > .v-center {
+        @apply(--fs-person-name-v-center);
+      }
+
+      :host([orientation='portrait']) .v-center {
+        justify-content: center;
+      }
+
+      /* This is a CSS hack to allow for easy copying of the PID */
+      #pid-input {
+        opacity: 0;
+        position: absolute;
+        width: 40px; /* Fix for OFT-69102 - copy pid not working for person-card or tree. */
+        height: 1px;
+        top: 0;
+        left: 0;
+        z-index: -1;
+      }
+
+      :host([orientation='portrait']) .fs-person__container {
+        flex-direction: column;
+      }
+
+      .fs-person-gender__icon {
+        margin-right: 8px;
+      }
+
+      .fs-person-portrait__container {
+        background-position: center;
+        background-size: 60%;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 4px;
+        box-shadow: 0 2px 3px 0 #636363;
+        box-shadow: none;
+        height: 66px;
+        margin-right: 20px;
+        width: 66px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+
+        @apply(--fs-person-portrait);
+      }
+
+      :host([orientation='portrait']) .fs-person-portrait__container {
+        margin: 0 auto;
+      }
+
+      .fs-person-portrait__portrait-icon[icon='female'],
+      .fs-person-portrait__portrait-icon[icon='male'] {
+        width: 100%;
+        height: 100%;
+
+        @apply(--fs-person-portrait-icon);
+      }
+
+      .fs-person-portrait__portrait-icon[icon^='gray'],
+      .fs-person-portrait__portrait-icon[icon^='unknown'] {
+        width: 60%;
+        height: 60%;
+
+        @apply(--fs-person-portrait-icon);
+      }
+
+      .fs-person-portrait__portrait-image {
+        width: 100%;
+        height: 100%;
+        flex-shrink: 0;
+
+        @apply(--fs-person-portrait-image);
+      }
+
+      a {
+        text-decoration: none;
+      }
+
+      a:visited {
+        color: blue;
+      }
+
+      :host([inline]) a {
+        color: #333331;
+      }
+
+      :host([inline]) a:hover {
+        text-decoration: underline;
+      }
+
+      .fs-person-gender__icon[icon='male'],
+      .fs-person-gender__icon[icon='female'] {
+        height: 26px;
+        width: 26px;
+      }
+
+      .fs-person__container.locale-ja .fs-person-vitals__name-block p {
+        font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo", "ＭＳ ゴシック", "MS Gothic", sans-serif;
+      }
+
+      .fs-person__container.locale-ko .fs-person-vitals__name-block p {
+        font-family: "Apple SD Gothic Neo", "애플고딕", "AppleGothic", "맑은 고딕", "Malgun Gothic", "굴림", "Gulim", sans-serif;
+      }
+
+      .fs-person__container.locale-zh .fs-person-vitals__name-block p {
+        font-family: "黑體-繁", "Heiti TC", "华文细黑", "STXihei", "微軟正黑體", "Microsoft JengHei", "中易黑体", "SimHei", "HanaMinB", sans-serif;
+      }
+
+      .fs-person-details__separator {
+        margin-top: -2px;
+        margin-bottom: 2px;
+        padding-right: 6px;
+        padding-left: 6px;
+        font-family: Verdana, sans-serif;
+      }
+
+      /* The actual popup (appears on top) */
+      .popup-text {
+        color: #448ef7;
+        font-family: Verdana, sans-serif;
+        font-size: 0.875rem;
+      }
+
+      span.pid-container-span {
+        cursor: pointer;
+      }
+
+      span.pid-container-span:hover {
+        text-decoration: underline;
+      }
+
+      .popup-text:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+
+      .black-text,
+      .black-text .popup-text:hover {
+        color: black;
+        text-decoration: none;
+      }
+
+      fs-anchored-dialog#copy-popup-dialog .fs-dialog__body {
+        padding: 0;
+        border-radius: 6px;
+        line-height: 0;
+      }
+
+      fs-anchored-dialog#copy-popup-dialog[opened] {
+        margin-top: 10px;
+      }
+
+      fs-anchored-dialog .fs-dialog-pointer {
+        top: 15px;
+      }
+
+      button#copy-text {
+        padding: 5px;
+        border: none;
+      }
+
+      .fs-person-details__container .fs-person-ls-container {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      /* BEGIN DAYBREAK STYLES */
+      .fs-person__container.daybreak .fs-person-portrait__container {
+        background-color: #f4f4f4;
+        border-color: #d9d9d9;
+      }
+
+      /* END DAYBREAK STYLES */
+
+      /* BEGIN NIGHTFALL STYLES */
+      .fs-person__container.nightfall .fs-person-vitals__name {
+        color: #fff;
+        font-weight: normal;
+      }
+
+      .fs-person__container.nightfall .fs-person-details__container,
+      .fs-person__container.nightfall .fs-person-details__separator {
+        color: #ecebea;
+      }
+
+      .fs-person__container.nightfall .fs-person-portrait__container {
+        background-color: #57585a;
+        border-color: #8c8d8f;
+      }
+
+      /* END NIGHTFALL STYLES */
+    </style>
+    <div class\$="fs-person__container locale-[[language]] [[colorScheme]]" data-test-person="[[pid]]">
+      <div class="fs-person-portrait" hidden="[[inline]]">
+        <div class="fs-person-portrait__container" hidden="[[!showPortrait]]">
+          <template is="dom-if" if="[[portraitUrl]]">
+            <img alt="" class="fs-person-portrait__portrait-image" src\$="[[portraitUrl]]" on-error="handlePortraitError" data-test-person-portrait="">
+          </template>
+          <fs-icon-eol icon="[[_getGenderIcon(gender, coloredIcon)]]" class="fs-person-portrait__portrait-icon"></fs-icon-eol>
+        </div>
+      </div>
+      <div class="v-center">
+        <fs-icon-eol class="fs-person-gender__icon" icon="[[gender]]" hidden="[[!_showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation)]]"></fs-icon-eol>
+        <div class="fs-person-vitals">
+          <div class="v-center">
+            <fs-icon-eol class="fs-person-gender__icon" icon="[[gender]]-dot" size="small" hidden="[[!_showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation)]]"></fs-icon-eol>
+            <span class="fs-person-vitals__name-block">
+              <p class="fs-person-vitals__name" hidden="[[_isPortrait(orientation)]]" data-test-person-full-name=""><span class="person-label" hidden\$="[[!label]]">[[label]]: </span>[[_checkValidName(fullName, pid, i18n)]]</p>
+              <p class="fs-person-vitals__name" hidden="[[!_isPortrait(orientation)]]">
+                <span class="person-label" hidden\$="[[!label]]">[[label]]: </span>
+                <span data-test-person-given-name="">[[_getFirstName(firstName, lastName, nameSystem)]]</span>
+                <span data-test-person-family-name="">[[_getLastName(firstName, lastName, nameSystem)]]</span>
+              </p>
+            </span>
+          </div>
+          <div class\$="fs-person-details__container [[_getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation)]]" hidden\$="[[_hideDetials(pid)]]">
+            <span data-test-person-lifespan="" class="fs-person-ls-container">[[lifespan]]</span>
+            <div hidden\$="[[!_showPid(pid, hidePid)]]">
+              <span class="fs-person-details__separator" hidden="[[_hideSeparator(hideSeparator, pid, lifespan)]]">●</span>
+              <span class="pid-container-span popup" on-click="_showCopyID" data-test-person-pid="">
+                <span class="pid-to-be-copied">[[pid]]</span>
+              </span>
+              <fs-anchored-dialog id="copy-popup-dialog" forced-pointer-direction="down" no-close-button="" no-transition="" no-fullscreen-mobile="">
+                <div class="fs-dialog__body">
+                  <button option="minor" class="fs-button fs-button--minor popup-text" on-click="_copyPid" id="copy-text" aria-haspopup="true">[[i18n("COPY_TO_CLIPBOARD")]]</button>
+                </div>
+              </fs-anchored-dialog>
+              <input id="pid-input" type="text" value\$="[[pid]]" aria-hidden="true" readonly="" tabindex="-1">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+`,
+
+  is: 'fs-person-eol',
+
+  properties: {
+    /**
+     * Whether or not to use a colored icon (instead of gray), used to compute the gender icon
+     *
+     * **Valid values are true or false**
+     * @type {Boolean}
+     */
+    coloredIcon: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * Which color scheme to display: daybreak or nightfall.
+     *
+     * **Valid values are daybreak or nightfall. If not specified, default is daybreak.**
+     * @type {String}
+     */
+    colorScheme: {
+      type: String,
+      reflectToAttribute: true,
+      value: 'daybreak'
+    },
+
+    /**
+     * Whether or not to show the gender dot icon (instead of coloredIcon)
+     *
+     * **Valid values are true or false**
+     * @type {Boolean}
+     */
+    dotIcon: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * The full name of the person to be rendered (used only in landscape mode)
+     * @type {String}
+     */
+    fullName: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * The first name of the person to be rendered (used only in portrait mode)
+     * @type {String}
+     */
+    firstName: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * The last name of the person to be rendered (used only in portrait mode)
+     * @type {String}
+     */
+    lastName: {
+      type: String,
+      value: ''
+    },
+    /**
+     * The label used for a person.
+     * @type {String}
+     */
+    label: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * Whether the first/last name parts should be reversed
+     *
+     * **Valid values are `eurotypic` or `sinotypic`**
+     * @type {String}
+     */
+    nameSystem: {
+      type: String,
+      value: 'eurotypic'
+    },
+
+    /**
+     * The ID of the person to be displayed (if not passed simply hidden)
+     * @type {String}
+     */
+    pid: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * The lifespan of the person (if not passed simply hidden)
+     * @type {String}
+     */
+    lifespan: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * Gender of the person, used to compute the gender icon
+     *
+     * **Valid values are `male`, `female`, or `unknown`**
+     * @type {String}
+     */
+    gender: {
+      type: String,
+      value: ''
+    },
+
+    /** Whether this element is hiding the gender icon. */
+    hideGender: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * Orientation of the person renderer
+     *
+     * **Valid values are `landscape` or `portrait`**
+     * @type {String}
+     */
+    orientation: {
+      type: String,
+      value: 'landscape',
+      reflectToAttribute: true
+    },
+
+    /**
+     * Whether or not the portrait image should be shown
+     * @type {Boolean}
+     */
+    showPortrait: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * URL for the person portrait
+     * @type {String}
+     */
+    portraitUrl: {
+      type: String,
+      value: ''
+    },
+
+    /**
+     * Inline rendering of the person
+     * @type {Boolean}
+     */
+    inline: {
+      type: Boolean,
+      value: false,
+      reflectToAttribute: true
+    },
+
+    /**
+     * Whether or not to show the spearator dot (•)
+     * @type {Boolean}
+     */
+    hideSeparator: {
+      type: Boolean,
+      value: false
+    },
+
+    /**
+     * Whether the person id should be shown
+     * @type {Boolean}
+     */
+    hidePid: {
+      type: Boolean,
+      value: false
+    }
+
+  },
+
+  behaviors: [
+    window.WCI18n()
+  ],
+
+  observers: [
+    '_portraitDefault(showPortrait, orientation)'
+  ],
+
+  handlePortraitError: function (e) {
+    this.portraitUrl = false;
+  },
+
+  _querySelector: function (selector) {
+    if (this.shadowRoot) {
+      return this.shadowRoot.querySelector(selector);
+    }
+    return this.querySelector(selector);
+  },
+
+  // this comes from stackoverflow: https://stackoverflow.com/questions/985272/selecting-text-in-an-element-akin-to-highlighting-with-your-mouse
+  _showCopyID: function (e) {
+    e.preventDefault();
+    // Stop any other events from firing (like opening the person card or person page)
+    e.stopImmediatePropagation();
+
+    this.$['copy-popup-dialog'].open({'focusBackElement': e.target, 'attachToElement': e.target});
+  },
+
+  _copyPid: function (e) {
+    e.preventDefault();
+    // Stop any other events from firing (like opening the person card or person page)
+    e.stopImmediatePropagation();
+
+    var sel;
+    var range;
+    var el = this._querySelector('.pid-to-be-copied');
+    sel = window.getSelection();
+    if (sel.toString() === '') { // no text selection
+      range = document.createRange(); // range object
+      range.selectNodeContents(el); // sets Range
+      sel.removeAllRanges(); // remove all ranges from selection
+      sel.addRange(range);// add Range to a Selection.
+    }
+    document.execCommand('copy');
+    window.getSelection().removeAllRanges();
+
+    var copyPopupDialog = this.$['copy-popup-dialog'];
+    var copyText = this.$['copy-text'];
+    copyText.innerHTML = this.i18n('COPY_TO_CLIPBOARD_COMPLETE');
+    copyText.classList.toggle('black-text');
+    setTimeout(() => {
+      copyPopupDialog.close();
+    }, 2000);
+    setTimeout(() => {
+      copyText.innerHTML = this.i18n('COPY_TO_CLIPBOARD');
+      copyText.classList.toggle('black-text', false);
+    }, 2200);
+  },
+
+  _showPid: function (pid, hidePid) {
+    return (pid && !hidePid);
+  },
+
+  _portraitDefault: function (showPortrait, orientation) {
+    if (orientation === 'portrait' && !showPortrait) {
+      this.showPortrait = true;
+    }
+  },
+
+  _showGenderIcon: function (inline, dotIcon, showPortrait, gender, hideGender, orientation) {
+    if (inline || dotIcon) return false;
+    return gender && !hideGender && !showPortrait && !this._isPortrait(orientation);
+  },
+
+  _showGenderDot: function (inline, dotIcon, showPortrait, hideGender, orientation) {
+    if ((inline && !hideGender) || (dotIcon && !hideGender)) return true;
+    return !hideGender && showPortrait && !this._isPortrait(orientation);
+  },
+
+  _getDetailsClass: function (inline, dotIcon, showPortrait, hideGender, orientation) {
+    return this._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation) ? 'indented' : '';
+  },
+
+  _getGender: function (gender) {
+    if (gender === 'female') return gender;
+    return 'male';
+  },
+
+  _getGenderIcon: function (gender, coloredIcon) {
+    if (coloredIcon) {
+      if (gender === 'female') {
+        return 'female';
+      }
+      if (gender === 'male') {
+        return 'male';
+      }
+    }
+    if (gender === 'female') {
+      return 'gray-female';
+    }
+    if (gender === 'male') {
+      return 'gray-male';
+    }
+
+    return 'unknown-portrait';
+  },
+
+  _hideSeparator: function (hideSeparator, pid, lifespan) {
+    return (hideSeparator || !(pid && lifespan));
+  },
+
+  _isPortrait: function (orientation) {
+    return orientation === 'portrait';
+  },
+
+  _usingNameParts: function (first, last) { // Is this used anywhere?
+    return first || last;
+  },
+
+  _getFirstName: function (first, last, nameSystem) {
+    return nameSystem === 'sinotypic' ? last : first;
+  },
+
+  _getLastName: function (first, last, nameSystem) {
+    return nameSystem === 'sinotypic' ? first : last;
+  },
+
+  _hideDetials: function (pid) {
+    return pid === '' || pid === 'UNKNOWN';
+  },
+
+  _checkValidName: function (fullName, pid, i18n) {
+    if (!i18n || typeof i18n('UNKNOWN_NAME') !== 'string') return;
+    return (pid === '' || pid === 'UNKNOWN') ? i18n('UNKNOWN_NAME') : fullName;
+  }
+});

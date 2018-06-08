@@ -1,6 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-
-<!--
+/**
 A tooltip that models the FamilySearch styleguide.
 
 Example:
@@ -12,9 +10,18 @@ Example:
 @group Seed Elements
 @element fs-tooltip-eol
 @demo fs-tooltip-eol/demo/index.html
--->
-<dom-module id="fs-tooltip-eol">
-  <template>
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
+
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
     <style>
       :host {
         display: inline-block;
@@ -122,38 +129,34 @@ Example:
       }
     </style>
 
-    <span role="tooltip" class='fs-tooltip__body'>
+    <span role="tooltip" class="fs-tooltip__body">
       <slot name="tooltip-body"></slot>
     </span>
 
     <slot></slot>
-  </template>
+`,
 
-</dom-module>
+  is: 'fs-tooltip-eol',
 
-<script>
-  Polymer({
-    is: 'fs-tooltip-eol',
-    properties: {
-      /**
-       * Valid Values: 'top', `bottom`, `left`, `right`
-       * @type {String}
-       */
-      direction: {
-        type: String,
-        value: 'top',
-        reflectToAttribute: true
-      },
-      /**
-       * The string that will be shown in the tooltip, if left
-       * null the tooltip will be hidden
-       *
-       * @type {String}
-       */
-      text: {
-        type: String,
-        value: ''
-      }
+  properties: {
+    /**
+     * Valid Values: 'top', `bottom`, `left`, `right`
+     * @type {String}
+     */
+    direction: {
+      type: String,
+      value: 'top',
+      reflectToAttribute: true
+    },
+    /**
+     * The string that will be shown in the tooltip, if left
+     * null the tooltip will be hidden
+     *
+     * @type {String}
+     */
+    text: {
+      type: String,
+      value: ''
     }
-  });
-</script>
+  }
+});

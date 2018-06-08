@@ -4,12 +4,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../../wct-browser-legacy/browser.js"></script>
     <script src="../../es6-promise/dist/es6-promise.auto.js"></script>
 
     <!-- Step 1: import the element to test -->
-    <link rel="import" href="../fs-person-eol/fs-person-eol.html">
+    <script type="module" src="../fs-person-eol/fs-person-eol.js"></script>
 
   </head>
   <body>
@@ -49,492 +49,491 @@
       </template>
     </test-fixture>
 
-    <script>
-    (function(){
-      describe('<fs-person-eol>', function() {
-        var fsPersonDefault;
-        var fsPersonPassedValues;
-        var fsPersonSetShowPortrait;
-
-        beforeEach(function() {
-          fsPersonDefault = fixture('fs-person-default');
-          fsPersonPassedValues = fixture('fs-person-passed-values');
-          fsPersonSetShowPortrait = fixture('fs-person-set-show-portrait');
-        });
-
-        describe('properties', function() {
-          it('should set default values for "colorScheme", "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
-            expect(fsPersonDefault.colorScheme, "colorScheme is not daybreak").to.equal('daybreak');
-            expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
-            expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;
-            expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
-            expect(fsPersonDefault.fullName, "fullName is not ''").to.equal('');
-            expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
-            expect(fsPersonDefault.hideGender, "hideGender is not false").to.be.false;
-            expect(fsPersonDefault.hidePid, "hidePid is not false").to.be.false;
-            expect(fsPersonDefault.hideSeparator, "hideSeparator is not false").to.be.false;
-            expect(fsPersonDefault.inline, "inline is not false").to.be.false;
-            expect(fsPersonDefault.lastName, "lastName is not ''").to.equal('');
-            expect(fsPersonDefault.lifespan, "lifespan is not ''").to.equal('');
-            expect(fsPersonDefault.nameSystem, "nameSystem is not ''").to.equal('eurotypic');
-            expect(fsPersonDefault.orientation, "orientation is not 'landscape'").to.equal('landscape');
-            expect(fsPersonDefault.pid, "pid is not ''").to.equal('');
-            expect(fsPersonDefault.portraitUrl, "portraitUrl is not ''").to.equal('');
-            expect(fsPersonDefault.showPortrait, "showPortrait is not false").to.be.false;
-          });
-
-          it('should set colorScheme to "nightfall"', function () {
-            expect(fsPersonPassedValues.colorScheme, "colorScheme is not 'nightfall'").to.equal('nightfall');
-          });
-
-          it('should have coloredIcon true', function () {
-            expect(fsPersonPassedValues.coloredIcon, "coloredIcon is not true").to.be.true;
-          });
-
-          it('should have dotIcon true', function () {
-            expect(fsPersonPassedValues.dotIcon, "dotIcon is not true").to.be.true;
-          });
-
-          it('should set firstName', function () {
-            expect(fsPersonPassedValues.firstName, "firstName is not set correctly").to.equal('John Jacob');
-          });
-
-          it('should set fullName', function () {
-            expect(fsPersonPassedValues.fullName, "fullName is not set correctly").to.equal('John Jacob Schmidt');
-          });
-
-          it('should set gender', function () {
-            expect(fsPersonPassedValues.gender, "gender is not set correctly").to.equal('male');
-          });
-
-          it('should hide gender and pid ', function () {
-            expect(fsPersonPassedValues.hideGender, "hideGender is not true").to.be.true;
-            expect(fsPersonPassedValues.hidePid, "hidePid is not true").to.be.true;
-            expect(fsPersonPassedValues.hideSeparator, "hideSeparator is not false").to.be.false;
-          });
-
-          it('should be inline ', function () {
-            expect(fsPersonPassedValues.inline, "inline is not true").to.be.true;
-          });
-
-          it('should set lastName', function () {
-            expect(fsPersonPassedValues.lastName, "lastName is not set correctly").to.equal('Schmidt');
-          });
-
-          it('should set lifespan', function () {
-            expect(fsPersonPassedValues.lifespan, "lifespan is not set correctly").to.equal('1800-1900');
-          });
-
-          it('should set nameSystem', function () {
-            expect(fsPersonPassedValues.nameSystem, "nameSystem is not set correctly").to.equal('sinotypic');
-          });
-
-          it('should set orientation to portrait & showPortrait to true', function () {
-            expect(fsPersonPassedValues.orientation, "orientation is not 'portrait'").to.equal('portrait');
-            expect(fsPersonPassedValues.showPortrait, "showPortrait is not true").to.be.true;
-          });
-
-          it('should set pid', function () {
-            expect(fsPersonPassedValues.pid, "pid is not set correctly").to.equal('PID');
-          });
-
-          // it('should set portraitUrl', function () {
-          //   expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
-          // });
-
-          it('should set showPortrait to true without changing orientation to "portrait"', function () {
-            expect(fsPersonSetShowPortrait.orientation, "orientation is not 'portrait'").to.not.equal('portrait');
-            expect(fsPersonSetShowPortrait.showPortrait, "showPortrait is not true").to.be.true;
-          });
-        });
-
-        // This feature doesn't work for IE11 or Edge, so neither will the tests.
-        // describe('handlePortraitError', function() {
-        //   it('should set portraitUrl to false', function () {
-        //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
-
-        //     fsPersonPassedValues.handlePortraitError({});
-
-        //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not false").to.be.false;
-        //   });
-        // });
-        describe('_showCopyID', function(){
-          var mockEvent;
-          var preventDefaultStub;
-          var stopImmediatePropagationStub;
-
-          beforeEach(function() {
-            mockEvent = {
-              preventDefault: function(){},
-              stopImmediatePropagation: function(){},
-              target: {
-                setAttribute: function(){}
-              }
-            };
-
-            preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
-            stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
-          });
-
-          afterEach(function() {
-            preventDefaultStub.restore();
-            stopImmediatePropagationStub.restore();
-
-            mockEvent = undefined;
-          });
-
-          it('should have nothing selected starting off', function () {
-            expect(window.getSelection().toString()).to.equal('');
-          });
-        });
-
-        describe('_copyPid', function() {
-          var mockEvent;
-          var preventDefaultStub;
-          var stopImmediatePropagationStub;
-          var execCommandSpy;
-
-          beforeEach(function() {
-            mockEvent = {
-              preventDefault: function(){},
-              stopImmediatePropagation: function(){},
-              target: {
-                setAttribute: function(){}
-              }
-            };
-
-            preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
-            stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
-            execCommandSpy = sinon.spy(document, "execCommand");
-          });
-
-          afterEach(function() {
-            preventDefaultStub.restore();
-            stopImmediatePropagationStub.restore();
-            execCommandSpy.restore();
-
-            mockEvent = undefined;
-          });
-
-          it('should call e.preventDefault()', function () {
-            fsPersonDefault._copyPid(mockEvent);
-
-            expect(preventDefaultStub.callCount, "_copyPid did not call preventDefault only once").to.equal(1);
-          });
-
-          it('should call e.stopImmediatePropagation()', function () {
-            fsPersonDefault._copyPid(mockEvent);
-
-            expect(preventDefaultStub.callCount, "_copyPid did not call stopImmediatePropagation only once").to.equal(1);
-          });
-
-          it('should call document.execCommand()', function () {
-            fsPersonDefault._copyPid(mockEvent);
-
-            expect(execCommandSpy.callCount, "_copyPid did not call execCommand only once").to.equal(1);
-            expect(execCommandSpy.calledWith("copy"), "_copyPid did not call execCommand with the correct parameters").to.be.true;
-          });
-
-          // This test is flakey for IE11 because of a popup that sometimes appears.
-          // TODO: Find a fix for this test.
-          // it('should set the aria-label', function () {
-          //   expect(fsPersonDefault.$.CopyPIDIcon.hasAttribute("aria-label")).to.be.false;
-          //   fsPersonDefault._copyPid(mockEvent);
-
-          //   expect(fsPersonDefault.$.CopyPIDIcon.hasAttribute("aria-label")).to.be.true;
-          // });
-        });
-
-        describe('_showPid', function() {
-          it('should show the pid', function () {
-            expect(fsPersonDefault._showPid(true, false), "pid exists and don't hide it returned false").to.be.true;
-          });
-
-          it('should not show pid', function () {
-            expect(fsPersonDefault._showPid(true, true), "pid exists and hide it returned true").to.be.false;
-            expect(fsPersonDefault._showPid(false, true), "no pid exists and hide it returned true").to.be.false;
-            expect(fsPersonDefault._showPid(false, false), "no pid exists and don't hide it returned true").to.be.false;
-          });
-        });
-
-        describe('_hideSeparator', function() {
-          it('should return true (not show the separator)', function () {
-            expect(fsPersonDefault._hideSeparator(true, true, true), "hideSeparator=true, pid=true, lifespan=true").to.be.true;
-            expect(fsPersonDefault._hideSeparator(true, false, false), "hideSeparator=true, pid=false, lifespan=false").to.be.true;
-            expect(fsPersonDefault._hideSeparator(false, false, true), "hideSeparator=false, pid=false, lifespan=true").to.be.true;
-            expect(fsPersonDefault._hideSeparator(false, true, false), "hideSeparator=false, pid=true, lifespan=false").to.be.true;
-            expect(fsPersonDefault._hideSeparator(false, false, false), "hideSeparator=false, pid=false, lifespan=false").to.be.true;
-          });
-
-          it('should return false (show the separator)', function () {
-            expect(fsPersonDefault._hideSeparator(false, true, true), "hideSeparator=false, pid=true, lifespan=true").to.be.false;
-          });
-        });
-
-        describe('_portraitDefault', function() {
-          it('should set showPortrait to true', function () {
-            fsPersonDefault._portraitDefault(false, 'portrait');
-
-            expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='portrait' returned false").to.be.true;
-          });
-
-          it('should set showPortrait to false', function () {
-            fsPersonDefault._portraitDefault(true, 'portrait');
-            expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='portrait' returned true").to.be.false;
-
-            fsPersonDefault._portraitDefault(true, 'landscape');
-            expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='landscape' returned true").to.be.false;
-
-            fsPersonDefault._portraitDefault(false, 'landscape');
-            expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='landscape' returned true").to.be.false;
-          });
-        });
-
-        describe('_showGenderIcon', function() {
-          var inline;
-          var dotIcon;
-          var showPortrait;
-          var gender;
-          var orientation;
-          var result;
-
-          describe('inline = true', function() {
-            beforeEach(function() {
-              inline = true;
-              dotIcon = 'doesntMatter';
-              showPortrait = 'doesntMatter';
-              gender = 'doesntMatter';
-              hideGender = 'doesntMatter';
-              orientation = 'doesntMatter';
-            });
-
-            it('should always return false', function () {
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation); // other params don't matter in this case
-
-              expect(result, "inline=true returned true").to.be.false;
-            });
-          });
-
-          describe('inline = false', function() {
-            beforeEach(function() {
-              inline = false;
-              dotIcon = false;
-              showPortrait = false;
-              gender = 'female';
-              hideGender = false;
-              orientation = 'landscape';
-            });
-
-            it('should return true', function () {
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=false, gender='female', orientation='landscape' returned false").to.be.true;
-            });
-
-            it('should return false', function () {
-              gender = null;
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=true, gender=null, orientation='landscape' returned true").to.be.null; // falsey
-
-              gender = 'female';
-              showPortrait = true;
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
-
-              showPortrait = false;
-              hideGender = true;
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
-
-              hideGender = false;
-              orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=true, gender='female', orientation='portrait' returned true").to.be.false;
-
-              showPortrait = true;
-              orientation = 'portrait';
-              result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
-              expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
-            });
-          });
-        });
-
-        describe('_showGenderDot', function() {
-          var inline;
-          var dotIcon;
-          var showPortrait;
-          var hideGender;
-          var orientation;
-          var result;
-
-          describe('inline and hideGender', function() {
-            beforeEach(function() {
-              inline = true;
-              dotIcon = 'doesntMatter';
-              showPortrait = 'doesntMatter';
-              hideGender = false;
-              orientation = 'doesntMatter';
-            });
-
-            it('should always return true', function () {
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation); // other params don't matter in this case
-
-              expect(result, "inline=true and hideGender=false returned false").to.be.true;
-            });
-          });
-
-          describe('inline=true (and/or hideGender=true)', function() {
-            beforeEach(function() {
-              inline = false;
-              dotIcon = false;
-              showPortrait = true;
-              hideGender = false;
-              orientation = 'landscape';
-            });
-
-            it('should return true', function () {
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
-              expect(result, "showPortrait=true, hideGender=false, orientation='landscape' returned false").to.be.true;
-            });
-
-            it('should return false', function () {
-              hideGender = true;
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
-              expect(result, "showPortrait=true, hideGender=true, orientation='landscape' returned true").to.be.false;
-
-              hideGender=false;
-              showPortrait = false;
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
-              expect(result, "showPortrait=false, hideGender=false, orientation='landscape' returned true").to.be.false;
-
-              showPortrait = true;
-              orientation = 'portrait';
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
-              expect(result, "showPortrait=true, hideGender=false, orientation='portrait' returned true").to.be.false;
-
-              showPortrait = false;
-              orientation = 'portrait';
-              result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
-              expect(result, "showPortrait=false, hideGender=false, orientation='portrait' returned true").to.be.false;
-            });
-          });
-        });
-
-        describe('_getDetailsClass', function() {
-          beforeEach(function() {
-            inline = 'doesntMatter';
-            dotIcon = 'doesntMatter';
-            showPortrait = 'doesntMatter';
-            hideGender = 'doesntMatter';
-            orientation = 'doesntMatter';
-          });
-
-          it('should call _showGenderDot', function () {
-            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot");
-
-            fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation);
-
-            expect(_showGenderDotStub.callCount, "did not call _showGenderDot only once").to.equal(1);
-            expect(_showGenderDotStub.calledWith(inline, dotIcon, showPortrait, hideGender, orientation), "did not call _showGenderDot with the correct parameters").to.be.true;
-
-            _showGenderDotStub.restore();
-          });
-
-          it('should return "indented"', function () {
-            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return true });
-
-            expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return 'indented'").to.equal('indented');
-
-            _showGenderDotStub.restore();
-          });
-
-          it('should return ""', function () {
-            var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return false });
-
-            expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return ''").to.equal('');
-
-            _showGenderDotStub.restore();
-          });
-        });
-
-        describe('_getGender', function() {
-          it('should return female', function () {
-            expect(fsPersonDefault._getGender('female'), "did not return 'female'").to.equal('female');
-          });
-
-          it('should return male', function () {
-            expect(fsPersonDefault._getGender('male'), "did not return 'male'").to.equal('male');
-            expect(fsPersonDefault._getGender('unknown'), "did not return 'male'").to.equal('male');
-            expect(fsPersonDefault._getGender('anythingNotFemale'), "did not return 'male'").to.equal('male');
-          });
-        });
-
-        describe('_getGenderIcon', function() {
-          it('should return male', function () {
-            expect(fsPersonDefault._getGenderIcon('male', true), "did not return 'male'").to.equal('male');
-          });
-
-          it('should return female', function () {
-            expect(fsPersonDefault._getGenderIcon('female', true), "did not return 'female'").to.equal('female');
-          });
-
-          it('should return gray-male', function () {
-            expect(fsPersonDefault._getGenderIcon('male', false), "did not return 'gray-male'").to.equal('gray-male');
-          });
-
-          it('should return gray-female', function () {
-            expect(fsPersonDefault._getGenderIcon('female', false), "did not return 'gray-female'").to.equal('gray-female');
-          });
-
-          it('should return unknown-portrait', function () {
-            expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', true), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
-
-            expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', false), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
-          });
-        });
-
-        describe('_isPortrait', function() {
-          it('should return true', function () {
-            expect(fsPersonDefault._isPortrait('portrait'), "did not return true").to.be.true;
-          });
-
-          it('should return false', function () {
-            expect(fsPersonDefault._isPortrait('anythingNotPortrait'), "did not return false").to.be.false;
-          });
-        });
-
-        describe('_usingNameParts', function() {
-          it('should return "first" or "last"', function () {
-            expect(fsPersonDefault._usingNameParts('first', 'last'), "did not return 'first'").to.equal('first');
-
-            expect(fsPersonDefault._usingNameParts(null, 'last'), "did not return 'last'").to.equal('last');
-
-            expect(fsPersonDefault._usingNameParts('first', null), "did not return 'first'").to.equal('first');
-
-            expect(fsPersonDefault._usingNameParts(null, null), "did not return null").to.be.null;
-          });
-        });
-
-        describe('_getFirstName', function() {
-          it('should return the first name', function () {
-            expect(fsPersonDefault._getFirstName('first', 'last', 'anythingNotSinotypic'), "did not return 'first'").to.equal('first');
-          });
-
-          it('should return the last name', function () {
-            expect(fsPersonDefault._getFirstName('first', 'last', 'sinotypic'), "did not return 'last'").to.equal('last');
-          });
-        });
-
-        describe('_getLastName', function() {
-          it('should return the first name', function () {
-            expect(fsPersonDefault._getLastName('first', 'last', 'sinotypic'), "did not return 'first'").to.equal('first');
-          });
-
-          it('should return the last name', function () {
-            expect(fsPersonDefault._getLastName('first', 'last', 'anythingNotSinotypic'), "did not return 'last'").to.equal('last');
-          });
-        });
+    <script type="module">
+import '../fs-person-eol/fs-person-eol.js';
+describe('<fs-person-eol>', function() {
+  var fsPersonDefault;
+  var fsPersonPassedValues;
+  var fsPersonSetShowPortrait;
+
+  beforeEach(function() {
+    fsPersonDefault = fixture('fs-person-default');
+    fsPersonPassedValues = fixture('fs-person-passed-values');
+    fsPersonSetShowPortrait = fixture('fs-person-set-show-portrait');
+  });
+
+  describe('properties', function() {
+    it('should set default values for "colorScheme", "coloredIcon", "dotIcon", "firstName", "fullName", "gender", "hideGender", "hidePid", "inline", "lastName", "lifespan", "nameSystem", "orientation", "pid", "portraitUrl", and "showPortrait" properties', function() {
+      expect(fsPersonDefault.colorScheme, "colorScheme is not daybreak").to.equal('daybreak');
+      expect(fsPersonDefault.coloredIcon, "coloredIcon is not false").to.be.false;
+      expect(fsPersonDefault.dotIcon, "dotIcon is not false").to.be.false;
+      expect(fsPersonDefault.firstName, "firstName is not ''").to.equal('');
+      expect(fsPersonDefault.fullName, "fullName is not ''").to.equal('');
+      expect(fsPersonDefault.gender, "gender is not ''").to.equal('');
+      expect(fsPersonDefault.hideGender, "hideGender is not false").to.be.false;
+      expect(fsPersonDefault.hidePid, "hidePid is not false").to.be.false;
+      expect(fsPersonDefault.hideSeparator, "hideSeparator is not false").to.be.false;
+      expect(fsPersonDefault.inline, "inline is not false").to.be.false;
+      expect(fsPersonDefault.lastName, "lastName is not ''").to.equal('');
+      expect(fsPersonDefault.lifespan, "lifespan is not ''").to.equal('');
+      expect(fsPersonDefault.nameSystem, "nameSystem is not ''").to.equal('eurotypic');
+      expect(fsPersonDefault.orientation, "orientation is not 'landscape'").to.equal('landscape');
+      expect(fsPersonDefault.pid, "pid is not ''").to.equal('');
+      expect(fsPersonDefault.portraitUrl, "portraitUrl is not ''").to.equal('');
+      expect(fsPersonDefault.showPortrait, "showPortrait is not false").to.be.false;
+    });
+
+    it('should set colorScheme to "nightfall"', function () {
+      expect(fsPersonPassedValues.colorScheme, "colorScheme is not 'nightfall'").to.equal('nightfall');
+    });
+
+    it('should have coloredIcon true', function () {
+      expect(fsPersonPassedValues.coloredIcon, "coloredIcon is not true").to.be.true;
+    });
+
+    it('should have dotIcon true', function () {
+      expect(fsPersonPassedValues.dotIcon, "dotIcon is not true").to.be.true;
+    });
+
+    it('should set firstName', function () {
+      expect(fsPersonPassedValues.firstName, "firstName is not set correctly").to.equal('John Jacob');
+    });
+
+    it('should set fullName', function () {
+      expect(fsPersonPassedValues.fullName, "fullName is not set correctly").to.equal('John Jacob Schmidt');
+    });
+
+    it('should set gender', function () {
+      expect(fsPersonPassedValues.gender, "gender is not set correctly").to.equal('male');
+    });
+
+    it('should hide gender and pid ', function () {
+      expect(fsPersonPassedValues.hideGender, "hideGender is not true").to.be.true;
+      expect(fsPersonPassedValues.hidePid, "hidePid is not true").to.be.true;
+      expect(fsPersonPassedValues.hideSeparator, "hideSeparator is not false").to.be.false;
+    });
+
+    it('should be inline ', function () {
+      expect(fsPersonPassedValues.inline, "inline is not true").to.be.true;
+    });
+
+    it('should set lastName', function () {
+      expect(fsPersonPassedValues.lastName, "lastName is not set correctly").to.equal('Schmidt');
+    });
+
+    it('should set lifespan', function () {
+      expect(fsPersonPassedValues.lifespan, "lifespan is not set correctly").to.equal('1800-1900');
+    });
+
+    it('should set nameSystem', function () {
+      expect(fsPersonPassedValues.nameSystem, "nameSystem is not set correctly").to.equal('sinotypic');
+    });
+
+    it('should set orientation to portrait & showPortrait to true', function () {
+      expect(fsPersonPassedValues.orientation, "orientation is not 'portrait'").to.equal('portrait');
+      expect(fsPersonPassedValues.showPortrait, "showPortrait is not true").to.be.true;
+    });
+
+    it('should set pid', function () {
+      expect(fsPersonPassedValues.pid, "pid is not set correctly").to.equal('PID');
+    });
+
+    // it('should set portraitUrl', function () {
+    //   expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
+    // });
+
+    it('should set showPortrait to true without changing orientation to "portrait"', function () {
+      expect(fsPersonSetShowPortrait.orientation, "orientation is not 'portrait'").to.not.equal('portrait');
+      expect(fsPersonSetShowPortrait.showPortrait, "showPortrait is not true").to.be.true;
+    });
+  });
+
+  // This feature doesn't work for IE11 or Edge, so neither will the tests.
+  // describe('handlePortraitError', function() {
+  //   it('should set portraitUrl to false', function () {
+  //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not set correctly").to.equal('portraitUrl');
+
+  //     fsPersonPassedValues.handlePortraitError({});
+
+  //     expect(fsPersonPassedValues.portraitUrl, "portraitUrl is not false").to.be.false;
+  //   });
+  // });
+  describe('_showCopyID', function(){
+    var mockEvent;
+    var preventDefaultStub;
+    var stopImmediatePropagationStub;
+
+    beforeEach(function() {
+      mockEvent = {
+        preventDefault: function(){},
+        stopImmediatePropagation: function(){},
+        target: {
+          setAttribute: function(){}
+        }
+      };
+
+      preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
+      stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
+    });
+
+    afterEach(function() {
+      preventDefaultStub.restore();
+      stopImmediatePropagationStub.restore();
+
+      mockEvent = undefined;
+    });
+
+    it('should have nothing selected starting off', function () {
+      expect(window.getSelection().toString()).to.equal('');
+    });
+  });
+
+  describe('_copyPid', function() {
+    var mockEvent;
+    var preventDefaultStub;
+    var stopImmediatePropagationStub;
+    var execCommandSpy;
+
+    beforeEach(function() {
+      mockEvent = {
+        preventDefault: function(){},
+        stopImmediatePropagation: function(){},
+        target: {
+          setAttribute: function(){}
+        }
+      };
+
+      preventDefaultStub = sinon.stub(mockEvent, "preventDefault");
+      stopImmediatePropagationStub = sinon.stub(mockEvent, "stopImmediatePropagation");
+      execCommandSpy = sinon.spy(document, "execCommand");
+    });
+
+    afterEach(function() {
+      preventDefaultStub.restore();
+      stopImmediatePropagationStub.restore();
+      execCommandSpy.restore();
+
+      mockEvent = undefined;
+    });
+
+    it('should call e.preventDefault()', function () {
+      fsPersonDefault._copyPid(mockEvent);
+
+      expect(preventDefaultStub.callCount, "_copyPid did not call preventDefault only once").to.equal(1);
+    });
+
+    it('should call e.stopImmediatePropagation()', function () {
+      fsPersonDefault._copyPid(mockEvent);
+
+      expect(preventDefaultStub.callCount, "_copyPid did not call stopImmediatePropagation only once").to.equal(1);
+    });
+
+    it('should call document.execCommand()', function () {
+      fsPersonDefault._copyPid(mockEvent);
+
+      expect(execCommandSpy.callCount, "_copyPid did not call execCommand only once").to.equal(1);
+      expect(execCommandSpy.calledWith("copy"), "_copyPid did not call execCommand with the correct parameters").to.be.true;
+    });
+
+    // This test is flakey for IE11 because of a popup that sometimes appears.
+    // TODO: Find a fix for this test.
+    // it('should set the aria-label', function () {
+    //   expect(fsPersonDefault.$.CopyPIDIcon.hasAttribute("aria-label")).to.be.false;
+    //   fsPersonDefault._copyPid(mockEvent);
+
+    //   expect(fsPersonDefault.$.CopyPIDIcon.hasAttribute("aria-label")).to.be.true;
+    // });
+  });
+
+  describe('_showPid', function() {
+    it('should show the pid', function () {
+      expect(fsPersonDefault._showPid(true, false), "pid exists and don't hide it returned false").to.be.true;
+    });
+
+    it('should not show pid', function () {
+      expect(fsPersonDefault._showPid(true, true), "pid exists and hide it returned true").to.be.false;
+      expect(fsPersonDefault._showPid(false, true), "no pid exists and hide it returned true").to.be.false;
+      expect(fsPersonDefault._showPid(false, false), "no pid exists and don't hide it returned true").to.be.false;
+    });
+  });
+
+  describe('_hideSeparator', function() {
+    it('should return true (not show the separator)', function () {
+      expect(fsPersonDefault._hideSeparator(true, true, true), "hideSeparator=true, pid=true, lifespan=true").to.be.true;
+      expect(fsPersonDefault._hideSeparator(true, false, false), "hideSeparator=true, pid=false, lifespan=false").to.be.true;
+      expect(fsPersonDefault._hideSeparator(false, false, true), "hideSeparator=false, pid=false, lifespan=true").to.be.true;
+      expect(fsPersonDefault._hideSeparator(false, true, false), "hideSeparator=false, pid=true, lifespan=false").to.be.true;
+      expect(fsPersonDefault._hideSeparator(false, false, false), "hideSeparator=false, pid=false, lifespan=false").to.be.true;
+    });
+
+    it('should return false (show the separator)', function () {
+      expect(fsPersonDefault._hideSeparator(false, true, true), "hideSeparator=false, pid=true, lifespan=true").to.be.false;
+    });
+  });
+
+  describe('_portraitDefault', function() {
+    it('should set showPortrait to true', function () {
+      fsPersonDefault._portraitDefault(false, 'portrait');
+
+      expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='portrait' returned false").to.be.true;
+    });
+
+    it('should set showPortrait to false', function () {
+      fsPersonDefault._portraitDefault(true, 'portrait');
+      expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='portrait' returned true").to.be.false;
+
+      fsPersonDefault._portraitDefault(true, 'landscape');
+      expect(fsPersonDefault.showPortrait, "showPortrait=true and orientation='landscape' returned true").to.be.false;
+
+      fsPersonDefault._portraitDefault(false, 'landscape');
+      expect(fsPersonDefault.showPortrait, "showPortrait=false and orientation='landscape' returned true").to.be.false;
+    });
+  });
+
+  describe('_showGenderIcon', function() {
+    var inline;
+    var dotIcon;
+    var showPortrait;
+    var gender;
+    var orientation;
+    var result;
+
+    describe('inline = true', function() {
+      beforeEach(function() {
+        inline = true;
+        dotIcon = 'doesntMatter';
+        showPortrait = 'doesntMatter';
+        gender = 'doesntMatter';
+        hideGender = 'doesntMatter';
+        orientation = 'doesntMatter';
       });
-    })();
-    </script>
+
+      it('should always return false', function () {
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation); // other params don't matter in this case
+
+        expect(result, "inline=true returned true").to.be.false;
+      });
+    });
+
+    describe('inline = false', function() {
+      beforeEach(function() {
+        inline = false;
+        dotIcon = false;
+        showPortrait = false;
+        gender = 'female';
+        hideGender = false;
+        orientation = 'landscape';
+      });
+
+      it('should return true', function () {
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=false, gender='female', orientation='landscape' returned false").to.be.true;
+      });
+
+      it('should return false', function () {
+        gender = null;
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=true, gender=null, orientation='landscape' returned true").to.be.null; // falsey
+
+        gender = 'female';
+        showPortrait = true;
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
+
+        showPortrait = false;
+        hideGender = true;
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=true, gender='female', orientation='landscape' returned true").to.be.false;
+
+        hideGender = false;
+        orientation = 'portrait';
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=true, gender='female', orientation='portrait' returned true").to.be.false;
+
+        showPortrait = true;
+        orientation = 'portrait';
+        result = fsPersonDefault._showGenderIcon(inline, dotIcon, showPortrait, gender, hideGender, orientation);
+        expect(result, "showPortrait=false, gender='female', orientation='portrait' returned true").to.be.false;
+      });
+    });
+  });
+
+  describe('_showGenderDot', function() {
+    var inline;
+    var dotIcon;
+    var showPortrait;
+    var hideGender;
+    var orientation;
+    var result;
+
+    describe('inline and hideGender', function() {
+      beforeEach(function() {
+        inline = true;
+        dotIcon = 'doesntMatter';
+        showPortrait = 'doesntMatter';
+        hideGender = false;
+        orientation = 'doesntMatter';
+      });
+
+      it('should always return true', function () {
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation); // other params don't matter in this case
+
+        expect(result, "inline=true and hideGender=false returned false").to.be.true;
+      });
+    });
+
+    describe('inline=true (and/or hideGender=true)', function() {
+      beforeEach(function() {
+        inline = false;
+        dotIcon = false;
+        showPortrait = true;
+        hideGender = false;
+        orientation = 'landscape';
+      });
+
+      it('should return true', function () {
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
+        expect(result, "showPortrait=true, hideGender=false, orientation='landscape' returned false").to.be.true;
+      });
+
+      it('should return false', function () {
+        hideGender = true;
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
+        expect(result, "showPortrait=true, hideGender=true, orientation='landscape' returned true").to.be.false;
+
+        hideGender=false;
+        showPortrait = false;
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
+        expect(result, "showPortrait=false, hideGender=false, orientation='landscape' returned true").to.be.false;
+
+        showPortrait = true;
+        orientation = 'portrait';
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
+        expect(result, "showPortrait=true, hideGender=false, orientation='portrait' returned true").to.be.false;
+
+        showPortrait = false;
+        orientation = 'portrait';
+        result = fsPersonDefault._showGenderDot(inline, dotIcon, showPortrait, hideGender, orientation);
+        expect(result, "showPortrait=false, hideGender=false, orientation='portrait' returned true").to.be.false;
+      });
+    });
+  });
+
+  describe('_getDetailsClass', function() {
+    beforeEach(function() {
+      inline = 'doesntMatter';
+      dotIcon = 'doesntMatter';
+      showPortrait = 'doesntMatter';
+      hideGender = 'doesntMatter';
+      orientation = 'doesntMatter';
+    });
+
+    it('should call _showGenderDot', function () {
+      var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot");
+
+      fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation);
+
+      expect(_showGenderDotStub.callCount, "did not call _showGenderDot only once").to.equal(1);
+      expect(_showGenderDotStub.calledWith(inline, dotIcon, showPortrait, hideGender, orientation), "did not call _showGenderDot with the correct parameters").to.be.true;
+
+      _showGenderDotStub.restore();
+    });
+
+    it('should return "indented"', function () {
+      var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return true });
+
+      expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return 'indented'").to.equal('indented');
+
+      _showGenderDotStub.restore();
+    });
+
+    it('should return ""', function () {
+      var _showGenderDotStub = sinon.stub(fsPersonDefault, "_showGenderDot", function() { return false });
+
+      expect(fsPersonDefault._getDetailsClass(inline, dotIcon, showPortrait, hideGender, orientation), "did not return ''").to.equal('');
+
+      _showGenderDotStub.restore();
+    });
+  });
+
+  describe('_getGender', function() {
+    it('should return female', function () {
+      expect(fsPersonDefault._getGender('female'), "did not return 'female'").to.equal('female');
+    });
+
+    it('should return male', function () {
+      expect(fsPersonDefault._getGender('male'), "did not return 'male'").to.equal('male');
+      expect(fsPersonDefault._getGender('unknown'), "did not return 'male'").to.equal('male');
+      expect(fsPersonDefault._getGender('anythingNotFemale'), "did not return 'male'").to.equal('male');
+    });
+  });
+
+  describe('_getGenderIcon', function() {
+    it('should return male', function () {
+      expect(fsPersonDefault._getGenderIcon('male', true), "did not return 'male'").to.equal('male');
+    });
+
+    it('should return female', function () {
+      expect(fsPersonDefault._getGenderIcon('female', true), "did not return 'female'").to.equal('female');
+    });
+
+    it('should return gray-male', function () {
+      expect(fsPersonDefault._getGenderIcon('male', false), "did not return 'gray-male'").to.equal('gray-male');
+    });
+
+    it('should return gray-female', function () {
+      expect(fsPersonDefault._getGenderIcon('female', false), "did not return 'gray-female'").to.equal('gray-female');
+    });
+
+    it('should return unknown-portrait', function () {
+      expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', true), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
+
+      expect(fsPersonDefault._getGenderIcon('anythingNotFemaleOrMale', false), "did not return 'unknown-portrait'").to.equal('unknown-portrait');
+    });
+  });
+
+  describe('_isPortrait', function() {
+    it('should return true', function () {
+      expect(fsPersonDefault._isPortrait('portrait'), "did not return true").to.be.true;
+    });
+
+    it('should return false', function () {
+      expect(fsPersonDefault._isPortrait('anythingNotPortrait'), "did not return false").to.be.false;
+    });
+  });
+
+  describe('_usingNameParts', function() {
+    it('should return "first" or "last"', function () {
+      expect(fsPersonDefault._usingNameParts('first', 'last'), "did not return 'first'").to.equal('first');
+
+      expect(fsPersonDefault._usingNameParts(null, 'last'), "did not return 'last'").to.equal('last');
+
+      expect(fsPersonDefault._usingNameParts('first', null), "did not return 'first'").to.equal('first');
+
+      expect(fsPersonDefault._usingNameParts(null, null), "did not return null").to.be.null;
+    });
+  });
+
+  describe('_getFirstName', function() {
+    it('should return the first name', function () {
+      expect(fsPersonDefault._getFirstName('first', 'last', 'anythingNotSinotypic'), "did not return 'first'").to.equal('first');
+    });
+
+    it('should return the last name', function () {
+      expect(fsPersonDefault._getFirstName('first', 'last', 'sinotypic'), "did not return 'last'").to.equal('last');
+    });
+  });
+
+  describe('_getLastName', function() {
+    it('should return the first name', function () {
+      expect(fsPersonDefault._getLastName('first', 'last', 'sinotypic'), "did not return 'first'").to.equal('first');
+    });
+
+    it('should return the last name', function () {
+      expect(fsPersonDefault._getLastName('first', 'last', 'anythingNotSinotypic'), "did not return 'last'").to.equal('last');
+    });
+  });
+});
+</script>
   </body>
 </html>

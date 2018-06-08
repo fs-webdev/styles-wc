@@ -1,6 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-
-<!--
+/**
 A simple FamilySearch badge style
 
 Example:
@@ -12,10 +10,19 @@ Example:
     <fs-badge-eol option='light'>5</fs-badge-eol>
 
 @demo fs-badge-eol/demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="fs-badge-eol">
-  <template>
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
+Polymer({
+  _template: html`
     <style>
       :host {
         background: #4d4d4a;
@@ -39,22 +46,20 @@ Example:
       }
     </style>
     <slot></slot>
-  </template>
-  <script>
-    Polymer({
-      is: 'fs-badge-eol',
-      properties: {
-        /**
-         * The rendering type of the badge
-         *
-         * _Only valid option is currently `light`_
-         * @type {String}
-         */
-        option: {
-          type: String,
-          reflectToAttribute: true
-        }
-      }
-    });
-  </script>
-</dom-module>
+`,
+
+  is: 'fs-badge-eol',
+
+  properties: {
+    /**
+     * The rendering type of the badge
+     *
+     * _Only valid option is currently `light`_
+     * @type {String}
+     */
+    option: {
+      type: String,
+      reflectToAttribute: true
+    }
+  }
+});

@@ -1,6 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-
-<!--
+/**
 A simple wrapper that create a FamilySearch card element
 
 It will use the body of a the children node as the content of the card.
@@ -17,10 +15,18 @@ Example:
     </fs-card-eol>
 
 @demo fs-card-eol/demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="fs-card-eol">
-  <template>
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+Polymer({
+  _template: html`
     <style>
       :host {
         background: #fff;
@@ -52,25 +58,23 @@ Example:
         padding: 10px 15px;
       }
     </style>
-    <slot name='card-title'></slot>
-    <div class='fs-card__body'>
+    <slot name="card-title"></slot>
+    <div class="fs-card__body">
       <slot></slot>
     </div>
-  </template>
-  <script>
-    Polymer({
-      is: 'fs-card-eol',
-      properties: {
-        /**
-         * Whether or not the card should render with 15px padding
-         * @type {Boolean}
-         */
-        nopadding: {
-          type: Boolean,
-          reflectToAttribute: true,
-          value: false
-        }
-      }
-    });
-  </script>
-</dom-module>
+`,
+
+  is: 'fs-card-eol',
+
+  properties: {
+    /**
+     * Whether or not the card should render with 15px padding
+     * @type {Boolean}
+     */
+    nopadding: {
+      type: Boolean,
+      reflectToAttribute: true,
+      value: false
+    }
+  }
+});

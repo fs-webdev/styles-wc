@@ -20,8 +20,8 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
 
   <!-- Web Components -->
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../fs-icon-eol.html">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../fs-icon-eol.js"></script>
   <style>
     body {
       margin-left: 20px;
@@ -64,67 +64,68 @@
 
   <ul class="icon-demo"></ul>
 
-  <script>
-    var iconList = [];
+  <script type="module">
+import '../fs-icon-eol.js';
+var iconList = [];
 
-    // dynamically parse fs-icon-eol.html dynamically for all
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', './../fs-icon-eol.html');
-    xhr.send(null);
+// dynamically parse fs-icon-eol.html dynamically for all
+var xhr = new XMLHttpRequest();
+xhr.open('GET', './../fs-icon-eol.html');
+xhr.send(null);
 
-    xhr.onreadystatechange = function() {
-      var DONE = 4; // readyState 4 means the request is done.
-      var OK = 200; // status 200 is a successful return.
-      if (xhr.readyState === DONE) {
-        if (xhr.status === OK) {
-          iconStyleEntries = xhr.responseText.split(":host([icon=");
-          // parse out icon values
-          iconList = iconStyleEntries.map(function(currentValue, index) {
-            temp = currentValue.match(/(?:'|").+(?:'|")/g);
-            if (temp[0]) {
-              return temp[0].replace(/\'|\"/g, "");
-            } else {
-              return null;
-            }
-          });
-          iconList.shift();// remove leading garbage
-          iconList = iconList.sort();
-          generateIconList();
+xhr.onreadystatechange = function() {
+  var DONE = 4; // readyState 4 means the request is done.
+  var OK = 200; // status 200 is a successful return.
+  if (xhr.readyState === DONE) {
+    if (xhr.status === OK) {
+      iconStyleEntries = xhr.responseText.split(":host([icon=");
+      // parse out icon values
+      iconList = iconStyleEntries.map(function(currentValue, index) {
+        temp = currentValue.match(/(?:'|").+(?:'|")/g);
+        if (temp[0]) {
+          return temp[0].replace(/\'|\"/g, "");
         } else {
-          console.error('Could not load fs-icon-eol.html for parsing. Error: ' + xhr.status); // An error occurred during the request.
+          return null;
         }
-      }
-    };
-
-    function generateIconList() {
-      var demoBlock = document.querySelector("[class='icon-demo']"), i, el, wrapperEl, textEl, size;
-      demoBlock.innerHTML = "";
-
-      // Loop through icon list to add all icons dynamically
-
-      // set the correct size
-      size = document.querySelector("input:checked").value;
-
-      for (j = 0; j < iconList.length; j++) {
-        el = document.createElement("fs-icon-eol");
-        el.setAttribute("size", size);
-        el.setAttribute("icon", iconList[j]);
-
-        // set a dark background for light icons
-        if (iconList[j].indexOf("white") !== -1 || iconList[j].indexOf("light") !== -1) {
-          wrapperEl = document.createElement("span");
-          wrapperEl.appendChild(el);
-          wrapperEl.classList.add("dark");
-          el = wrapperEl;
-        }
-
-        // add the sized icons
-        wrapperEl = document.createElement("li");
-        wrapperEl.appendChild(el);
-        textEl = document.createTextNode(iconList[j]);
-        demoBlock.appendChild(wrapperEl).appendChild(textEl);
-      }
+      });
+      iconList.shift();// remove leading garbage
+      iconList = iconList.sort();
+      generateIconList();
+    } else {
+      console.error('Could not load fs-icon-eol.html for parsing. Error: ' + xhr.status); // An error occurred during the request.
     }
-  </script>
+  }
+};
+
+function generateIconList() {
+  var demoBlock = document.querySelector("[class='icon-demo']"), i, el, wrapperEl, textEl, size;
+  demoBlock.innerHTML = "";
+
+  // Loop through icon list to add all icons dynamically
+
+  // set the correct size
+  size = document.querySelector("input:checked").value;
+
+  for (j = 0; j < iconList.length; j++) {
+    el = document.createElement("fs-icon-eol");
+    el.setAttribute("size", size);
+    el.setAttribute("icon", iconList[j]);
+
+    // set a dark background for light icons
+    if (iconList[j].indexOf("white") !== -1 || iconList[j].indexOf("light") !== -1) {
+      wrapperEl = document.createElement("span");
+      wrapperEl.appendChild(el);
+      wrapperEl.classList.add("dark");
+      el = wrapperEl;
+    }
+
+    // add the sized icons
+    wrapperEl = document.createElement("li");
+    wrapperEl.appendChild(el);
+    textEl = document.createTextNode(iconList[j]);
+    demoBlock.appendChild(wrapperEl).appendChild(textEl);
+  }
+}
+</script>
 </body>
 </html>

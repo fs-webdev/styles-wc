@@ -20,8 +20,8 @@
   <link rel="apple-touch-icon-precomposed" href="apple-touch-icon.png">
 
   <!-- Web Components -->
-  <script src="../../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../fs-input-validation-eol.html">
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+  <script type="module" src="../fs-input-validation-eol.js"></script>
   <style>
     fs-icon-eol {
       vertical-align: bottom;
@@ -55,14 +55,15 @@
     <p slot="valid-text">This is valid</p>
     <p slot="invalid-text">This is invalid</p>
   </fs-input-validation-eol>
-  <script>
-    var input1 = document.querySelector('#i1');
-    var validation1 = document.querySelector('#v1');
+  <script type="module">
+import '../fs-input-validation-eol.js';
+var input1 = document.querySelector('#i1');
+var validation1 = document.querySelector('#v1');
 
-    input1.addEventListener('input', function() {
-      validation1.status = /^[a-zA-Z]+$/.test(input1.value) ? 'valid' : 'invalid';
-    });
-  </script>
+input1.addEventListener('input', function() {
+  validation1.status = /^[a-zA-Z]+$/.test(input1.value) ? 'valid' : 'invalid';
+});
+</script>
   <h3>Code</h3>
   <pre>
     <code>
@@ -88,14 +89,15 @@
     <p slot="valid-text">This is valid</p>
     <p slot="invalid-text">This is invalid</p>
   </fs-input-validation-eol>
-  <script>
-    var input2 = document.querySelector('#i2');
-    var validation2 = document.querySelector('#v2');
+  <script type="module">
+import '../fs-input-validation-eol.js';
+var input2 = document.querySelector('#i2');
+var validation2 = document.querySelector('#v2');
 
-    input2.addEventListener('input', function() {
-      validation2.status = input2.checkValidity() ? 'valid' : 'invalid';
-    });
-  </script>
+input2.addEventListener('input', function() {
+  validation2.status = input2.checkValidity() ? 'valid' : 'invalid';
+});
+</script>
   <h3>Code</h3>
   <pre>
     <code>

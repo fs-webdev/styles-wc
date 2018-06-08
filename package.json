@@ -1,24 +1,36 @@
 {
+  "description": "Global styles for the FamilySearch.org website.",
+  "keywords": [
+    "css",
+    "stylus",
+    "familysearch",
+    "styles"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fs-webdev/styles-wc.git"
+  },
+  "flat": true,
+  "homepage": "https://github.com/fs-webdev/styles-wc#readme",
   "name": "styles-wc",
   "version": "4.2.3",
   "directories": {
     "test": "test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/fs-webdev/styles-wc.git"
-  },
   "author": {
     "name": "FamilySearch",
     "url": "https://familysearch.org/"
   },
-  "private": true,
   "bugs": {
     "url": "https://github.com/fs-webdev/styles-wc/issues"
   },
-  "homepage": "https://github.com/fs-webdev/styles-wc#readme",
   "devDependencies": {
-    "fs-common-build-scripts": "github:fs-webdev/fs-common-build-scripts"
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.18",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "es6-promise": "^4.0.0",
+    "fs-common-build-scripts": "github:fs-webdev/fs-common-build-scripts",
+    "wct-browser-legacy": "^0.0.1-pre.11"
   },
   "scripts": {
     "postinstall": "bower install",
@@ -98,5 +110,18 @@
         "vw"
       ]
     }
+  },
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0",
+    "@webcomponents/webcomponentsjs": "2.0.0-beta.2"
+  },
+  "main": "fs-styles.js",
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "dependencies": {
+    "@polymer/polymer": "^3.0.0",
+    "wc-i18n": "github:fs-webdev/wc-i18n#es-module"
   }
 }

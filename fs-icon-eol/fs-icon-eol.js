@@ -1,6 +1,4 @@
-<link rel="import" href="../../polymer/polymer.html">
-
-<!--
+/**
 An element that will render an icon from the FamilySearch styleguide
 
 Example:
@@ -15,12 +13,20 @@ Example:
 
     <fs-icon-eol icon='close' size='large'></fs-icon-eol>
 
-
 @demo fs-icon-eol/demo/index.html
--->
+*/
+/*
+  FIXME(polymer-modulizer): the above comments were extracted
+  from HTML and may be out of place here. Review them and
+  then delete this comment!
+*/
+import '@polymer/polymer/polymer-legacy.js';
 
-<dom-module id="fs-icon-eol">
-  <template>
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+
+Polymer({
+  _template: html`
     <style>
       :host {
         display: inline-block;
@@ -346,32 +352,30 @@ Example:
         background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMiIgYmFzZVByb2ZpbGU9InRpbnkiIGlkPSJMYXllcl8xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4PSIwcHgiIHk9IjBweCIgd2lkdGg9IjE2cHgiIGhlaWdodD0iMjJweCIgdmlld0JveD0iMCAwIDE2IDIyIiB4bWw6c3BhY2U9InByZXNlcnZlIj48Zz48cmVjdCB4PSIwIiB5PSIwIiBmaWxsPSJub25lIiB3aWR0aD0iMTYiIGhlaWdodD0iMjIiLz48cG9seWxpbmUgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzMzMzMxIiBzdHJva2Utd2lkdGg9IjQuOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHBvaW50cz0iMTEuNSwzLjUgNCwxMSAxMS41LDE4LjUgIi8+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjxnPjwvZz48Zz48L2c+PGc+PC9nPjwvc3ZnPg==) !important;
       }
     </style>
-  </template>
-  <script>
-    Polymer({
-      is: 'fs-icon-eol',
-      properties: {
-        /**
-         * The size of the icon.
-         *
-         * Valid values are `large`, `medium-small`, and `small`. _To get the default behavior simply omit this property_.
-         * @type {String}
-         */
-        size: {
-          type: String,
-          reflectToAttribute: true
-        },
-        /**
-         * The icon to be rendered.
-         *
-         * _For a complete list of the different icons available, please see the demo!_
-         * @type {String}
-         */
-        icon: {
-          type: String,
-          reflectToAttribute: true
-        }
-      }
-    });
-  </script>
-</dom-module>
+`,
+
+  is: 'fs-icon-eol',
+
+  properties: {
+    /**
+     * The size of the icon.
+     *
+     * Valid values are `large`, `medium-small`, and `small`. _To get the default behavior simply omit this property_.
+     * @type {String}
+     */
+    size: {
+      type: String,
+      reflectToAttribute: true
+    },
+    /**
+     * The icon to be rendered.
+     *
+     * _For a complete list of the different icons available, please see the demo!_
+     * @type {String}
+     */
+    icon: {
+      type: String,
+      reflectToAttribute: true
+    }
+  }
+});
