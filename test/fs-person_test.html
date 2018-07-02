@@ -6,7 +6,6 @@
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../es6-promise/dist/es6-promise.auto.js"></script>
 
     <!-- Step 1: import the element to test -->
     <link rel="import" href="../fs-person-eol/fs-person-eol.html">
@@ -195,6 +194,7 @@
           var execCommandSpy;
 
           beforeEach(function() {
+            fsPersonDefault.i18n = (key) => key;
             mockEvent = {
               preventDefault: function(){},
               stopImmediatePropagation: function(){},
