@@ -1,6 +1,6 @@
 # \<styles-wc\>
 
-[![Code Climate](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/gpa.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/feed) [![Test Coverage](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/coverage.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/coverage) [![Issue Count](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/issue_count.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/feed) [![Build Status](https://travis-ci.org/fs-webdev/styles-wc.svg?branch=master)](https://travis-ci.org/fs-webdev/styles-wc)
+[![Code Climate](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/gpa.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/feed) [![Test Coverage](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/coverage.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/coverage) [![Issue Count](https://codeclimate.com/repos/5890c169bdfc83513e00108d/badges/30a5d02d4d98cd2c3809/issue_count.svg)](https://codeclimate.com/repos/5890c169bdfc83513e00108d/feed) [![Build Status](https://travis-ci.org/fs-webdev/styles-wc.svg?branch=master)](https://travis-ci.com/fs-webdev/styles-wc)
 
 ## Intro
 

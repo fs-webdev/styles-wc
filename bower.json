@@ -1,6 +1,6 @@
 {
   "name": "styles-wc",
-  "version": "4.2.4",
+  "version": "4.2.5",
   "description": "Global styles for the FamilySearch.org website.",
   "keywords": [
     "css",
@@ -31,11 +31,16 @@
     "web-component-tester": "Polymer/web-component-tester#^6.5.0"
   },
   "ignore": [
-    ".*",
-    "bin/",
-    "bin/*",
-    "test/",
-    "test/*",
-    "wct.conf.json"
+    "**/.*",
+    "**/node_modules",
+    "**/bower_components",
+    "**/components",
+    "**/demo",
+    "**/test",
+    "gulpfile.js",
+    "package.json",
+    "src/",
+    "src/*",
+    "wct.*.json"
   ]
 }
