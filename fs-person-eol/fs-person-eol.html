@@ -84,6 +84,12 @@ fs-person-eol:not([inline]) {
         @apply(--person-name-hover);
       }
 
+      @media (max-width: 768px) {
+        .fs-person-vitals__name {
+          width: calc(var(--fs-person-name_-_width) - 35px);
+        }
+      }
+
       :host {
         display: inline-block;
         max-width: 100%;
