@@ -626,18 +626,19 @@ fs-person-eol:not([inline]) {
         // Stop any other events from firing (like opening the person card or person page)
         e.stopImmediatePropagation();
 
-        var sel;
-        var range;
+        /* Originally, this was done using the window selection and
+        ranges. Firefox would add a space before and after to the pid,
+        for whatever reason, which was considered an invalid pid by
+        other components. This workaround works for Firefox and all
+        other browsers. */
         var el = this._querySelector('.pid-to-be-copied');
-        sel = window.getSelection();
-        if (sel.toString() === '') { // no text selection
-          range = document.createRange(); // range object
-          range.selectNodeContents(el); // sets Range
-          sel.removeAllRanges(); // remove all ranges from selection
-          sel.addRange(range);// add Range to a Selection.
-        }
+        let pid = el.innerText.trim();
+        let temp = document.createElement('textarea');
+        temp.value = el.innerText;
+        document.body.appendChild(temp);
+        temp.select();
         document.execCommand('copy');
-        window.getSelection().removeAllRanges();
+        document.body.removeChild(temp);
 
         var copyPopupDialog = this.$['copy-popup-dialog'];
         var copyText = this.$['copy-text'];
