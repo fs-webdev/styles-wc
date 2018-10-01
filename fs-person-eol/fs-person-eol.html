@@ -344,6 +344,10 @@ fs-person-eol:not([inline]) {
         padding: 5px;
       }
 
+      .pid-input {
+        display: none;
+      }
+
       .fs-person-details__container .fs-person-ls-container {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -405,6 +409,7 @@ fs-person-eol:not([inline]) {
               <span class="fs-person-details__separator" hidden='[[_hideSeparator(hideSeparator, pid, lifespan)]]'>&#9679;</span>
               <span class="pid-container-span popup" on-click="_showCopyID" data-test-person-pid>
                 <span class="pid-to-be-copied">[[pid]]</span>
+                <input class="pid-input" value$="[[pid]]">
               </span>
               <fs-anchored-dialog id="copy-popup-dialog" forced-pointer-direction="down" no-close-button no-transition no-fullscreen-mobile>
                 <div class="fs-dialog__body">
@@ -631,14 +636,11 @@ fs-person-eol:not([inline]) {
         for whatever reason, which was considered an invalid pid by
         other components. This workaround works for Firefox and all
         other browsers. */
-        var el = this._querySelector('.pid-to-be-copied');
-        let pid = el.innerText.trim();
-        let temp = document.createElement('textarea');
-        temp.value = el.innerText;
-        document.body.appendChild(temp);
-        temp.select();
+        var pidInput = this._querySelector('.pid-input');
+        pidInput.style.display = 'block';
+        pidInput.select();
         document.execCommand('copy');
-        document.body.removeChild(temp);
+        pidInput.style.display = 'none';
 
         var copyPopupDialog = this.$['copy-popup-dialog'];
         var copyText = this.$['copy-text'];
