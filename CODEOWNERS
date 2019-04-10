@@ -1,0 +1,8 @@
+#########################################################################################
+# Code Ownership for styles-wc 
+#   All files owned by shared
+#
+# See https://help.github.com/en/articles/about-code-owners for information on how to use
+#########################################################################################
+
+*   @fs-webdev/tw-gold @fs-webdev/tw-red
