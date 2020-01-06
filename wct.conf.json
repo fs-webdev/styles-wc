@@ -40,7 +40,7 @@
       "thresholds": {
         "global": {
           "statements": 85,
-          "branches": 90,
+          "branches": 95,
           "functions": 90,
           "lines": 85
         }
@@ -48,8 +48,8 @@
     },
     "size-limit": {
       "path": "styles-wc.html",
-      "limitNoPolymer": "100 KB",
-      "limitNoExternals": "40 KB"
+      "limitNoPolymer": "120 KB",
+      "limitNoExternals": "60 KB"
     }
   }
 }

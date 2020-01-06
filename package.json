@@ -18,10 +18,7 @@
   },
   "homepage": "https://github.com/fs-webdev/styles-wc#readme",
   "devDependencies": {
-    "eslint-config-frontier": "github:fs-webdev/eslint-config-frontier",
-    "eslint-config-tree": "github:fs-webdev/eslint-config-tree#semver:^1",
-    "fs-common-build-scripts": "github:fs-webdev/fs-common-build-scripts#semver:^1",
-    "husky": "^2"
+    "fs-common-build-scripts": "github:fs-webdev/fs-common-build-scripts#semver:^2"
   },
   "husky": {
     "hooks": {
@@ -40,12 +37,11 @@
     "postinstall": "bower install",
     "lint": "eslint '**/*.html' '**/*.json' && stylelint '**/*.html' '**/*.css'",
     "lint:fix": "eslint '**/*.html' '**/*.json' --fix && stylelint '**/*.html' '**/*.css' --fix",
-    "lint:staged": "node node_modules/fs-common-build-scripts/bin/pre_commit_checks.js && lint-staged",
-    "standard": "npm run lint",
-    "standard-fix": "npm run lint:fix",
+    "lint:quiet": "eslint '**/*.html' '**/*.json' --quiet && stylelint '**/*.html' '**/*.css' --quiet",
+    "lint:staged": "lint-staged && node node_modules/fs-common-build-scripts/bin/pre_commit_checks.js",
     "test": "wct --skip-plugin sauce",
-    "test-p": "wct --skip-plugin sauce -p",
-    "test-s": "wct --configFile wct.conf.windows.json --skip-plugin local && wct --configFile wct.conf.json --skip-plugin local"
+    "test:ci": "wct --configFile wct.conf.windows.json --skip-plugin local && wct --configFile wct.conf.json --skip-plugin local",
+    "test:persistent": "wct --skip-plugin sauce -p"
   },
   "stylelint": {
     "about": "https://github.com/stylelint/stylelint/blob/master/docs/user-guide/rules.md#possible-errors",
