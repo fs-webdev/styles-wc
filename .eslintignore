@@ -1,7 +1,9 @@
+**/.*
 **/*bower_components*/**
 **/*min.*
 **/*node_modules*/**
 **/*polyfill*
+**/coverage/**
 **/demo/**
 **/reports/**
 **/test/**
